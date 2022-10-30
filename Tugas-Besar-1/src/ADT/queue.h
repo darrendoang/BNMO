@@ -10,7 +10,7 @@
 #define CAPACITY 100
 
 /* Definisi elemen dan address */
-typedef int ElType;
+#define ElType int
 typedef struct {
 	ElType buffer[CAPACITY]; 
 	int idxHead;
@@ -65,4 +65,4 @@ void displayQueue(Queue q);
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika Queue kosong : menulis [] */
 
-#endif QUEUE_H
+#endif
