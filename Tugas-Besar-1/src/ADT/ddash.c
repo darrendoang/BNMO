@@ -169,6 +169,10 @@ void dinner_dash(){
                     printf("Berhasil mengantar M%d\n", val);
                     saldo += finished[val].price;
                     tserve++;
+                    if (tserve == 15){
+                        over = true;
+                        win = true;
+                    }
                     valid = true;  
                 }
                 else if (val>tserve){   
@@ -218,30 +222,43 @@ void dinner_dash(){
     // Memulai putaran baru
     enqueue(&incoming, torder);
     torder++;
+    if (length(incoming)>7){
+        over = true;
+    }
 
-    // Output
-    printf("==========================================================\n\n");
-    printf("SALDO: %d\n\n", saldo);
-    printf("Daftar Pesanan\nMakanan | Durasi memasak | Ketahanan | Harga\n----------------------------------------------");
-    printQueue(incoming);
-    printf("Daftar Makanan yang sedang dimasak\nMakanan | Sisa durasi memasak\n------------------------------\n");
-    for (int i = 0; i < tcook; i++){
-        if ((cooking[i].number!=Nil)&&(cooking[i].time>0)){
-            printf("M%d      | %d\n", cooking[i].number, cooking[i].time);
+    if (!over){
+        // Output
+        printf("==========================================================\n\n");
+        printf("SALDO: %d\n\n", saldo);
+        printf("Daftar Pesanan\nMakanan | Durasi memasak | Ketahanan | Harga\n----------------------------------------------");
+        printQueue(incoming);
+        printf("Daftar Makanan yang sedang dimasak\nMakanan | Sisa durasi memasak\n------------------------------\n");
+        for (int i = 0; i < tcook; i++){
+            if ((cooking[i].number!=Nil)&&(cooking[i].time>0)){
+                printf("M%d      | %d\n", cooking[i].number, cooking[i].time);
+            }
+        }
+        printf("\n");
+        printf("Daftar Makanan yang dapat disajikan\nMakanan | Sisa ketahanan makanan\n------------------------------\n");
+        for (int i = 0; i < 100; i++){
+            if ((finished[i].number!=Nil)&&(finished[i].duration>0)){
+                printf("M%d      | %d\n", cooking[i].number, cooking[i].duration);
+            }
+        }
+        printf("\n\n");
+
+        // Input
+        printf("MASUKKAN COMMAND: ");
+        scanf("%s %s", input1, input2);
+        printf("\n\n");
+    }
+    else{
+        if (win){
+            printf("Kamu menang uwu\n");
+        }else{
+            printf("Kamu kalah :<\n");
         }
     }
-    printf("\n");
-    printf("Daftar Makanan yang dapat disajikan\nMakanan | Sisa ketahanan makanan\n------------------------------\n");
-    for (int i = 0; i < 100; i++){
-        if ((finished[i].number!=Nil)&&(finished[i].duration>0)){
-            printf("M%d      | %d\n", cooking[i].number, cooking[i].duration);
-        }
-    }
-    printf("\n\n");
-
-    // Meminta command
-    printf("MASUKKAN COMMAND: ");
-    scanf("%s %s", input1, input2);
-    printf("\n\n");
+    
     }
 }
