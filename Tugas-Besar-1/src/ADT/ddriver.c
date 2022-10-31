@@ -2,22 +2,42 @@
 #include <stdlib.h>
 #include <time.h>
 
+typedef struct {
+	int number;
+	int time;
+	int duration;
+    int price;
+} order;
+
 int main(){
+    /*
     srand(time(NULL));   
     int r = rand();
     int s = rand();
-    printf("%d %d", (1000*(r%15))+1000, s);
+    printf("%d %d\n", (1000*(r%15))+1000, s);
     
     char input1[10];
     char input2[10];
 
     scanf("%s %s", input1, input2);
-    printf("%c", input2[0]);
-    printf("%c", input2[1]);
-    printf("%c", input2[2]);
+    printf("\n");
+    printf("%c\n", input2[0]);
+    printf("%c\n", input2[1]);
+    printf("%c\n", input2[2]);
     if (input2[2] == '\0'){
-        printf("delta");
+
+        printf("delta\n");
     }
+    int val = 0;
+    val += input2[1] - '0';
+        if (input2[2] != '\0'){
+            val += input2[2] - '0';
+        }
+    printf("%d\n", val);
     system("pause");
+    */
+    order temp;
+    order arr[3];
+    
     return 0;
 }

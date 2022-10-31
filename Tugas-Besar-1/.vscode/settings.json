@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "time.h": "c",
-        "boolean.h": "c"
+        "boolean.h": "c",
+        "ddash.h": "c"
     }
 }
