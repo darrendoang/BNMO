@@ -4,8 +4,12 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
+
+
 #include "boolean.h"
 #include "mesinkarakter.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 #define NMax 50
 #define BLANK ' '
@@ -16,9 +20,11 @@ typedef struct
    int Length;
 } Word;
 
+
 /* State Mesin Kata */
 extern boolean EndWord;
 extern Word currentWord;
+
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
@@ -45,5 +51,9 @@ void CopyWord();
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+char *READINPUT();
+
+int StrToInt (char * str);
 
 #endif

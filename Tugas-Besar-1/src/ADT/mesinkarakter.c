@@ -1,5 +1,6 @@
-# include <stdio.h>
-# include "mesinkarakter.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "mesinkarakter.h"
 
 char cc;
 boolean eop;
@@ -19,6 +20,7 @@ void ADV()  {
         fclose(pita);
     }
 }
+
 
 char GetCC()    {
     return cc;

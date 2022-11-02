@@ -1,4 +1,5 @@
-# include "mesinkata.h"
+#include "mesinkata.h"
+#include <stdlib.h>
 
 boolean EndWord;
 Word currentWord;
@@ -19,6 +20,22 @@ void STARTWORD()    {
         EndWord = false;
         CopyWord();
     }
+}
+
+char *READINPUT()
+{
+    START();
+    CopyWord();
+    int i;
+    char *strinput;
+    strinput = (char *)malloc(sizeof(char) * 100);
+    for (int i = 0; i < currentWord.Length; i++)
+    {
+        *(strinput +i) = currentWord.TabWord[i];
+    }
+    *(strinput + currentWord.Length) = '\0';
+    return strinput;
+    
 }
 
 void ADVWORD()  {
@@ -46,4 +63,14 @@ void CopyWord() {
         }
     }
     currentWord.Length = i;
+}
+
+int StrToInt (char * str)
+{
+    int i=0 , output=0;
+    for (int i = 0; i < currentWord.Length; i++)
+    {
+        output = output * 10 + (str[i] - '0');
+    }
+    return output;
 }
