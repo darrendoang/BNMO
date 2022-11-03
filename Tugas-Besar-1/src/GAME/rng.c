@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include "../ADT/mesinkata.h"
 int main() {
     int i , score= 10;
     printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak X\n");
@@ -11,7 +12,7 @@ int main() {
     while (flag == 0 && score > 0)
     {
         printf("Tebakan: ");
-        scanf("%d" , &i);
+        fscanf(stdin, "%d" , i);
         if (i > r)
         {
             printf("Lebih kecil\n");
