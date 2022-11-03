@@ -1,14 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
-typedef struct {
-	int number;
-	int time;
-	int duration;
-    int price;
-} order;
-
+#include "ddash.h"
 int main(){
     /*
     srand(time(NULL));   
@@ -36,8 +29,7 @@ int main(){
     printf("%d\n", val);
     system("pause");
     */
-    order temp;
-    order arr[3];
+    dinner_dash();
     
     return 0;
 }

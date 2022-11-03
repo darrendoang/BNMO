@@ -1,4 +1,4 @@
-#include "ddash_copy.h"
+#include "ddash1.h"
 
 void CreateQueue(orderQueue *q){
     IDX_HEAD(*q) = IDX_UNDEF;
@@ -94,7 +94,7 @@ void dinner_dash(){
     // Initial output
     printf("Selamat Datang di Diner Dash!\n\n");
     printf("SALDO: %d\n\n", saldo);
-    printf("Daftar Pesanan\nMakanan | Durasi memasak | Ketahanan | Harga\n----------------------------------------------");
+    printf("Daftar Pesanan\nMakanan | Durasi memasak | Ketahanan | Harga\n----------------------------------------------\n");
     for (int i = IDX_HEAD(incoming); i <= IDX_TAIL(incoming); i++){
         if ((cook[i]==false)&&(serve[i]==false)&&(rot[i]==false)){
             printf("M%d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time);
@@ -194,7 +194,7 @@ void dinner_dash(){
     }
 
     // Memulai putaran baru
-    enqueue(&incoming, torder);
+    enqueue(&incoming);
     torder++;
     if (length(incoming)>7){
         over = true;
@@ -204,7 +204,7 @@ void dinner_dash(){
         // Output
         printf("==========================================================\n\n");
         printf("SALDO: %d\n\n", saldo);
-        printf("Daftar Pesanan\nMakanan | Durasi memasak | Ketahanan | Harga\n----------------------------------------------");
+        printf("Daftar Pesanan\nMakanan | Durasi memasak | Ketahanan | Harga\n----------------------------------------------\n");
         for (int i = IDX_HEAD(incoming); i <= IDX_TAIL(incoming); i++){
         if ((cook[i]==false)&&(serve[i]==false)&&(rot[i]==false)){
             printf("M%d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time);
@@ -239,4 +239,36 @@ void dinner_dash(){
     }
     
     }
+}
+
+int main(){
+    /*
+    srand(time(NULL));   
+    int r = rand();
+    int s = rand();
+    printf("%d %d\n", (1000*(r%15))+1000, s);
+    
+    char input1[10];
+    char input2[10];
+
+    scanf("%s %s", input1, input2);
+    printf("\n");
+    printf("%c\n", input2[0]);
+    printf("%c\n", input2[1]);
+    printf("%c\n", input2[2]);
+    if (input2[2] == '\0'){
+
+        printf("delta\n");
+    }
+    int val = 0;
+    val += input2[1] - '0';
+        if (input2[2] != '\0'){
+            val += input2[2] - '0';
+        }
+    printf("%d\n", val);
+    system("pause");
+    */
+    dinner_dash();
+    
+    return 0;
 }

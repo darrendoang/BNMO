@@ -31,7 +31,7 @@ boolean isEmpty(orderQueue q);
 
 int length(orderQueue q);
 
-void enqueue(orderQueue *q, int num);
+void enqueue(orderQueue *q);
 
 void dequeue(orderQueue *q, int *saldo);
 
