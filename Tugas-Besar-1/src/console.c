@@ -91,16 +91,16 @@ void QUIT();
 
 void HELP();
 
-int main()
-{
-    Array a;
-    MakeEmpty(&a);
-    LOAD(&a, "../data/config.txt");
+// int main()
+// {
+//     Array a;
+//     MakeEmpty(&a);
+//     LOAD(&a, "../data/config.txt");
 
-    printf("Neff: %d\n", a.Neff);
-    int i;
-    for(i = 0; i < a.Neff; i++)
-    printf("%s\n", a.TI[i]);
+//     printf("Neff: %d\n", a.Neff);
+//     int i;
+//     for(i = 0; i < a.Neff; i++)
+//     printf("%s\n", a.TI[i]);
 
-    return 0;
-}
+//     return 0;
+// }
