@@ -1,6 +1,8 @@
 #ifndef PLAYGAME_H
 #define PLAYGAME_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "queue.h"
 #include "mesinkata.h"
 #include "stringcomp.h"
