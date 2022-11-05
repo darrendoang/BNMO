@@ -11,7 +11,7 @@
 #include "ADT/mesinload.h"
 
 
-void START();
+void STARTGAME();
 
 void LOAD();
 
