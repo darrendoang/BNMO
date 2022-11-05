@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "mesinkarakter.h"
 
-char cc;
-boolean eop;
+char currentChar;
+boolean EOP;
 
 static FILE *pita;
 static int retval;
@@ -14,18 +14,18 @@ void START()    {
 }
 
 void ADV()  {
-    retval = fscanf(pita, "%c", &cc);
-    eop = IsEOP();
-    if (eop)    {
-        fclose(pita);
-    }
+    retval = fscanf(pita, "%c", &currentChar);
+    // eop = IsEOP();
+    // if (eop)    {
+    //     fclose(pita);
+    // }
 }
 
 
 char GetCC()    {
-    return cc;
+    return currentChar;
 }
 
 boolean IsEOP()   {
-    return (cc == MARK);
+    return (currentChar == MARK);
 }

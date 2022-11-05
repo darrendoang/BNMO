@@ -74,3 +74,4 @@ int StrToInt (char * str)
     }
     return output;
 }
+

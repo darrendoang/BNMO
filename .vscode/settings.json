@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "time.h": "c"
+        "time.h": "c",
+        "mesinload.h": "c",
+        "stdlib.h": "c"
     }
 }
