@@ -53,8 +53,9 @@ void CREATEGAME(Array* game,char new[]){
 
 void LISTGAME(Array *game){
     int i;
-    for(i = 0; i < game->Neff; i++)
+    for(i = 0; i < game->Neff; i++){
     printf("%d. %s\n",i, game->TI[i]);
+    }
 }
 
 void DELETEGAME(Array* game,int del){
