@@ -1,14 +1,18 @@
-#include "../ADT/mesinkata.h"
-#include "../ADT/list.h"
-#include "../ADT/queue.h"
-#include "../ADT/boolean.h"
-#include "stringcomp.h"
+#include "mesinkata.h"
+#include "list.h"
+#include "queue.h"
+#include "boolean.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include "ADT/array.h"
+#include "ADT/mesinkarakter.h"
+#include "ADT/mesinkata.h"
+#include "ADT/mesinload.h"
 
-void START();
+
+void STARTGAME();
 
 void LOAD();
 

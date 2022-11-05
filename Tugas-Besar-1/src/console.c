@@ -1,8 +1,32 @@
 #include "console.h"
 
-void START();
+void STARTGAME()
+{
+    Array game;
+    MakeEmpty(&game);
+    LOAD(&game, "../data/config.txt");
+    printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.");
+}
 
-void LOAD();
+void LOAD(Array *game, char *filename) {    
+    StartLOAD(filename);
+    int n = currentChar - '0'; //mengambil nilai line pertama dalam file yaitu jumlah game lalu diubah ke int
+    game->Neff = n; // jumlah game di assign ke game->Neff
+    ADVLOAD();
+    for (int i = 0; i < n; i++) {
+        ADVWORDLOAD();
+        char *namagame;
+        namagame = (char *)malloc(currentWord.Length * sizeof(char));
+        for(int j = 0; j < currentWord.Length; j++)
+        {
+            *(namagame + j) = currentWord.TabWord[j];
+        }
+        *(namagame + currentWord.Length) = '\0'; //penanda akhir string
+        game->TI[i] = namagame;
+    }
+
+    
+}
 
 void SAVE();
 
@@ -66,3 +90,17 @@ void SKIPGAME();
 void QUIT();
 
 void HELP();
+
+// int main()
+// {
+//     Array a;
+//     MakeEmpty(&a);
+//     LOAD(&a, "../data/config.txt");
+
+//     printf("Neff: %d\n", a.Neff);
+//     int i;
+//     for(i = 0; i < a.Neff; i++)
+//     printf("%s\n", a.TI[i]);
+
+//     return 0;
+// }
