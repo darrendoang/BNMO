@@ -24,7 +24,7 @@ void load(Array *game, char *filename) {
         {
             *(namagame + j) = currentWord.TabWord[j];
         }
-        *(namagame + currentWord.Length) = '\0';
+        *(namagame + currentWord.Length) = '\0'; //penanda akhir string
         game->TI[i] = namagame;
     }
 }
@@ -34,10 +34,12 @@ int main()
 {
     Array game;
     MakeEmpty(&game);
-    load(&game, "../data/config.txt");
+    load(&game, "../../data/config.txt");
     printf("%d\n", game.Neff);
-    printf("%s\n", game.TI[0]);
-
+    for(int i = 0; i < game.Neff; i++)
+    {
+        printf("%s\n", game.TI[i]);
+    }
 
     return 0;
 
