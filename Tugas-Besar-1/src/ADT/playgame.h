@@ -7,7 +7,9 @@
 #include "mesinkata.h"
 #include "stringcomp.h"
 #include "list.h"
-#include "ddash.h"
+#include "ddash1.h"
 #include "rng.h"
 
 void PLAYGAME(Queue *antriangame);
+
+#endif

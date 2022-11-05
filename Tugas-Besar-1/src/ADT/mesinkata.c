@@ -65,6 +65,13 @@ void CopyWord() {
     currentWord.Length = i;
 }
 
+void SalinWord(Word kata1, Word *kata2){
+    kata2->Length = kata1.Length;
+    for (int i = 0; i < kata1.Length; i++){
+        kata2->TabWord[i] = kata1.TabWord[i];
+    }
+}
+
 int StrToInt (char * str)
 {
     int i=0 , output=0;

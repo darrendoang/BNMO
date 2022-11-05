@@ -2,6 +2,8 @@
     "files.associations": {
         "time.h": "c",
         "boolean.h": "c",
-        "ddash.h": "c"
+        "ddash.h": "c",
+        "mesinkata.h": "c",
+        "queue.h": "c"
     }
 }

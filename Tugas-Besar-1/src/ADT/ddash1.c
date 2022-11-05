@@ -27,31 +27,31 @@ void enqueue(orderQueue *q){
         IDX_TAIL(*q) = 0;
         IDX_HEAD(*q) = 0;
         TAIL(*q).number = IDX_TAIL(*q);
-        TAIL(*q).time = ((rand()%5)+1);
-        TAIL(*q).duration = ((rand()%5)+1);
-        TAIL(*q).price = ((1000*(rand()%50))+1000); 
+        TAIL(*q).time = (((rand()+rand())%5)+1);
+        TAIL(*q).duration = (((rand()+rand())%5)+1);
+        TAIL(*q).price = ((1000*((rand()+rand())%50))+1000); 
     }
     else{
         IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % CAPACITY;
         TAIL(*q).number = IDX_TAIL(*q);
-        TAIL(*q).time = ((rand()%5)+1);
-        TAIL(*q).duration = ((rand()%5)+1);
-        TAIL(*q).price = ((1000*(rand()%50))+1000); 
+        TAIL(*q).time = (((rand()+rand())%5)+1);
+        TAIL(*q).duration = (((rand()+rand())%5)+1);
+        TAIL(*q).price = ((1000*((rand()+rand())%50))+1000); 
     }
 }
 
 void dequeue(orderQueue *q, int *saldo){
     if (IDX_HEAD(*q) == IDX_TAIL(*q)){
-        *saldo = HEAD(*q).price;
+        *saldo += HEAD(*q).price;
         IDX_HEAD(*q) = IDX_UNDEF;
         IDX_TAIL(*q) = IDX_UNDEF;
     }
     else if ((IDX_HEAD(*q) >= 0) && (IDX_HEAD(*q) < CAPACITY-1) && (IDX_HEAD(*q) != IDX_TAIL(*q)))   {
-        *saldo = HEAD(*q).price;
+        *saldo += HEAD(*q).price;
         IDX_HEAD(*q)++;
     }
     else if ((IDX_HEAD(*q) == CAPACITY - 1) && (IDX_HEAD(*q) != IDX_TAIL(*q)))  {
-        *saldo = HEAD(*q).price;
+        *saldo += HEAD(*q).price;
         IDX_HEAD(*q) = 0;
     }
 }
@@ -75,13 +75,12 @@ void dinner_dash(){
     int saldo = 0;
 
     // Pesanan
-    int torder = 0;
-    int tcook = 0;
+    int torder = 2;
+    int backlog = 3;
     int tserve = 0;
-    for(int j = 0; j < 3; j++){
-        enqueue(&incoming);
-        torder++;
-    }
+    enqueue(&incoming);
+    enqueue(&incoming);
+    enqueue(&incoming);
 
     // Command
     char input1[10];
@@ -97,7 +96,7 @@ void dinner_dash(){
     printf("Daftar Pesanan\nMakanan | Durasi memasak | Ketahanan | Harga\n----------------------------------------------\n");
     for (int i = IDX_HEAD(incoming); i <= IDX_TAIL(incoming); i++){
         if ((cook[i]==false)&&(serve[i]==false)&&(rot[i]==false)){
-            printf("M%d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time);
+            printf("M%d      | %d      | %d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time, incoming.buffer[i].duration, incoming.buffer[i].price);
         }
     }
     printf("Daftar Makanan yang sedang dimasak\nMakanan | Sisa durasi memasak\n------------------------------\n        |\n");
@@ -122,14 +121,22 @@ void dinner_dash(){
                     val += input2[2] - '0';
                 }
 
-                // Mengecek apakah pesanan sedang/sudah dimasak
-                if ((cook[val]==false)&&(serve[val]==false)&&(rot[val]==false)){  
-                    cook[val] = true;   // Memasukkan ke array
-                    printf("Berhasil memasak M%d\n", val);   // Pesan berhasil
-                    valid = true;   // Keluar dari loop input
+                // Mengecek apakah pesanan ada
+                if (val<=torder){
+                    // Mengecek apakah pesanan sedang/sudah dimasak
+                    if ((cook[val]==false)&&(serve[val]==false)&&(rot[val]==false)){  
+                        cook[val] = true;   // Memasukkan ke array
+                        incoming.buffer[val].time++;
+                        printf("Berhasil memasak M%d\n", val);   // Pesan berhasil
+                        backlog--;
+                        valid = true;   // Keluar dari loop input
+                    }
+                    else {  
+                        printf("M%d sudah dimasak\n", val);   // Pesan gagal
+                    }
                 }
-                else {  
-                    printf("M%d sudah dimasak\n", val);   // Pesan gagal
+                else{
+                    printf("Tidak ada pesanan M%d\n", val);   // Pesan gagal
                 }
             }
             else if ((input1[0] == 'S')&&(input1[1] == 'E')&&(input1[2] == 'R')&&(input1[3] == 'V')&&(input1[4] == 'E')&&(input2[0]=='M')){   //SERVE M...
@@ -141,7 +148,7 @@ void dinner_dash(){
                 }
 
                 // Mengecek apakah pesanan sebelumnya sudah dimasak
-                if ((val==IDX_HEAD(incoming))&&(cook[val]==false)&&(serve[val]==true)&&(rot[val]==false)){   // Pesanan paling depan dan belum basi
+                if ((val==IDX_HEAD(incoming)||(rot[val-1]==true))&&(cook[val]==false)&&(serve[val]==true)&&(rot[val]==false)){   // Pesanan paling depan dan belum basi
                     dequeue(&incoming, &saldo);
                     serve[val]=false;
                     tserve++;
@@ -152,7 +159,7 @@ void dinner_dash(){
                     }
                     valid = true;   // Keluar dari loop input
                 }
-                else if (val>IDX_HEAD(incoming)){   
+                else if ((val>IDX_HEAD(incoming))&&(rot[val-1]==false)){   
                     printf("M%d belum dapat disajikan karena M%d belum selesai\n", val, val-1);   // Pesan gagal
                 }
                 else if (val<IDX_HEAD(incoming)){  
@@ -196,7 +203,8 @@ void dinner_dash(){
     // Memulai putaran baru
     enqueue(&incoming);
     torder++;
-    if (length(incoming)>7){
+    backlog++;
+    if (backlog>7){
         over = true;
     }
 
@@ -207,7 +215,7 @@ void dinner_dash(){
         printf("Daftar Pesanan\nMakanan | Durasi memasak | Ketahanan | Harga\n----------------------------------------------\n");
         for (int i = IDX_HEAD(incoming); i <= IDX_TAIL(incoming); i++){
         if ((cook[i]==false)&&(serve[i]==false)&&(rot[i]==false)){
-            printf("M%d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time);
+            printf("M%d      | %d      | %d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time, incoming.buffer[i].duration, incoming.buffer[i].price);
         }
     }
         printf("Daftar Makanan yang sedang dimasak\nMakanan | Sisa durasi memasak\n------------------------------\n");
@@ -233,8 +241,10 @@ void dinner_dash(){
     else{
         if (win){
             printf("Kamu menang uwu\n");
+            system("pause");
         }else{
             printf("Kamu kalah :<\n");
+            system("pause");
         }
     }
     

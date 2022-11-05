@@ -52,6 +52,8 @@ void CopyWord();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
+void SalinWord(Word kata1, Word *kata2);
+
 char *READINPUT();
 
 int StrToInt (char * str);

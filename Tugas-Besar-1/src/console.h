@@ -1,7 +1,8 @@
-#include "mesinkata.h"
-#include "list.h"
-#include "queue.h"
-#include "boolean.h"
+#include "../ADT/mesinkata.h"
+#include "../ADT/list.h"
+#include "../ADT/queue.h"
+#include "../ADT/boolean.h"
+#include "stringcomp.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
