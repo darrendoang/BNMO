@@ -1,11 +1,9 @@
 #include "console.h"
 
-void STARTGAME()
+void STARTGAME(Array *game)
 {
-    Array game;
-    MakeEmpty(&game);
-    LOAD(&game, "../data/config.txt");
-    printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.");
+    LOAD(game, "../data/config.txt");
+    printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
 }
 
 void LOAD(Array *game, char *filename) {    
@@ -23,7 +21,9 @@ void LOAD(Array *game, char *filename) {
         }
         *(namagame + currentWord.Length) = '\0'; //penanda akhir string
         game->TI[i] = namagame;
+        
     }
+    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
 
     
 }

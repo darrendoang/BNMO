@@ -54,11 +54,15 @@ void CopyWord();
 
 void SalinWord(Word kata1, Word *kata2);
 
-
+int blank_count(char *strg);
 
 int StrToInt (char * str);
 
 int StrToInt_input(char *str, int length);
 
 int str_len(char *str);
+
+char *KataKedua(char *str);
+
+char *KataPertama(char *str);
 #endif

@@ -13,19 +13,19 @@
 
 void STARTGAME();
 
-void LOAD();
+void LOAD(Array *game, char *filename);
 
-void SAVE();
+void SAVE(Array game , char * filename);
 
-void CREATEGAME();
+void CREATEGAME(Array* game);
 
-void LISTGAME();
+void LISTGAME(Array *game);
 
-void DELETEGAME();
+void DELETEGAME(Array* game);
 
-void QUEUEGAME();
+void QUEUEGAME(Queue *antriangame, Array gamelist);
 
-void PLAYGAME();
+void PLAYGAME(Queue *antriangame , Array gamelist);
 
 void SKIPGAME();
 
