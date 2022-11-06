@@ -54,8 +54,11 @@ void CopyWord();
 
 void SalinWord(Word kata1, Word *kata2);
 
-char *READINPUT();
+
 
 int StrToInt (char * str);
 
+int StrToInt_input(char *str, int length);
+
+int str_len(char *str);
 #endif

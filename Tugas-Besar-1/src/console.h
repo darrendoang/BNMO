@@ -1,7 +1,3 @@
-#include "mesinkata.h"
-#include "list.h"
-#include "queue.h"
-#include "boolean.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

@@ -29,3 +29,23 @@ char GetCC()    {
 boolean IsEOP()   {
     return (currentChar == MARK);
 }
+
+char *READINPUT()
+{
+    pita = stdin;
+    char *stringinput;
+    int c;
+    int i = 0;
+    stringinput = (char *)malloc(101 * sizeof(char));
+    while (c = fgetc(pita))
+    {
+        if (c == EOF || c == '\n' || c == '\r')
+        {
+            break;
+        }
+        *(stringinput + i) = (char)c;
+        i++;
+    }
+    *(stringinput + i) = '\0';
+    return stringinput;
+}

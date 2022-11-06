@@ -28,7 +28,27 @@ void LOAD(Array *game, char *filename) {
     
 }
 
-void SAVE();
+void SAVE(Array game , char * filename){
+    FILE* pita;
+    char data_path[100] = "../data/";
+    int i = 8;
+    while(*filename!='\0'){
+      data_path[i] = *filename;
+      i++;
+      *filename++;
+    }
+    pita=fopen(data_path,"w");
+
+    fprintf(pita,"%c\n",(char)(game.Neff+48));
+
+    for(int i=0;i<NbElmt(game)-1;i++){
+        fprintf(pita,"%s\n",game.TI[i]);
+    }
+    fprintf(pita,"%s",game.TI[NbElmt(game)-1]);
+
+    fclose(pita);
+    printf("Save file berhasil disimpan.\n");
+}
 
 int compare(char *str1, char *str2) {
   while (*str1 && *str1 == *str2) {
@@ -48,13 +68,14 @@ void CREATEGAME(Array* game,char new[]){
         printf("Nama game sudah ada!\n");
     } else{
         game->TI[num] = new;
+        game->Neff ++;
     }
 }
 
 void LISTGAME(Array *game){
     int i;
     for(i = 0; i < game->Neff; i++){
-    printf("%d. %s\n",i, game->TI[i]);
+    printf("%d. %s\n",i+1, game->TI[i]);
     }
 }
 
@@ -87,11 +108,11 @@ void HELP();
 //     Array a;
 //     MakeEmpty(&a);
 //     LOAD(&a, "../data/config.txt");
-
 //     printf("Neff: %d\n", a.Neff);
-//     int i;
-//     for(i = 0; i < a.Neff; i++)
-//     printf("%s\n", a.TI[i]);
-
+//     LISTGAME(&a);
+//     DELETEGAME(&a,2);
+//     printf("Neff: %d\n", a.Neff);
+//     LISTGAME(&a);
+//     SAVE(a , "../data/config.txt" );
 //     return 0;
 // }

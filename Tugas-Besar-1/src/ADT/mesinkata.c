@@ -22,21 +22,6 @@ void STARTWORD()    {
     }
 }
 
-char *READINPUT()
-{
-    START();
-    CopyWord();
-    int i;
-    char *strinput;
-    strinput = (char *)malloc(sizeof(char) * 100);
-    for (int i = 0; i < currentWord.Length; i++)
-    {
-        *(strinput +i) = currentWord.TabWord[i];
-    }
-    *(strinput + currentWord.Length) = '\0';
-    return strinput;
-    
-}
 
 void ADVWORD()  {
     IgnoreBlanks();
@@ -82,3 +67,24 @@ int StrToInt (char * str)
     return output;
 }
 
+int StrToInt_input(char *str, int length)
+{
+    int i;
+    int res;
+    res = 0;
+    for (i = 0; i < length; i++)
+    {
+        res = res * 10 + (str[i] - '0');
+    }
+    return res;
+}
+
+int str_len(char *str)
+{
+    int i = 0;
+    while (str[i] != '\0')
+    {
+        i++;
+    }
+    return i;
+}
