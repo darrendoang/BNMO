@@ -144,7 +144,7 @@ void PLAYGAME(Queue *antriangame , Array gamelist)
     printf("Berikut adalah daftar Game-mu\n");
 
     if (isEmpty(*antriangame)){
-        printf("Daftar game kosong.");
+        printf("Daftar game kosong.\n");
         QUEUEGAME(antriangame, gamelist);
     }
     else{
@@ -202,8 +202,7 @@ void HELP (){
 //     Queue q;
 //     CreateQueue(&q);
 //     LOAD(&a, "../data/config.txt");
-//     QUEUEGAME(&q , a);
-//     QUEUEGAME(&q , a);
+
 //       int i = 0;
 //         for (i; i < length(q); i++){
 //             printf("%d. %s\n", i+1, q.buffer[i]);
