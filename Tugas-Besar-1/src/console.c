@@ -79,16 +79,25 @@ void LISTGAME(Array *game){
     }
 }
 
-void DELETEGAME(Array* game,int del){
-    if(del-1>=game->Neff){
-        printf("Tidak ada game dengan posisi tersebut\n");
-    } else if(del<=5 && del>=1){
+void DELETEGAME(Array* game){
+    LISTGAME(game);
+    printf("Masukkan nomor game yang akan dihapus: ");
+    char *del_num_input;
+    del_num_input = READINPUT();
+    int del_num;
+    del_num = StrToInt_input(del_num_input , str_len(del_num_input));
+
+    if(del_num <=5 || del_num > game->Neff)
+    {
         printf("Game gagal dihapus!\n");
     }
-    else {
-        for(int i = del-1;i<game->Neff+1;i++){
-            game[i] = game[i+1];
+    else
+    {
+        for(int i=del_num-1 ; i < game->Neff ; i++)
+        {
+            game->TI[i] = game->TI[i+1];
         }
+        game->Neff --;
         printf("Game berhasil dihapus\n");
     }
 }
@@ -108,9 +117,7 @@ void HELP();
 //     Array a;
 //     MakeEmpty(&a);
 //     LOAD(&a, "../data/config.txt");
-//     printf("Neff: %d\n", a.Neff);
-//     LISTGAME(&a);
-//     DELETEGAME(&a,2);
+//     DELETEGAME(&a);
 //     printf("Neff: %d\n", a.Neff);
 //     LISTGAME(&a);
 //     SAVE(a , "../data/config.txt" );
