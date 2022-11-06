@@ -115,13 +115,13 @@ void QUIT();
 
 void HELP();
 
-int main()
-{
-    Array a;
-    MakeEmpty(&a);
-    LOAD(&a, "../data/config.txt");
-    CREATEGAME(&a);
-    LISTGAME(&a);
-    SAVE(a , "../data/config.txt" );
-    return 0;
-}
+// int main()
+// {
+//     Array a;
+//     MakeEmpty(&a);
+//     LOAD(&a, "../data/config.txt");
+//     CREATEGAME(&a);
+//     LISTGAME(&a);
+//     SAVE(a , "../data/config.txt" );
+//     return 0;
+// }
