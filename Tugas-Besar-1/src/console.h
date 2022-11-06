@@ -6,6 +6,9 @@
 #include "ADT/mesinkarakter.h"
 #include "ADT/mesinkata.h"
 #include "ADT/mesinload.h"
+#include "ADT/queue.h"
+#include "ADT/stringcomp.h"
+#include "GAME/rng.h"
 
 
 void STARTGAME();
