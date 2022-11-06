@@ -57,7 +57,10 @@ int compare(char *str1, char *str2) {
   }
   return *str1 - *str2;
 }
-void CREATEGAME(Array* game,char new[]){
+void CREATEGAME(Array* game){
+    printf("Masukkan nama game yang akan ditambahkan: ");
+    char *new;
+    new = READINPUT();
     int found=0,num=game->Neff;
     for (int i=0;i<num;i++){
         if(compare(game->TI[i],new)==0){
@@ -112,14 +115,13 @@ void QUIT();
 
 void HELP();
 
-// int main()
-// {
-//     Array a;
-//     MakeEmpty(&a);
-//     LOAD(&a, "../data/config.txt");
-//     DELETEGAME(&a);
-//     printf("Neff: %d\n", a.Neff);
-//     LISTGAME(&a);
-//     SAVE(a , "../data/config.txt" );
-//     return 0;
-// }
+int main()
+{
+    Array a;
+    MakeEmpty(&a);
+    LOAD(&a, "../data/config.txt");
+    CREATEGAME(&a);
+    LISTGAME(&a);
+    SAVE(a , "../data/config.txt" );
+    return 0;
+}
