@@ -36,10 +36,10 @@ char *READINPUT()
     char *stringinput;
     int c;
     int i = 0;
-    stringinput = (char *)malloc(101 * sizeof(char));
+    stringinput = (char *)malloc(100 * sizeof(char));
     while (c = fgetc(pita))
     {
-        if (c == EOF || c == '\n' || c == '\r')
+        if ( c == '\n' )
         {
             break;
         }
