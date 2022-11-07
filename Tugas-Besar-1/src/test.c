@@ -49,6 +49,13 @@ int main(){
     printf("%c", currentChar);
     retval = fscanf(pita, "%c", &currentChar);
     printf("%c", currentChar);
+    pita = stdin;
+    retval = fscanf(pita, "%c", &currentChar);
+    printf("%c", currentChar);
+    retval = fscanf(pita, "%c", &currentChar);
+    printf("%c", currentChar);
+    retval = fscanf(pita, "%c", &currentChar);
+    printf("%c", currentChar);
 
     system("pause");
     return 0;

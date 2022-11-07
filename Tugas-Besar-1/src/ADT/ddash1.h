@@ -12,6 +12,8 @@ typedef struct {
 	int time;
 	int duration;
     int price;
+	boolean cook;
+	boolean serve;
 } order;
 
 typedef struct {

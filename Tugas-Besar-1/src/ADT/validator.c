@@ -8,10 +8,6 @@ boolean validasi(char command[]) {
 
     boolean same = false;
 
-    // Array of char
-    char start[] = 
-
-
     if (command == "START" || command == "LOAD " || command == "SAVE" || command == "CREATEGAME" || command == "LISTGAME"|| command == "DELETEGAME"|| command == "QUEUEGAME" || command == "PLAYGAME" ||command == "SKIPGAME" || command == "QUIT" || command == "HELP") {
         same = true;
     } else {

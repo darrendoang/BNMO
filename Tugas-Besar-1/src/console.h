@@ -1,7 +1,3 @@
-#include "mesinkata.h"
-#include "list.h"
-#include "queue.h"
-#include "boolean.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -10,6 +6,7 @@
 #include "ADT/mesinkarakter.h"
 #include "ADT/mesinkata.h"
 #include "ADT/mesinload.h"
+#include "ADT/stringcomp.h"
 
 
 void STARTGAME();
