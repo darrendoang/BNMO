@@ -1,3 +1,3 @@
 #include "boolean.h"
 
-boolean str_comp(char str1[], char str2[]);
+int str_comp(char str1[], char str2[]);

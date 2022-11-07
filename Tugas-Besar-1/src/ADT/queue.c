@@ -36,15 +36,15 @@ int length(Queue q){
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val){
+void enqueue(Queue *q, char * v){
     if (isEmpty(*q)){
         IDX_TAIL(*q) = 0;
         IDX_HEAD(*q) = 0;
-        TAIL(*q) = val;
+        TAIL(*q) = v;
     }
     else{
-        IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % CAPACITY;
-        TAIL(*q) = val;
+        IDX_TAIL(*q) ++;
+        TAIL(*q) = v;
     }
 }
 /* Proses: Menambahkan val pada q dengan aturan FIFO */

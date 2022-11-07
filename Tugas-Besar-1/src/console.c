@@ -1,11 +1,9 @@
 #include "console.h"
 
-void STARTGAME()
+void STARTGAME(Array *game)
 {
-    Array game;
-    MakeEmpty(&game);
-    LOAD(&game, "../data/config.txt");
-    printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.");
+    LOAD(game, "../data/config.txt");
+    printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
 }
 
 void LOAD(Array *game, char *filename) {    
@@ -23,12 +21,34 @@ void LOAD(Array *game, char *filename) {
         }
         *(namagame + currentWord.Length) = '\0'; //penanda akhir string
         game->TI[i] = namagame;
+        
     }
+    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
 
     
 }
 
-void SAVE();
+void SAVE(Array game , char * filename){
+    FILE* pita;
+    char data_path[100] = "../data/";
+    int i = 8;
+    while(*filename!='\0'){
+      data_path[i] = *filename;
+      i++;
+      *filename++;
+    }
+    pita=fopen(data_path,"w");
+
+    fprintf(pita,"%c\n",(char)(game.Neff+48));
+
+    for(int i=0;i<NbElmt(game)-1;i++){
+        fprintf(pita,"%s\n",game.TI[i]);
+    }
+    fprintf(pita,"%s",game.TI[NbElmt(game)-1]);
+
+    fclose(pita);
+    printf("Save file berhasil disimpan.\n");
+}
 
 int compare(char *str1, char *str2) {
   while (*str1 && *str1 == *str2) {
@@ -37,70 +57,157 @@ int compare(char *str1, char *str2) {
   }
   return *str1 - *str2;
 }
-void CREATEGAME(char* game[20],char new[20]){
-    int num = 0,found=0,sum=0;
-    while (game[num] != "-999"){
-        num+=1;
-    }
+void CREATEGAME(Array* game){
+    printf("Masukkan nama game yang akan ditambahkan: ");
+    char *new;
+    new = READINPUT();
+    int found=0,num=game->Neff;
     for (int i=0;i<num;i++){
-        if(compare(game[i],new)==0){
+        if(compare(game->TI[i],new)==0){
             found=1;
         }
     }
     if (found==1){
         printf("Nama game sudah ada!\n");
     } else{
-        game[num] = new;
-        game[num+1] = "-999";
+        game->TI[num] = new;
+        game->Neff ++;
     }
 }
 
-void LISTGAME(char* game[20]){
-    int no = 0;
-    while(game[no] != "-999"){
-        printf("%d. %s\n",no+1,game[no]);
-        no++;
+void LISTGAME(Array *game){
+    int i;
+    for(i = 0; i < game->Neff; i++){
+    printf("%d. %s\n",i+1, game->TI[i]);
     }
 }
 
-void DELETEGAME(char* game[20],int del){
-    int num = 0;
-    while (game[num] != "-999"){
-        num+=1;
-    }
-    if(del-1>=num){
-        printf("Tidak ada game dengan posisi tersebut\n");
-    } else if(del<=5 && del>=1){
+void DELETEGAME(Array* game){
+    LISTGAME(game);
+    printf("Masukkan nomor game yang akan dihapus: ");
+    char *del_num_input;
+    del_num_input = READINPUT();
+    int del_num;
+    del_num = StrToInt_input(del_num_input , str_len(del_num_input));
+
+    if(del_num <=5 || del_num > game->Neff)
+    {
         printf("Game gagal dihapus!\n");
     }
-    else {
-        for(int i = del-1;i<num+1;i++){
-            game[i] = game[i+1];
+    else
+    {
+        for(int i=del_num-1 ; i < game->Neff ; i++)
+        {
+            game->TI[i] = game->TI[i+1];
         }
+        game->Neff --;
         printf("Game berhasil dihapus\n");
     }
 }
 
-void QUEUEGAME();
+void QUEUEGAME(Queue *antriangame, Array gamelist)
 
-void PLAYGAME();
+{
+    int gamenumber;
+    printf("Berikut adalah daftar antrian game-mu\n");
+
+    if (isEmpty(*antriangame)){
+        printf("Tidak ada game dalam daftar antrian \n");
+    }
+    else{
+        int i = 0;
+        for (i; i < length(*antriangame); i++){
+            printf("%d. %s\n", i+1, antriangame->buffer[i]);
+        }
+    }
+    printf("\n");
+
+    LISTGAME(&gamelist);
+    printf("\n");
+    printf("Nomor Game yang mau ditambahkan ke antrian:");
+    char *gamenumber_input;
+    gamenumber_input = READINPUT();
+    gamenumber = StrToInt_input(gamenumber_input, str_len(gamenumber_input));
+    if (gamenumber > gamelist.Neff){
+        printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
+    }
+    else{
+        enqueue(antriangame, gamelist.TI[gamenumber - 1]);
+        printf("Game berhasil ditambahkan kedalam daftar antrian.\n");
+    }
+
+}
+
+void PLAYGAME(Queue *antriangame , Array gamelist)
+{
+    ElType val;
+    printf("Berikut adalah daftar Game-mu\n");
+
+    if (isEmpty(*antriangame)){
+        printf("Daftar game kosong.\n");
+        QUEUEGAME(antriangame, gamelist);
+    }
+    else{
+        int i,x=0;
+        for (i=(*antriangame).idxHead; i< length(*antriangame); i++){
+            printf("%d. %s\n", x+1, (*antriangame).buffer[i]);
+            x++;
+        }
+    }
+    printf("\n");
+
+    char *play = antriangame->buffer[antriangame->idxHead];
+    if (str_comp(play, "RNG")){
+        printf("Loading RNG . . . \n");
+        dequeue(antriangame,&val);
+        RNG();
+    }
+    else if (str_comp(play, "DINER DASH")){
+        printf("Loading DINER DASH . . . \n");
+        dequeue(antriangame,&val);
+
+
+    }
+    else{
+        printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
+        printf("Silahkan pilih game lain.\n");
+    }
+}
 
 void SKIPGAME();
 
 void QUIT();
 
-void HELP();
+void HELP (){
+    printf(
+        "COMMANDs :\n"
+        " START                 Membaca file konfigurasi default yang berisi list game yang dapat dimainkan\n"
+        " LOAD                  Membaca save file yang berisi list game yang dapat dimainkan, histori dan scoreboard game\n"
+        " SAVE                  Merepresentasikan nama file yang akan disimpan pada disk\n"
+        " CREATEGAME            Menambahkan game baru pada daftar game \n"
+        " LISTGAME              Menampilkan daftar game yang disediakan oleh sistem \n"
+        " DELETEGAME            Menghapus sebuah game dari daftar game \n"
+        " QUEUEGAME             Mendaftarkan permainan kedalam list \n"
+        " PLAYGAME              Memainkan sebuah permainan \n"
+        " SKIPGAME              Melewatkan permainan sebanyak n \n"
+        " QUIT                  Keluar dari Program \n"
+        " HELP                  Menampilkan daftar perintah \n"
+    );
+}
 
 // int main()
 // {
 //     Array a;
 //     MakeEmpty(&a);
+//     Queue q;
+//     CreateQueue(&q);
 //     LOAD(&a, "../data/config.txt");
 
-//     printf("Neff: %d\n", a.Neff);
-//     int i;
-//     for(i = 0; i < a.Neff; i++)
-//     printf("%s\n", a.TI[i]);
-
+//       int i = 0;
+//         for (i; i < length(q); i++){
+//             printf("%d. %s\n", i+1, q.buffer[i]);
+//         }
+//     PLAYGAME(&q , a);
+//     SAVE(a , "../data/config.txt" );
 //     return 0;
 // }

@@ -10,7 +10,7 @@
 #define CAPACITY 100
 
 /* Definisi elemen dan address */
-#define ElType int
+#define ElType char *
 typedef struct {
 	ElType buffer[CAPACITY]; 
 	int idxHead;
@@ -44,7 +44,7 @@ int length(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val);
+void enqueue(Queue *q, char * v);
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur" dalam buffer melingkar. */

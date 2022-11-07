@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include<stdlib.h>
-#include<time.h>
-#include "../ADT/mesinkata.h"
-int main() {
-    int i , score= 10;
+#include <stdlib.h>
+#include <time.h>
+#include "rng.h"
+void RNG() {
+    int i , score= 100;
     printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak X\n");
     srand(time(0));
     int r= rand();
@@ -12,7 +12,9 @@ int main() {
     while (flag == 0 && score > 0)
     {
         printf("Tebakan: ");
-        fscanf(stdin, "%d" , i);
+        char * i_input;
+        i_input = READINPUT();
+        i = StrToInt_input(i_input, str_len(i_input));
         if (i > r)
         {
             printf("Lebih kecil\n");
@@ -32,12 +34,12 @@ int main() {
     }
     if (flag==1 && score > 0)
     {
-        printf("Ya, X adalah %i" , r);
+        printf("Ya, X adalah %i\n" , r);
+        printf("Score anda adalah = %d\n" , score);
     }
     else if(score == 0)
     {
         printf("Kesempatan menebak Anda habis.");
     }
 
-    return 0;
 }

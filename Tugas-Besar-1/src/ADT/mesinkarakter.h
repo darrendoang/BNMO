@@ -35,4 +35,6 @@ char GetCC();
 boolean IsEOP();
 /* Mengirimkan true jika currentChar = MARK */
 
+char *READINPUT();
+
 #endif

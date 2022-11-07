@@ -9,11 +9,7 @@ void StartLOAD(char *filename)
 }
 
 void IgnoreNewLine() {
-/* Mengabaikan newline (\n)
-   I.S. : currentChar sembarang
-   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-    // KAMUS LOKAL
-    // ALGORITMA
+
     while (currentChar == MARK) {
         ADVLOAD();
     }
@@ -36,15 +32,7 @@ void ADVWORDLOAD() {
 }
 
 void CopyWordLOAD() {
-/* Mengakuisisi kata, menyimpan dalam currentWord
-   I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : currentWord berisi kata yang sudah diakuisisi;
-          currentChar = BLANK atau currentChar = MARK;
-          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-    // KAMUS LOKAL
     int i = 0;
-    // ALGORITMA
     while ((currentChar != MARK) && i < NMax && !EOP) {
         currentWord.TabWord[i] = currentChar; 
         ADVLOAD();

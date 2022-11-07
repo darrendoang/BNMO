@@ -22,21 +22,6 @@ void STARTWORD()    {
     }
 }
 
-char *READINPUT()
-{
-    START();
-    CopyWord();
-    int i;
-    char *strinput;
-    strinput = (char *)malloc(sizeof(char) * 100);
-    for (int i = 0; i < currentWord.Length; i++)
-    {
-        *(strinput +i) = currentWord.TabWord[i];
-    }
-    *(strinput + currentWord.Length) = '\0';
-    return strinput;
-    
-}
 
 void ADVWORD()  {
     IgnoreBlanks();
@@ -82,3 +67,76 @@ int StrToInt (char * str)
     return output;
 }
 
+int StrToInt_input(char *str, int length)
+{
+    int i;
+    int res;
+    res = 0;
+    for (i = 0; i < length; i++)
+    {
+        res = res * 10 + (str[i] - '0');
+    }
+    return res;
+}
+
+int str_len(char *str)
+{
+    int i = 0;
+    while (str[i] != '\0')
+    {
+        i++;
+    }
+    return i;
+}
+
+char *KataPertama(char *str)
+{
+    int i = 0;
+    char *katapertama = (char *)malloc(50 * sizeof(char));
+    while (str[i] != ' ')
+    {
+        *(katapertama + i) = str[i];
+        i++;
+    }
+    *(katapertama + i) = '\0';
+
+    return katapertama;
+}
+/*
+   mengembalikan kata pertama untuk string
+*/
+
+char *KataKedua(char *str)
+{
+    int i = 0;
+    int idx = 0;
+    char *katakedua = (char *)malloc(50 * sizeof(char));
+    while (str[i] != ' ')
+    {
+        i++;
+    }
+    i++;
+    while (str[i] != '\0')
+    {
+        *(katakedua + idx) = str[i];
+        idx++;
+        i++;
+    }
+
+    *(katakedua + idx) = '\0';
+    return katakedua;
+}
+
+int blank_count(char *strg)
+{
+    int i, count;
+    count = 0;
+    for (i = 0; i < str_len(strg); i++)
+    {
+        if (strg[i] == ' ')
+        {
+            count++;
+        }
+    }
+    return count;
+}
