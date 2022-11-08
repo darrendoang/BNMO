@@ -193,16 +193,16 @@ void QUIT();
 
 void HELP (){
     printf(
-        "COMMANDs :\n"
+        "COMMANDS :\n"
         " START                 Membaca file konfigurasi default yang berisi list game yang dapat dimainkan\n"
         " LOAD                  Membaca save file yang berisi list game yang dapat dimainkan, histori dan scoreboard game\n"
         " SAVE                  Merepresentasikan nama file yang akan disimpan pada disk\n"
-        " CREATEGAME            Menambahkan game baru pada daftar game \n"
-        " LISTGAME              Menampilkan daftar game yang disediakan oleh sistem \n"
-        " DELETEGAME            Menghapus sebuah game dari daftar game \n"
-        " QUEUEGAME             Mendaftarkan permainan kedalam list \n"
-        " PLAYGAME              Memainkan sebuah permainan \n"
-        " SKIPGAME              Melewatkan permainan sebanyak n \n"
+        " CREATE GAME           Menambahkan game baru pada daftar game \n"
+        " LIST GAME             Menampilkan daftar game yang disediakan oleh sistem \n"
+        " DELETE GAME           Menghapus sebuah game dari daftar game \n"
+        " QUEUE GAME            Mendaftarkan permainan kedalam list \n"
+        " PLAY GAME             Memainkan sebuah permainan \n"
+        " SKIPGAME <n>          Melewatkan permainan sebanyak n \n"
         " QUIT                  Keluar dari Program \n"
         " HELP                  Menampilkan daftar perintah \n"
     );
