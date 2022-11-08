@@ -5,6 +5,13 @@
 #include <time.h>
 
 int main(){
+    // Variabel global
+    Array game;
+    Queue antrian;
+    MakeEmpty(&game);
+    CreateQueue(&antrian);
+    
+
     // Initial output
     printf("Selamat datang di BNMO ^w^\n");
     printf("ENTER COMMAND: ");
@@ -13,20 +20,6 @@ int main(){
     Word command;
     Word arg;
 
-    // Command
-    char start[] = "START";
-    char load[] = "LOAD";
-    char save[] = "SAVE";
-    char create[] = "CREATEGAME";
-    char list[] = "LISTGAME";
-    char delete[] = "DELETEGAME";
-    char queue[] = "QUEUEGAME";
-    char play[] = "PLAYGAME";
-    char skip[] = "SKIPGAME";
-    char quit[] = "QUIT";
-    char help[] = "HELP"; 
-
-
     // Meminta input
     STARTWORD();   
     SalinWord(currentWord, &command);
@@ -34,51 +27,46 @@ int main(){
     if (!EndWord){
         SalinWord(currentWord, &arg);
     }
-
-    // Validasi input
-    boolean valid = false;
-    while (!valid){
-        if ((str_comp(command.TabWord, start))||(str_comp(command.TabWord, load))||(str_comp(command.TabWord, save))||(str_comp(command.TabWord, create))||(str_comp(command.TabWord, list))||(str_comp(command.TabWord, delete))||(str_comp(command.TabWord, queue))||(str_comp(command.TabWord, play))||(str_comp(command.TabWord, skip))||(str_comp(command.TabWord, quit))||(str_comp(command.TabWord, help))){
-            valid = true;
-        }
-        else{
-            printf("error\n");
-        }
-    }
     
     // Loop utama
     // (str_comp(command.TabWord, quit))||(str_comp(command.TabWord, help))
     boolean over = false;
     while (!over){
-        if (str_comp(command.TabWord, start)){
-            START();
+        if (str_comp(command.TabWord, "START")){
+            STARTGAME(&game);
         }
-        else if (str_comp(command.TabWord, load)){
-
+        else if (str_comp(command.TabWord, "LOAD")){
+            LOAD(&game, arg.TabWord);
         }
-        else if (str_comp(command.TabWord, save)){
-
+        else if (str_comp(command.TabWord, "SAVE")){
+            SAVE(game, arg.TabWord);
         }
-        else if (str_comp(command.TabWord, create)){
-
+        else if (str_comp(command.TabWord, "CREATEGAME")){
+            CREATEGAME(&game);
         }
-        else if (str_comp(command.TabWord, list)){
-           
+        else if (str_comp(command.TabWord, "LISTGAME")){
+            LISTGAME(&game);
         }
-        else if (str_comp(command.TabWord, delete)){
-    
+        else if (str_comp(command.TabWord, "DELETEGAME")){
+            DELETEGAME(&game);
         }
-        else if (str_comp(command.TabWord, play)){
-      
+        else if (str_comp(command.TabWord, "QUEUEGAME")){
+            QUEUEGAME(&antrian, game);
         }
-        else if (str_comp(command.TabWord, skip)){
-      
+        else if (str_comp(command.TabWord, "PLAYGAME")){
+            PLAYGAME(&antrian, game);
         }
-        else if (str_comp(command.TabWord, quit)){
-      
+        else if (str_comp(command.TabWord, "SKIPGAME")){
+            SKIPGAME();
         }
-        else if (str_comp(command.TabWord, help)){
+        else if (str_comp(command.TabWord, "QUIT")){
             QUIT();
+        }
+        else if (str_comp(command.TabWord, "HELP")){
+            HELP();
+        }
+        else{
+            printf("error\n");
         }
 
         // Apabila belum keluar dari game
@@ -89,19 +77,7 @@ int main(){
             ADVWORD();
             if (!EndWord){
                 SalinWord(currentWord, &arg);
-            }
-
-            // Validasi
-            boolean valid = false;
-            while (!valid){
-                // Read command
-                if ((str_comp(command.TabWord, start))||(str_comp(command.TabWord, load))||(str_comp(command.TabWord, save))||(str_comp(command.TabWord, create))||(str_comp(command.TabWord, list))||(str_comp(command.TabWord, delete))||(str_comp(command.TabWord, queue))||(str_comp(command.TabWord, play))||(str_comp(command.TabWord, skip))||(str_comp(command.TabWord, quit))||(str_comp(command.TabWord, help))){
-                    valid = true;
-                }
-                else{
-                    printf("error\n");
-                }
-            }    
+            } 
         }
     }
     return 0;

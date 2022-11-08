@@ -27,8 +27,8 @@ void enqueue(orderQueue *q){
         IDX_TAIL(*q) = 0;
         IDX_HEAD(*q) = 0;
         TAIL(*q).number = IDX_TAIL(*q);
-        TAIL(*q).time = (((rand()+rand())%5)+1);
-        TAIL(*q).duration = (((rand()+rand())%5)+1);
+        TAIL(*q).time = (((rand()*(IDX_TAIL(*q)+1))%5)+1);
+        TAIL(*q).duration = (((rand()*(IDX_TAIL(*q)+1))%5)+1);
         TAIL(*q).price = ((1000*((rand()*(IDX_TAIL(*q)+1))%50))+1000); 
         TAIL(*q).cook = false;
         TAIL(*q).serve = false;
@@ -36,8 +36,8 @@ void enqueue(orderQueue *q){
     else{
         IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % CAPACITY;
         TAIL(*q).number = IDX_TAIL(*q);
-        TAIL(*q).time = (((rand()+rand())%5)+1);
-        TAIL(*q).duration = (((rand()+rand())%5)+1);
+        TAIL(*q).time = (((rand()*(IDX_TAIL(*q)+1))%5)+1);
+        TAIL(*q).duration = (((rand()*(IDX_TAIL(*q)+1))%5)+1);
         TAIL(*q).price = ((1000*((rand()*(IDX_TAIL(*q)+1))%50))+1000); 
         TAIL(*q).cook = false;
         TAIL(*q).serve = false;
