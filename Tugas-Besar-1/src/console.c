@@ -23,7 +23,7 @@ void LOAD(Array *game, char *filename) {
         game->TI[i] = namagame;
         
     }
-    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
+    
 
     
 }
@@ -82,15 +82,28 @@ void LISTGAME(Array *game){
     }
 }
 
-void DELETEGAME(Array* game){
+void DELETEGAME(Array* game , Queue *antriangame){
     LISTGAME(game);
     printf("Masukkan nomor game yang akan dihapus: ");
     char *del_num_input;
     del_num_input = READINPUT();
     int del_num;
     del_num = StrToInt_input(del_num_input , str_len(del_num_input));
+    boolean flag;
+    flag = false;
+    int x;
+    x = (*antriangame).idxHead;
+    char *gamename;
+    while ((x < (*antriangame).idxHead + length(*antriangame)) && !flag)
+    {
+        if (str_comp(game->TI[del_num - 1], (*antriangame).buffer[x]))
+        {
+            flag = true;
+        }
+        x++;
+    }
 
-    if(del_num <=5 || del_num > game->Neff)
+    if(del_num <=5 || del_num > game->Neff || flag)
     {
         printf("Game gagal dihapus!\n");
     }
@@ -207,7 +220,9 @@ void HELP (){
 //         for (i; i < length(q); i++){
 //             printf("%d. %s\n", i+1, q.buffer[i]);
 //         }
-//     PLAYGAME(&q , a);
+//     CREATEGAME(&a);
+//     QUEUEGAME(&q , a);
+//     DELETEGAME(&a , &q);
 //     SAVE(a , "../data/config.txt" );
 //     return 0;
 // }
