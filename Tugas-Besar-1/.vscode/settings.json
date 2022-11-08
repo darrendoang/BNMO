@@ -4,6 +4,7 @@
         "boolean.h": "c",
         "ddash.h": "c",
         "mesinkata.h": "c",
-        "queue.h": "c"
+        "queue.h": "c",
+        "rng.h": "c"
     }
 }

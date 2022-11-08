@@ -1,15 +1,15 @@
 #include "ddash1.h"
 
-void CreateQueue(orderQueue *q){
+void CreateQueueD(orderQueue *q){
     IDX_HEAD(*q) = IDX_UNDEF;
     IDX_TAIL(*q) = IDX_UNDEF;
 }
 
-boolean isEmpty(orderQueue q){
+boolean isEmptyD(orderQueue q){
     return ((IDX_HEAD(q) == IDX_UNDEF) || (IDX_TAIL(q) == IDX_UNDEF));
 }
 
-int length(orderQueue q){
+int lengthD(orderQueue q){
     if (isEmpty(q)){
         return 0;
     }
@@ -21,7 +21,7 @@ int length(orderQueue q){
     }
 }
 
-void enqueue(orderQueue *q){
+void enqueueD(orderQueue *q){
     srand(time(NULL)); 
     if (isEmpty(*q)){
         IDX_TAIL(*q) = 0;
@@ -44,7 +44,7 @@ void enqueue(orderQueue *q){
     }
 }
 
-void dequeue(orderQueue *q, int *saldo){
+void dequeueD(orderQueue *q, int *saldo){
     if (IDX_HEAD(*q) == IDX_TAIL(*q)){
         *saldo += HEAD(*q).price;
         IDX_HEAD(*q) = IDX_UNDEF;
@@ -66,7 +66,7 @@ void dinner_dash(){
     int cook[100];
     int serve[100];
 
-    CreateQueue(&incoming);
+    CreateQueueD(&incoming);
 
     for (int k = 0; k < 100; k++){
         cook[k] = -1;
@@ -80,13 +80,12 @@ void dinner_dash(){
     int torder = 2;
     int backlog = 3;
     int tserve = 0;
-    enqueue(&incoming);
-    enqueue(&incoming);
-    enqueue(&incoming);
+    enqueueD(&incoming);
+    enqueueD(&incoming);
+    enqueueD(&incoming);
 
     // Command
-    char input1[10];
-    char input2[10];
+    char *input;
 
     // Menang atau Kalah 
     boolean over = false;
@@ -106,7 +105,7 @@ void dinner_dash(){
 
     // Initial input
     printf("MASUKKAN COMMAND: ");
-    scanf("%s %s", input1, input2);
+    input = READINPUT();
     printf("\n\n");
 
     // Main loop
@@ -115,12 +114,12 @@ void dinner_dash(){
         boolean valid = false;
         while (!valid){
             int val = 0;   // ID pesanan
-            if ((input1[0] == 'C')&&(input1[1] == 'O')&&(input1[2] == 'O')&&(input1[3] == 'K')&&(input2[0]=='M')){   // COOK M...
+            if ((input[0] == 'C')&&(input[1] == 'O')&&(input[2] == 'O')&&(input[3] == 'K')&&(input[4] == ' ')&&(input[5]=='M')){   // COOK M...
                 // Mencari val
-                val += input2[1] - '0';
-                if (input2[2] != '\0'){
+                val += input[6] - '0';
+                if (input[7] != '\n'){
                     val *= 10;
-                    val += input2[2] - '0';
+                    val += input[7] - '0';
                 }
 
                 // Mengecek apakah pesanan ada
@@ -140,17 +139,17 @@ void dinner_dash(){
                     printf("Tidak ada pesanan M%d\n", val);   // Pesan gagal
                 }
             }
-            else if ((input1[0] == 'S')&&(input1[1] == 'E')&&(input1[2] == 'R')&&(input1[3] == 'V')&&(input1[4] == 'E')&&(input2[0]=='M')){   //SERVE M...
+            else if ((input[0] == 'S')&&(input[1] == 'E')&&(input[2] == 'R')&&(input[3] == 'V')&&(input[4] == 'E')&&(input[5] == ' ')&&(input[6]=='M')){   //SERVE M...
                 // Mencari val
-                val += input2[1] - '0';
-                if (input2[2] != '\0'){
+                val += input[7] - '0';
+                if (input[8] != '\n'){
                     val *= 10;
-                    val += input2[2] - '0';
+                    val += input[8] - '0';
                 }
 
                 // Mengecek apakah pesanan sebelumnya sudah dimasak
                 if ((val == IDX_HEAD(incoming)) && (incoming.buffer[val].serve == true)){   // Pesanan paling depan dan belum basi
-                    dequeue(&incoming, &saldo);
+                    dequeueD(&incoming, &saldo);
                     tserve++;
                     printf("Berhasil mengantar M%d\n", val);   // Pesan berhasil;
                     if (tserve == 15){   // Kondisi menang
@@ -166,11 +165,14 @@ void dinner_dash(){
                     printf("M%d sudah disajikan\n", val);   // Pesan gagal
                 }
             }
+            else if ((input[0] == 'S')&&(input[1] == 'K')&&(input[2] == 'I')&&(input[3] == 'P')&&(input[4] == '\n')){
+                valid = true;
+            }
 
             // Apabila input salah
             if (!valid){
                 printf("MASUKKAN COMMAND: ");
-                scanf("%s %s", input1, input2);
+                input = READINPUT();
                 printf("\n\n");
             }
         }
@@ -202,7 +204,7 @@ void dinner_dash(){
         }
 
         // Memulai putaran baru
-        enqueue(&incoming);
+        enqueueD(&incoming);
         torder++;
         backlog++;
         if (backlog>7){
@@ -232,11 +234,12 @@ void dinner_dash(){
                     printf("M%d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].duration - serve[i]);
                 }
             }
+
             printf("\n\n");
 
             // Input
             printf("MASUKKAN COMMAND: ");
-            scanf("%s %s", input1, input2);
+            input = READINPUT();
             printf("\n\n");
         }
         else{
