@@ -14,7 +14,7 @@ int main(){
 
     // Initial output
     printf("Selamat datang di BNMO ^w^\n");
-    printf("ENTER COMMAND: ");
+   
 
     // Inisiasi input
     char *input;
@@ -22,58 +22,147 @@ int main(){
     char *arg;
 
     // Meminta input
-    input = READINPUT();
-    command = KataPertama(input);
-    arg = KataKedua(input);
+    
+    
     
     // Loop utama
     // (str_comp(command.TabWord, quit))||(str_comp(command.TabWord, help))
+    boolean load = false;
     boolean over = false;
-    while (!over){
-        if (str_comp(command, "START")){
-            STARTGAME(&game);
+    while (!load){
+        printf("ENTER COMMAND: ");
+        input = READINPUT();
+
+        if (blank_count(input) == 0)
+        {
+            if (str_comp(input , "START"))
+            {
+                STARTGAME(&game);
+                load = true;
+            }
+
+            else if (str_comp(input, "HELP"))
+            {
+                HELP();
+            }
+        
         }
-        else if (str_comp(command, "LOAD")){
-            LOAD(&game, arg);
+        else if(blank_count(input) == 1)
+        {
+            command = KataPertama(input);
+            arg = KataKedua(input);
+
+             if (str_comp(command , "LOAD"))
+            {
+                if (str_comp(arg, "savefile.txt"))
+                {
+                    LOAD(&game, "../data/savefile.txt");
+                    if (game.Neff < 0)
+                    {
+                        printf("Load gagal\n");
+                    }
+                    else
+                    {
+                    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
+                    load = true;
+                    }
+                }
+
+                else if (str_comp(arg, "config.txt"))
+                {
+                    LOAD(&game, "../data/config.txt");
+                    if (game.Neff < 0)
+                    {
+                        printf("Load gagal\n");
+                    }
+                    else
+                    {
+                    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
+                    load = true;
+                    }
+                }
+                else
+                {
+                    printf("Load gagal\n");
+                }
+
+
+            }
+            else{
+                printf("Perintah yang dapat digunakan hanya START, LOAD, atau HELP\n");
+            }
         }
-        else if (str_comp(command, "SAVE")){
-            SAVE(game, arg);
+
+        else 
+        {
+            printf("Perintah yang dapat digunakan hanya START, LOAD, atau HELP\n");
         }
-        else if (str_comp(command, "CREATEGAME")){
-            CREATEGAME(&game);
-        }
-        else if (str_comp(command, "LISTGAME")){
-            LISTGAME(&game);
-        }
-        else if (str_comp(command, "DELETEGAME")){
-            DELETEGAME(&game, antrian);
-        }
-        else if (str_comp(command, "QUEUEGAME")){
-            QUEUEGAME(&antrian, game);
-        }
-        else if (str_comp(command, "PLAYGAME")){
-            PLAYGAME(&antrian, game);
-        }
-        else if (str_comp(command, "SKIPGAME")){
-            SKIPGAME();
-        }
-        else if (str_comp(command, "QUIT")){
-            QUIT();
-        }
-        else if (str_comp(command, "HELP")){
-            HELP();
-        }
-        else{
-            printf("input error\n");
+
+
+        while(load && !over)
+        {
+            printf("ENTER COMMAND: ");
+            input = READINPUT();
+
+            if(blank_count(input) > 1)
+            {
+                printf("error\n");
+            }
+            else
+            {
+
+                if (str_comp(input, "CREATE GAME")){
+                    CREATEGAME(&game);
+                }
+                else if (str_comp(input, "LIST GAME")){
+                    LISTGAME(&game);
+                }
+                else if (str_comp(input, "DELETE GAME")){
+                    DELETEGAME(&game, &antrian);
+                }
+                else if (str_comp(input, "QUEUE GAME")){
+                    QUEUEGAME(&antrian, game);
+                }
+                else if (str_comp(input, "PLAY GAME")){
+                    PLAYGAME(&antrian, game);
+                }
+               
+                else if (str_comp(input, "QUIT")){
+                    over =true;
+                }
+                else if (str_comp(input, "HELP")){
+                    HELP();
+                }
+                else if(blank_count(input)== 1)
+                {
+                    command = KataPertama(input);
+                    arg = KataKedua(input);
+                    if(str_comp(command , "SAVE"))
+                    {
+                        SAVE(game, arg);
+                    }
+                    else if (str_comp(command, "SKIPGAME"))
+                    {
+                    // SKIPGAME();
+                    }
+                    else{
+                        printf("input error\n");
+                    }
+                }
+                else{
+                    printf("input error\n");
+                }
+            }
         }
 
         // Apabila belum keluar dari game
-        if (!over){
-            // Meminta input
-            input = READINPUT();
-            command = KataPertama(input);
-            arg = KataKedua(input);
-        }
+
+    }
+    if(over )
+    {
+        printf("Anda keluar dari game BNMO.\n");
+        printf("Bye bye ...\n");
+
     }
     return 0;
 }
