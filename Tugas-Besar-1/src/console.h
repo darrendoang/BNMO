@@ -6,9 +6,15 @@
 #include "ADT/mesinkarakter.h"
 #include "ADT/mesinkata.h"
 #include "ADT/mesinload.h"
+<<<<<<< Updated upstream
 #include "ADT/queue.h"
 #include "ADT/stringcomp.h"
 #include "GAME/rng.h"
+=======
+#include "ADT/stringcomp.h"
+#include "GAME/rng.h"
+#include "ADT/queue.h"
+>>>>>>> Stashed changes
 
 
 void STARTGAME();
@@ -21,7 +27,7 @@ void CREATEGAME(Array* game);
 
 void LISTGAME(Array *game);
 
-void DELETEGAME(Array* game);
+void DELETEGAME(Array* game , Queue *antriangame);
 
 void QUEUEGAME(Queue *antriangame, Array gamelist);
 
