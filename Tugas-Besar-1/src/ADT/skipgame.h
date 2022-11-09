@@ -1,5 +1,6 @@
-#include "boolean.h"
-#include "list.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include "queue.h"
-
-void SKIPGAME(int input);
+#include "mesinkata.h"
+ 
+void SKIPGAME(Queue *antriangame, int n){
