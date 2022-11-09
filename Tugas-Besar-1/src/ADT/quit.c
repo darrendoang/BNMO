@@ -2,5 +2,6 @@
 #include <stdlib.h>
 
 void quit_program (){
-    quit (0);
+    printf ("Anda keluar dari game BNMO. \n");
+    printf ("Bye bye ...");
 }
