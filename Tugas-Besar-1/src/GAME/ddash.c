@@ -107,7 +107,7 @@ void diner_dash(){
             if ((input[0] == 'C')&&(input[1] == 'O')&&(input[2] == 'O')&&(input[3] == 'K')&&(input[4] == ' ')&&(input[5]=='M')){   // COOK M...
                 // Mencari val
                 val += input[6] - '0';
-                if (input[7] != '\n'){
+                if (input[7] != '\0'){
                     val *= 10;
                     val += input[7] - '0';
                 }
@@ -132,7 +132,7 @@ void diner_dash(){
             else if ((input[0] == 'S')&&(input[1] == 'E')&&(input[2] == 'R')&&(input[3] == 'V')&&(input[4] == 'E')&&(input[5] == ' ')&&(input[6]=='M')){   //SERVE M...
                 // Mencari val
                 val += input[7] - '0';
-                if (input[8] != '\n'){
+                if (input[8] != '\0'){
                     val *= 10;
                     val += input[8] - '0';
                 }
@@ -155,7 +155,7 @@ void diner_dash(){
                     printf("M%d sudah disajikan\n", val);   // Pesan gagal
                 }
             }
-            else if ((input[0] == 'S')&&(input[1] == 'K')&&(input[2] == 'I')&&(input[3] == 'P')&&(input[4] == '\n')){
+            else if ((input[0] == 'S')&&(input[1] == 'K')&&(input[2] == 'I')&&(input[3] == 'P')&&(input[4] == '\0')){
                 valid = true;
             }
 

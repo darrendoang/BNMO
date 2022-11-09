@@ -172,7 +172,3 @@ void tictactoe()
     printf("Terima Kasih telah bermain TICTACTOE!\n");
 }
 
-int main()
-{
-    tictactoe();
-}

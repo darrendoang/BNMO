@@ -168,19 +168,25 @@ void PLAYGAME(Queue *antriangame , Array gamelist)
     char *play = antriangame->buffer[antriangame->idxHead];
     if (str_comp(play, "RNG")){
         printf("Loading RNG . . . \n");
-        dequeue(antriangame,&val);
+        dequeue(antriangame,val);
         RNG();
     }
     else if (str_comp(play, "Diner DASH")){
         printf("Loading DINER DASH . . . \n");
-        dequeue(antriangame,&val);
+        dequeue(antriangame,val);
         diner_dash();
+    }
+
+    else if (str_comp(play, "TIC TAC TOE")){
+        printf("Loading TIC TAC TOE . . . \n");
+        dequeue(antriangame,val);
+        tictactoe();
     }
     else{
         boolean found = false;
-        for (int i = 5; i < gamelist.Neff; i++){
+        for (int i = 6; i < gamelist.Neff; i++){
             if (str_comp(play, gamelist.TI[i])){
-                boolean found = true;
+                found = true;
             }
         }
         if (found){
@@ -189,14 +195,50 @@ void PLAYGAME(Queue *antriangame , Array gamelist)
             printf("GAME OVER\n");
             printf("SKOR AKHIR: %d\n", rand()%10000);
         }
-        else{
+        else if(!found){
         printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
         printf("Silahkan pilih game lain.\n");
         }
     }
 }
 
-void SKIPGAME();
+void SKIPGAME(Queue *queuegame, int input , Array gamelist)
+{
+    char *temp;
+    printf("Berikut adalah daftar Game-mu: \n");
+    if (!isEmpty(*queuegame))
+    {
+        int list = 0;
+        for (int i = queuegame->idxHead; i < (queuegame->idxHead + length(*queuegame)); i++)
+        {
+            printf("%d. %s\n", list + 1, queuegame->buffer[i]);
+            list++;
+        }
+    }
+    else
+    {
+        printf("Tidak ada game dalam antrian\n");
+    }
+    printf("\n");
+
+    for (int i = 0; i < input; i++)
+    {
+        if (!isEmpty(*queuegame))
+        {
+            dequeue(queuegame, temp);
+        }
+    }
+
+    if (!isEmpty(*queuegame))
+    {
+        PLAYGAME(queuegame, gamelist);
+    }
+    else
+    {
+        printf("Tidak ada permainan di dalam daftar Game-mu.\n");
+    }
+}
+
 
 void QUIT();
 

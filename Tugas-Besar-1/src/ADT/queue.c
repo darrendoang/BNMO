@@ -51,19 +51,17 @@ void enqueue(Queue *q, char * v){
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur" dalam buffer melingkar. */
 
-void dequeue(Queue *q, ElType *val){
-    if (IDX_HEAD(*q) == IDX_TAIL(*q)){
-        *val = HEAD(*q);
+void dequeue(Queue *q, char * v)
+{
+    v = (*q).buffer[0];
+    if (length(*q) == 1)
+    {
         IDX_HEAD(*q) = IDX_UNDEF;
         IDX_TAIL(*q) = IDX_UNDEF;
     }
-    else if ((IDX_HEAD(*q) >= 0) && (IDX_HEAD(*q) < CAPACITY-1) && (IDX_HEAD(*q) != IDX_TAIL(*q)))   {
-        *val = HEAD(*q);
-        IDX_HEAD(*q)++;
-    }
-    else if ((IDX_HEAD(*q) == CAPACITY - 1) && (IDX_HEAD(*q) != IDX_TAIL(*q)))  {
-        *val = HEAD(*q);
-        IDX_HEAD(*q) = 0;
+    else
+    {
+        IDX_HEAD(*q) += 1;
     }
 }
 /* Proses: Menghapus val pada q dengan aturan FIFO */
@@ -77,7 +75,7 @@ void displayQueue(Queue q){
     ElType k = 0;
     int i, j;
     while (!(isEmpty(q))) {
-        dequeue(&q, &k);
+        dequeue(&q, k);
         temp[j] = k;
         j++;
     }

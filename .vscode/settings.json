@@ -6,6 +6,7 @@
         "stdio.h": "c",
         "array.h": "c",
         "queue.h": "c",
-        "rng.h": "c"
+        "rng.h": "c",
+        "tictactoe.h": "c"
     }
 }

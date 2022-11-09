@@ -65,4 +65,7 @@ int str_len(char *str);
 char *KataKedua(char *str);
 
 char *KataPertama(char *str);
+
+int str_comp(char str1[], char str2[]);
+
 #endif

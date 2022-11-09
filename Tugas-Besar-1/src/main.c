@@ -44,6 +44,9 @@ int main(){
             {
                 HELP();
             }
+            else{
+                printf("Perintah yang dapat digunakan hanya START, LOAD, atau HELP\n");
+            }
         
         }
         else if(blank_count(input) == 1)
@@ -135,14 +138,16 @@ int main(){
                 else if(blank_count(input)== 1)
                 {
                     command = KataPertama(input);
-                    arg = KataKedua(input);
-                    if(str_comp(command , "SAVE"))
+                        arg = KataKedua(input);
+                    if(str_comp(command , "SKIPGAME"))
+                    { 
+                        int num = StrToInt_input(arg, str_len(arg));
+                        printf("%d\n" , num);
+                        SKIPGAME(&antrian, num , game);
+                    }
+                    else if (str_comp(command, "SAVE"))
                     {
                         SAVE(game, arg);
-                    }
-                    else if (str_comp(command, "SKIPGAME"))
-                    {
-                    // SKIPGAME();
                     }
                     else{
                         printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");

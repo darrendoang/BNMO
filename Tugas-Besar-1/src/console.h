@@ -7,9 +7,9 @@
 #include "ADT/mesinkata.h"
 #include "ADT/mesinload.h"
 #include "ADT/queue.h"
-#include "ADT/stringcomp.h"
 #include "GAME/rng.h"
 #include "GAME/ddash.h"
+#include "GAME/tictactoe.h"
 
 
 void STARTGAME(Array *game);
@@ -28,7 +28,7 @@ void QUEUEGAME(Queue *antriangame, Array gamelist);
 
 void PLAYGAME(Queue *antriangame , Array gamelist);
 
-void SKIPGAME();
+void SKIPGAME(Queue *queuegame, int input , Array gamelist);
 
 void QUIT();
 
