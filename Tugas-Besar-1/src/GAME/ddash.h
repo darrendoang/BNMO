@@ -29,7 +29,7 @@ typedef struct {
 
 typedef struct
 	{
-		int TI [IdxMax-IdxMin+1]; /* memori tempat penyimpan elemen (container) */
+		int TI [100]; /* memori tempat penyimpan elemen (container) */
 		int Neff; /* banyaknya elemen efektif */
 	} arrayCook;
 
