@@ -20,12 +20,8 @@ void LOAD(Array *game, char *filename) {
             *(namagame + j) = currentWord.TabWord[j];
         }
         *(namagame + currentWord.Length) = '\0'; //penanda akhir string
-        game->TI[i] = namagame;
-        
+        game->TI[i] = namagame;   
     }
-    
-
-    
 }
 
 void SAVE(Array game , char * filename){
@@ -178,12 +174,25 @@ void PLAYGAME(Queue *antriangame , Array gamelist)
     else if (str_comp(play, "DINER DASH")){
         printf("Loading DINER DASH . . . \n");
         dequeue(antriangame,&val);
-
-
+        diner_dash();
     }
     else{
+        boolean found = false;
+        for (int i = 5; i < gamelist.Neff; i++){
+            if (str_comp(play, gamelist.TI[i])){
+                boolean found = true;
+            }
+        }
+        if (found){
+            srand(time(0));
+            printf("Loading %s . . . \n", play);
+            printf("GAME OVER\n");
+            printf("SKOR AKHIR: %d\n", rand()%10000);
+        }
+        else{
         printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
         printf("Silahkan pilih game lain.\n");
+        }
     }
 }
 

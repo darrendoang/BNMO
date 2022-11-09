@@ -1,24 +1,8 @@
-#include "ddash1.h"
+#include "ddash.h"
 
 void CreateQueueD(orderQueue *q){
     IDX_HEAD(*q) = IDX_UNDEF;
     IDX_TAIL(*q) = IDX_UNDEF;
-}
-
-boolean isEmptyD(orderQueue q){
-    return ((IDX_HEAD(q) == IDX_UNDEF) || (IDX_TAIL(q) == IDX_UNDEF));
-}
-
-int lengthD(orderQueue q){
-    if (isEmpty(q)){
-        return 0;
-    }
-    else if ((IDX_HEAD(q) <= IDX_TAIL(q)) && (!isEmpty(q))){
-        return (IDX_TAIL(q) - IDX_HEAD(q) + 1);
-    }
-    else if ((IDX_HEAD(q) > IDX_TAIL(q)) && (!isEmpty(q))) {
-        return (CAPACITY + IDX_TAIL(q) - IDX_HEAD(q) + 1);
-    }
 }
 
 void enqueueD(orderQueue *q){
@@ -60,7 +44,7 @@ void dequeueD(orderQueue *q, int *saldo){
     }
 }
 
-void dinner_dash(){
+void diner_dash(){
     // Queue dan Array
     orderQueue incoming;
     int cook[100];
@@ -252,36 +236,4 @@ void dinner_dash(){
             }
         }
     }
-}
-
-int main(){
-    /*
-    srand(time(NULL));   
-    int r = rand();
-    int s = rand();
-    printf("%d %d\n", (1000*(r%15))+1000, s);
-    
-    char input1[10];
-    char input2[10];
-
-    scanf("%s %s", input1, input2);
-    printf("\n");
-    printf("%c\n", input2[0]);
-    printf("%c\n", input2[1]);
-    printf("%c\n", input2[2]);
-    if (input2[2] == '\0'){
-
-        printf("delta\n");
-    }
-    int val = 0;
-    val += input2[1] - '0';
-        if (input2[2] != '\0'){
-            val += input2[2] - '0';
-        }
-    printf("%d\n", val);
-    system("pause");
-    */
-    dinner_dash();
-    
-    return 0;
 }

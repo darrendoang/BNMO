@@ -5,6 +5,7 @@
         "ddash.h": "c",
         "mesinkata.h": "c",
         "queue.h": "c",
-        "rng.h": "c"
+        "rng.h": "c",
+        "math.h": "c"
     }
 }

@@ -1,4 +1,9 @@
-#include "boolean.h"
+#ifndef DDASH_H
+#define DDASH_H
+
+#include "../ADT/boolean.h"
+#include "../ADT/mesinkarakter.h"
+#include "../ADT/mesinkata.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -27,14 +32,12 @@ typedef struct {
 #define     HEAD(q) (q).buffer[(q).idxHead]
 #define     TAIL(q) (q).buffer[(q).idxTail]
 
-void CreateQueue(orderQueue *q);
+void CreateQueueD(orderQueue *q);
 
-boolean isEmpty(orderQueue q);
+void enqueueD(orderQueue *q);
 
-int length(orderQueue q);
+void dequeueD(orderQueue *q, int *saldo);
 
-void enqueue(orderQueue *q);
+void diner_dash();
 
-void dequeue(orderQueue *q, int *saldo);
-
-void dinnner_dash();
+#endif

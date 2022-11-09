@@ -6,15 +6,10 @@
 #include "ADT/mesinkarakter.h"
 #include "ADT/mesinkata.h"
 #include "ADT/mesinload.h"
-<<<<<<< Updated upstream
 #include "ADT/queue.h"
 #include "ADT/stringcomp.h"
 #include "GAME/rng.h"
-=======
-#include "ADT/stringcomp.h"
-#include "GAME/rng.h"
-#include "ADT/queue.h"
->>>>>>> Stashed changes
+#include "GAME/ddash.h"
 
 
 void STARTGAME();
