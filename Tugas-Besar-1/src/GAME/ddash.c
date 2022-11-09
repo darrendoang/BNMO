@@ -51,14 +51,16 @@ void dequeueD(orderQueue *q, int *saldo){
 void diner_dash(){
     // Queue dan Array
     orderQueue incoming;
-    int cook[100];
-    int serve[100];
+    arrayCook cook;
+    arrayCook serve;
+    cook.Neff = 100;
+    serve.Neff = 100;
 
     CreateQueueD(&incoming);
 
     for (int k = 0; k < 100; k++){
-        cook[k] = -1;
-        serve[k] = -1;
+        cook.TI[k] = -1;
+        serve.TI[k] = -1;
     }
 
     // Saldo
@@ -168,11 +170,11 @@ void diner_dash(){
         // Proses memasak
         for (int k = IDX_HEAD(incoming); k <= IDX_TAIL(incoming); k++){
             if (incoming.buffer[k].cook == true){
-                cook[k]++;
-                if ((incoming.buffer[k].time - cook[k]) == 0){
+                cook.TI[k]++;
+                if ((incoming.buffer[k].time - cook.TI[k]) == 0){
                     incoming.buffer[k].cook = false;
                     incoming.buffer[k].serve = true;
-                    cook[k] = -1;
+                    cook.TI[k] = -1;
                     printf("Makanan M%d telah selesai dimasak\n", k);
                 }
             }
@@ -181,10 +183,10 @@ void diner_dash(){
         // Proses membusuk
         for (int k = IDX_HEAD(incoming); k <= IDX_TAIL(incoming); k++){
             if (incoming.buffer[k].serve == true){
-                serve[k]++;
-                if ((incoming.buffer[k].duration - serve[k]) == 0){
+                serve.TI[k]++;
+                if ((incoming.buffer[k].duration - serve.TI[k]) == 0){
                     incoming.buffer[k].serve = false;
-                    serve[k] = -1;
+                    serve.TI[k] = -1;
                     backlog++;
                     printf("Makanan M%d telah membusuk\n", k);
                 }
@@ -212,14 +214,14 @@ void diner_dash(){
             printf("Daftar Makanan yang sedang dimasak\nMakanan | Sisa durasi memasak\n------------------------------\n");
             for (int i = IDX_HEAD(incoming); i <= IDX_TAIL(incoming); i++){
                 if (incoming.buffer[i].cook==true){
-                    printf("M%d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time - cook[i]);
+                    printf("M%d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time - cook.TI[i]);
                 }
             }
             printf("\n");
             printf("Daftar Makanan yang dapat disajikan\nMakanan | Sisa ketahanan makanan\n------------------------------\n");
             for (int i = IDX_HEAD(incoming); i <= IDX_TAIL(incoming); i++){
                 if (incoming.buffer[i].serve==true){
-                    printf("M%d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].duration - serve[i]);
+                    printf("M%d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].duration - serve.TI[i]);
                 }
             }
 

@@ -27,10 +27,18 @@ typedef struct {
 	int idxTail;
 } orderQueue;
 
+typedef struct
+	{
+		int TI [IdxMax-IdxMin+1]; /* memori tempat penyimpan elemen (container) */
+		int Neff; /* banyaknya elemen efektif */
+	} arrayCook;
+
 #define IDX_HEAD(q) (q).idxHead
 #define IDX_TAIL(q) (q).idxTail
 #define     HEAD(q) (q).buffer[(q).idxHead]
 #define     TAIL(q) (q).buffer[(q).idxTail]
+
+boolean isEmptyD(orderQueue q);
 
 void CreateQueueD(orderQueue *q);
 
