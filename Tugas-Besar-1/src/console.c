@@ -171,7 +171,7 @@ void PLAYGAME(Queue *antriangame , Array gamelist)
         dequeue(antriangame,&val);
         RNG();
     }
-    else if (str_comp(play, "DINER DASH")){
+    else if (str_comp(play, "Diner DASH")){
         printf("Loading DINER DASH . . . \n");
         dequeue(antriangame,&val);
         diner_dash();
