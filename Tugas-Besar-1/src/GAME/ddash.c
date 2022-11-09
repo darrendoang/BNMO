@@ -5,9 +5,13 @@ void CreateQueueD(orderQueue *q){
     IDX_TAIL(*q) = IDX_UNDEF;
 }
 
+boolean isEmptyD(orderQueue q){
+    return ((IDX_HEAD(q) == IDX_UNDEF) || (IDX_TAIL(q) == IDX_UNDEF));
+}
+
 void enqueueD(orderQueue *q){
     srand(time(NULL)); 
-    if (isEmpty(*q)){
+    if (isEmptyD(*q)){
         IDX_TAIL(*q) = 0;
         IDX_HEAD(*q) = 0;
         TAIL(*q).number = IDX_TAIL(*q);
