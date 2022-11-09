@@ -10,7 +10,6 @@ int main(){
     Queue antrian;
     MakeEmpty(&game);
     CreateQueue(&antrian);
-    
 
     // Initial output
     printf("Selamat datang di BNMO ^w^\n");
@@ -106,7 +105,7 @@ int main(){
 
             if(blank_count(input) > 1)
             {
-                printf("error\n");
+                printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
             }
             else
             {
@@ -146,11 +145,11 @@ int main(){
                     // SKIPGAME();
                     }
                     else{
-                        printf("input error\n");
+                        printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
                     }
                 }
                 else{
-                    printf("input error\n");
+                    printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
                 }
             }
         }
