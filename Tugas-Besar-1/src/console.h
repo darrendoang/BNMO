@@ -12,7 +12,7 @@
 #include "GAME/ddash.h"
 
 
-void STARTGAME();
+void STARTGAME(Array *game);
 
 void LOAD(Array *game, char *filename);
 
