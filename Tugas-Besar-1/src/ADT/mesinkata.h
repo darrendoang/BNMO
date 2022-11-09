@@ -68,4 +68,6 @@ char *KataPertama(char *str);
 
 int str_comp(char str1[], char str2[]);
 
+char *filetodir(char *file);
+
 #endif

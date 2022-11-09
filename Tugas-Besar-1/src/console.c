@@ -182,23 +182,30 @@ void PLAYGAME(Queue *antriangame , Array gamelist)
         dequeue(antriangame,val);
         tictactoe();
     }
+
+    else if (str_comp(play, "RISEWOMAN")){
+        printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
+        printf("Silahkan pilih game lain.\n");
+        dequeue(antriangame,val);
+    }
+
+    else if (str_comp(play, "EIFFEL TOWER")){
+        printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
+        printf("Silahkan pilih game lain.\n");
+        dequeue(antriangame,val);
+    }
+
+    else if (str_comp(play, "DINOSAUR IN EARTH")){
+        printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
+        printf("Silahkan pilih game lain.\n");
+        dequeue(antriangame,val);
+    }
     else{
-        boolean found = false;
-        for (int i = 6; i < gamelist.Neff; i++){
-            if (str_comp(play, gamelist.TI[i])){
-                found = true;
-            }
-        }
-        if (found){
             srand(time(0));
             printf("Loading %s . . . \n", play);
             printf("GAME OVER\n");
             printf("SKOR AKHIR: %d\n", rand()%10000);
-        }
-        else if(!found){
-        printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
-        printf("Silahkan pilih game lain.\n");
-        }
+            dequeue(antriangame,val);
     }
 }
 

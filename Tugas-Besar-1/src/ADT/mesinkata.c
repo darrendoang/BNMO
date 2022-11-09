@@ -156,3 +156,24 @@ int str_comp(char str1[], char str2[]){
     else    
         return false; 
 }
+
+char *filetodir(char *file)
+{
+    char dir[8] = "../data/";
+    char *dir_result = (char *)malloc(100 * sizeof(char));
+    int i=0;
+    while(i<8)
+    {
+        dir_result[i] = dir[i];
+        i++;
+    }
+    int idx= 0;
+    while(file[idx] != '\0')
+    {
+        dir_result[i] = file[idx];
+        i++;
+        idx++;
+    }
+    dir_result[i] ='\0';
+    return dir_result;
+}

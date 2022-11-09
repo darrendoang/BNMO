@@ -56,37 +56,18 @@ int main(){
 
              if (str_comp(command , "LOAD"))
             {
-                if (str_comp(arg, "savefile.txt"))
-                {
-                    LOAD(&game, "../data/savefile.txt");
+                char * dir;
+                    dir = filetodir(arg);
+                    LOAD(&game, dir);
                     if (game.Neff < 0)
                     {
-                        printf("Load gagal\n");
+                        printf("Save file gagal dibaca. Coba lagi\n");
                     }
                     else
                     {
                     printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
                     load = true;
                     }
-                }
-
-                else if (str_comp(arg, "config.txt"))
-                {
-                    LOAD(&game, "../data/config.txt");
-                    if (game.Neff < 0)
-                    {
-                        printf("Load gagal\n");
-                    }
-                    else
-                    {
-                    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
-                    load = true;
-                    }
-                }
-                else
-                {
-                    printf("Load gagal\n");
-                }
 
 
             }
@@ -142,7 +123,6 @@ int main(){
                     if(str_comp(command , "SKIPGAME"))
                     { 
                         int num = StrToInt_input(arg, str_len(arg));
-                        printf("%d\n" , num);
                         SKIPGAME(&antrian, num , game);
                     }
                     else if (str_comp(command, "SAVE"))
