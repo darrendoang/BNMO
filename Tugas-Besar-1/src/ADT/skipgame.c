@@ -7,6 +7,7 @@ Queue queuegame;
 
 void SKIPGAME(int input){
     int i = 0;
+    ElType val;
 
     displayQueue(queuegame);
 
