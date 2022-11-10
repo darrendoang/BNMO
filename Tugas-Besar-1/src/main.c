@@ -122,20 +122,7 @@ int main(){
                     {
                         SAVE(game, arg);
                     }
-                    if (str_comp(command , "LOAD"))
-                    {
-                        char * dir;
-                            dir = filetodir(arg);
-                            LOAD(&game, dir);
-                            if (game.Neff < 0)
-                            {
-                                printf("Save file gagal dibaca. Coba lagi\n");
-                            }
-                            else
-                            {
-                            printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
-                            }
-                    }
+                    
                     else{
                         printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
                     }

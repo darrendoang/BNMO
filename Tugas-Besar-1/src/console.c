@@ -99,7 +99,7 @@ void DELETEGAME(Array* game , Queue *antriangame){
         x++;
     }
 
-    if(del_num <=5 || del_num > game->Neff || flag)
+    if(del_num <=6 || del_num > game->Neff || flag)
     {
         printf("Game gagal dihapus!\n");
     }
@@ -124,9 +124,10 @@ void QUEUEGAME(Queue *antriangame, Array gamelist)
         printf("Tidak ada game dalam daftar antrian \n");
     }
     else{
-        int i = 0;
-        for (i; i < length(*antriangame); i++){
-            printf("%d. %s\n", i+1, antriangame->buffer[i]);
+        int i,x=0;
+        for (i=(*antriangame).idxHead; i< length(*antriangame) +(*antriangame).idxHead ; i++){
+            printf("%d. %s\n", x+1, (*antriangame).buffer[i]);
+            x++;
         }
     }
     printf("\n");
@@ -158,7 +159,7 @@ void PLAYGAME(Queue *antriangame , Array gamelist)
     }
     else{
         int i,x=0;
-        for (i=(*antriangame).idxHead; i< length(*antriangame); i++){
+        for (i=(*antriangame).idxHead; i< length(*antriangame) +(*antriangame).idxHead ; i++){
             printf("%d. %s\n", x+1, (*antriangame).buffer[i]);
             x++;
         }
