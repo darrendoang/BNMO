@@ -234,11 +234,9 @@ void diner_dash(){
         }
         else{
             if (win){
-                printf("Kamu menang uwu\n");
-                system("pause");
+                printf("Kamu menang ^w^\n");
             }else{
                 printf("Kamu kalah :<\n");
-                system("pause");
             }
         }
     }

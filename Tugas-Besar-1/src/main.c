@@ -14,15 +14,10 @@ int main(){
     // Initial output
     printf("Selamat datang di BNMO ^w^\n");
    
-
     // Inisiasi input
     char *input;
     char *command;
     char *arg;
-
-    // Meminta input
-    
-    
     
     // Loop utama
     // (str_comp(command.TabWord, quit))||(str_comp(command.TabWord, help))
@@ -54,7 +49,7 @@ int main(){
             command = KataPertama(input);
             arg = KataKedua(input);
 
-             if (str_comp(command , "LOAD"))
+            if (str_comp(command , "LOAD"))
             {
                 char * dir;
                     dir = filetodir(arg);
@@ -68,8 +63,6 @@ int main(){
                     printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
                     load = true;
                     }
-
-
             }
             else{
                 printf("Perintah yang dapat digunakan hanya START, LOAD, atau HELP\n");
@@ -128,6 +121,20 @@ int main(){
                     else if (str_comp(command, "SAVE"))
                     {
                         SAVE(game, arg);
+                    }
+                    if (str_comp(command , "LOAD"))
+                    {
+                        char * dir;
+                            dir = filetodir(arg);
+                            LOAD(&game, dir);
+                            if (game.Neff < 0)
+                            {
+                                printf("Save file gagal dibaca. Coba lagi\n");
+                            }
+                            else
+                            {
+                            printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
+                            }
                     }
                     else{
                         printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
