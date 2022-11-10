@@ -82,9 +82,9 @@ void displayQueue(Queue q){
     printf("[");
     if (j > 0)  {
         for (i = 0; i < j-1; i++) {
-            printf("%d,", temp[i]);
+            printf("%s,", temp[i]);
         }
-        printf("%d", temp[j-1]);
+        printf("%s", temp[j-1]);
     }
     printf("]\n");
 }
