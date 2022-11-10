@@ -10,7 +10,7 @@ void LOAD(Array *game, char *filename) {
     StartLOAD(filename);
     int n = currentChar - '0'; //mengambil nilai line pertama dalam file yaitu jumlah game lalu diubah ke int
     game->Neff = n; // jumlah game di assign ke game->Neff
-    ADVLOAD();
+    ADVWORDLOAD();
     for (int i = 0; i < n; i++) {
         ADVWORDLOAD();
         char *namagame;

@@ -16,13 +16,6 @@ void IgnoreNewLine() {
 }
 
 void ADVWORDLOAD() {
-/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika currentChar = MARK, EndWord = true.
-   Proses : Akuisisi kata menggunakan procedure SalinWord */
-    // KAMUS LOKAL
-    // ALGORITMA
     IgnoreNewLine();
     if (retval < 0) {
         EndWord = true;
