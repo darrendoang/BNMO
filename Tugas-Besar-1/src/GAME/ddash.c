@@ -90,8 +90,11 @@ void diner_dash(){
             printf("M%d      | %d      | %d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time, incoming.buffer[i].duration, incoming.buffer[i].price);
         }
     }
+    printf("\n");
     printf("Daftar Makanan yang sedang dimasak\nMakanan | Sisa durasi memasak\n------------------------------\n        |\n");
+    printf("\n");
     printf("Daftar Makanan yang dapat disajikan\nMakanan | Sisa ketahanan makanan\n------------------------------\n        |\n");
+    printf("\n\n");
 
     // Initial input
     printf("MASUKKAN COMMAND: ");
@@ -122,11 +125,11 @@ void diner_dash(){
                         valid = true;   // Keluar dari loop input
                     }
                     else {  
-                        printf("M%d sudah dimasak\n", val);   // Pesan gagal
+                        printf("M%d sudah dimasak\n\n", val);   // Pesan gagal
                     }
                 }
                 else{
-                    printf("Tidak ada pesanan M%d\n", val);   // Pesan gagal
+                    printf("Tidak ada pesanan M%d\n\n", val);   // Pesan gagal
                 }
             }
             else if ((input[0] == 'S')&&(input[1] == 'E')&&(input[2] == 'R')&&(input[3] == 'V')&&(input[4] == 'E')&&(input[5] == ' ')&&(input[6]=='M')){   //SERVE M...
@@ -149,10 +152,13 @@ void diner_dash(){
                     valid = true;   // Keluar dari loop input
                 }
                 else if ((val>IDX_HEAD(incoming))){   
-                    printf("M%d belum dapat disajikan karena M%d belum selesai\n", val, val-1);   // Pesan gagal
+                    printf("M%d belum dapat disajikan karena M%d belum selesai\n\n", val, val-1);   // Pesan gagal
+                }
+                else if ((val==IDX_HEAD(incoming)) && (incoming.buffer[val].serve == false)){   
+                    printf("M%d belum selesai dimasak\n\n", val);   // Pesan gagal
                 }
                 else if (val<IDX_HEAD(incoming)){  
-                    printf("M%d sudah disajikan\n", val);   // Pesan gagal
+                    printf("M%d sudah disajikan\n\n", val);   // Pesan gagal
                 }
             }
             else if ((input[0] == 'S')&&(input[1] == 'K')&&(input[2] == 'I')&&(input[3] == 'P')&&(input[4] == '\0')){
@@ -161,6 +167,7 @@ void diner_dash(){
 
             // Apabila input salah
             if (!valid){
+                printf("Command invalid, mohon masukkan command COOK M.., SERVE M.., atau SKIP\n\n");
                 printf("MASUKKAN COMMAND: ");
                 input = READINPUT();
                 printf("\n\n");
@@ -211,6 +218,7 @@ void diner_dash(){
                     printf("M%d      | %d      | %d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time, incoming.buffer[i].duration, incoming.buffer[i].price);
                 }
             }
+            printf("\n");
             printf("Daftar Makanan yang sedang dimasak\nMakanan | Sisa durasi memasak\n------------------------------\n");
             for (int i = IDX_HEAD(incoming); i <= IDX_TAIL(incoming); i++){
                 if (incoming.buffer[i].cook==true){
@@ -224,7 +232,6 @@ void diner_dash(){
                     printf("M%d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].duration - serve.TI[i]);
                 }
             }
-
             printf("\n\n");
 
             // Input

@@ -6,6 +6,8 @@
         "mesinkata.h": "c",
         "queue.h": "c",
         "rng.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "DRIVER_DDASH.C": "cpp",
+        "stdlib.h": "c"
     }
 }
