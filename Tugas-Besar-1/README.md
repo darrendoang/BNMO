@@ -4,11 +4,11 @@ Kelas 02
 
 
 Anggota:
-Muhammad Rafi Haidar / 18221134
-Priscilla Auleader Napitupulu / 18221098
-Laurensia Audrey Pramashinta / 1822114
-Darren / 18221050
-Razan Aditya Putra / 18221132
+Muhammad Rafi Haidar / 18221134;
+Priscilla Auleader Napitupulu / 18221098;
+Laurensia Audrey Pramashinta / 1822114;
+Darren / 18221050;
+Razan Aditya Putra / 18221132;
 
 
 Deskripsi:
@@ -28,17 +28,17 @@ Step 4: Ketik mingw32-make clean di terminal untuk menghapus driver.exe(Membersi
 
 Berikut merupakan list command yang dapat di-input saat program meminta anda memasukkan command:
 
-START                 Membaca file konfigurasi default yang berisi list game yang dapat dimainkan
-LOAD                  Membaca save file yang berisi list game yang dapat dimainkan, histori dan scoreboard game
-SAVE                  Merepresentasikan nama file yang akan disimpan pada disk
-CREATE GAME           Menambahkan game baru pada daftar game 
-LIST GAME             Menampilkan daftar game yang disediakan oleh sistem 
-DELETE GAME           Menghapus sebuah game dari daftar game 
-QUEUE GAME            Mendaftarkan permainan kedalam list 
-PLAY GAME             Memainkan sebuah permainan 
-SKIPGAME              Melewatkan permainan sebanyak n 
-QUIT                  Keluar dari Program 
-HELP                  Menampilkan daftar perintah 
+START                 Membaca file konfigurasi default yang berisi list game yang dapat dimainkan;
+LOAD                  Membaca save file yang berisi list game yang dapat dimainkan, histori dan scoreboard game;
+SAVE                  Merepresentasikan nama file yang akan disimpan pada disk;
+CREATE GAME           Menambahkan game baru pada daftar game;
+LIST GAME             Menampilkan daftar game yang disediakan oleh sistem;
+DELETE GAME           Menghapus sebuah game dari daftar game;
+QUEUE GAME            Mendaftarkan permainan kedalam list; 
+PLAY GAME             Memainkan sebuah permainan; 
+SKIPGAME              Melewatkan permainan sebanyak n; 
+QUIT                  Keluar dari Program; 
+HELP                  Menampilkan daftar perintah; 
 
 
 KHUSUS UNTUK FUNGSI LOAD
