@@ -13,15 +13,12 @@ Deskripsi:
 Program BNMO merupakan program permainan berbasis command-line interface yang dibuat menggunakan bahasa C. BNMO mempunyai beberapa fitur utama, yaitu memainkan game, menambahkan game, menghapus game, dan mengurutkan game yang akan dimainkan. Awalnya pengguna akan masuk ke dalam main menu dan dari situ dapat memasukkan command dengan cara mengetiknya untuk menggunakan fitur-fitur BNMO.
 
 Instruksi:
-Program bisa langsung dijalankan dengan mengeksekusi BNMO.exe di direktori src atau driver.exe di direktori bin
+Program bisa langsung dijalankan dengan mengeksekusi BNMO.exe atau dengan menjalankan langkah di bawah ini
 
-Program dapat di kompilasi dengan cara menjalankan MAKEFILE di direktori ../bin dan menjalankan driver.exe
-
-atau dengan menjalankan command: 
-
-gcc console.c main.c GAME/ddash.c GAME/tictactoe.c GAME/rng.c ADT/array.c ADT/mesinkarakter.c ADT/mesinkata.c ADT/mesinload.c ADT/queue.c -o BNMO
-
-di direktori ../src dan menjalankan BNMO.exe
+Step 1: Masuk ke directory bin
+Step 2: Ketik mingw32-make driver di terminal
+Step 3: Ketik  ./driver di terminal untuk menjalankan program
+Step 4: Ketik mingw32-make clean di terminal untuk menghapus driver.exe(Membersihkan file)
 
 berikut merupakan list command yang dapat di-input saat program meminta anda memasukkan command:
 
