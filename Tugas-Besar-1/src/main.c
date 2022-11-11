@@ -12,7 +12,7 @@ int main(){
     CreateQueue(&antrian);
 
     // Initial output
-    printf("Selamat datang di BNMO ^w^\n");
+    printf("Selamat datang di BNMO ^w^\n\n");
    
     // Inisiasi input
     char *input;
@@ -42,7 +42,7 @@ int main(){
             else{
                 printf("Perintah yang dapat digunakan hanya START, LOAD, atau HELP\n");
             }
-        
+            printf("\n");
         }
         else if(blank_count(input) == 1)
         {
@@ -122,7 +122,21 @@ int main(){
                     {
                         SAVE(game, arg);
                     }
-                    
+                    if (str_comp(command , "LOAD"))
+                    {
+                        char * dir;
+                            dir = filetodir(arg);
+                            LOAD(&game, dir);
+                            if (game.Neff < 0)
+                            {
+                                printf("Save file gagal dibaca. Coba lagi\n");
+                            }
+                            else
+                            {
+                            printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
+                            load = true;
+                            }
+                    }
                     else{
                         printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
                     }
@@ -131,12 +145,12 @@ int main(){
                     printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
                 }
             }
+            printf("\n");   
         }
 
-        // Apabila belum keluar dari game
-
+    // Apabila belum keluar dari game
     }
-    if(over )
+    if(over)
     {
         printf("Anda keluar dari game BNMO.\n");
         printf("Bye bye ...\n");

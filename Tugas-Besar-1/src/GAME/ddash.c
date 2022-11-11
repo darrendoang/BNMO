@@ -245,6 +245,7 @@ void diner_dash(){
             }else{
                 printf("Kamu kalah :<\n");
             }
+            printf("\nSKOR AKHIR: %d\n", saldo);
         }
     }
 }
