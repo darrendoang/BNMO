@@ -86,9 +86,7 @@ void diner_dash(){
     printf("SALDO: %d\n\n", saldo);
     printf("Daftar Pesanan\nMakanan | Durasi memasak | Ketahanan | Harga\n----------------------------------------------\n");
     for (int i = IDX_HEAD(incoming); i <= IDX_TAIL(incoming); i++){
-        if ((incoming.buffer[i].cook==false)&&(incoming.buffer[i].serve==false)){
-            printf("M%d      | %d      | %d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time, incoming.buffer[i].duration, incoming.buffer[i].price);
-        }
+        printf("M%d      | %d      | %d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time, incoming.buffer[i].duration, incoming.buffer[i].price);
     }
     printf("\n");
     printf("Daftar Makanan yang sedang dimasak\nMakanan | Sisa durasi memasak\n------------------------------\n        |\n");
@@ -214,9 +212,7 @@ void diner_dash(){
             printf("SALDO: %d\n\n", saldo);
             printf("Daftar Pesanan\nMakanan | Durasi memasak | Ketahanan | Harga\n----------------------------------------------\n");
             for (int i = IDX_HEAD(incoming); i <= IDX_TAIL(incoming); i++){
-                if ((incoming.buffer[i].cook==false)&&(incoming.buffer[i].serve==false)){
-                    printf("M%d      | %d      | %d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time, incoming.buffer[i].duration, incoming.buffer[i].price);
-                }
+                printf("M%d      | %d      | %d      | %d\n", incoming.buffer[i].number, incoming.buffer[i].time, incoming.buffer[i].duration, incoming.buffer[i].price);
             }
             printf("\n");
             printf("Daftar Makanan yang sedang dimasak\nMakanan | Sisa durasi memasak\n------------------------------\n");

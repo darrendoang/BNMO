@@ -1,7 +1,7 @@
 IF2111 - Algoritma dan Struktur Data
 Kelompok 04
 Kelas 02
-
+Tugas Besar 1 - BNMO
 
 Anggota:
 Muhammad Rafi Haidar / 18221134;
