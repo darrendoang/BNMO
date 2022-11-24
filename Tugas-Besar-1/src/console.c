@@ -1,14 +1,12 @@
 #include "console.h"
 
-void STARTGAME(Array *game , Array *gamehistory , TabMap *scoreboard)
+void STARTGAME(Array *game)
 {
-    LOAD(game, gamehistory, scoreboard , "../data/config.txt");
+    LOAD(game, "../data/config.txt");
     printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
 }
 
-void LOAD(Array *game, Array *gamehistory, TabMap *scoreboard , char *filename) 
-{    
-    int i , j , idx;
+void LOAD(Array *game, char *filename) {    
     StartLOAD(filename);
     int n = currentChar - '0'; //mengambil nilai line pertama dalam file yaitu jumlah game lalu diubah ke int
     game->Neff = n; // jumlah game di assign ke game->Neff
@@ -24,54 +22,6 @@ void LOAD(Array *game, Array *gamehistory, TabMap *scoreboard , char *filename)
         *(namagame + currentWord.Length) = '\0'; //penanda akhir string
         game->TI[i] = namagame;   
     }
-    // Membaca HISTORY GAME
-    ADVWORDLOAD();
-    i = StrToInt(currentWord.TabWord); 
-    (*gamehistory).Neff = i;
-    for (j = 0; j < i; j++)
-    {
-      ADV();
-      CopyWord();
-      char *namagame;
-      namagame = (char *)malloc(currentWord.Length * sizeof(char));
-      for (idx = 0; idx < currentWord.Length; idx++)
-      {
-        *(namagame + idx) = currentWord.TabWord[idx];
-      }
-      *(namagame + currentWord.Length) = '\0';
-      (*gamehistory).TI[j] = namagame;
-    }
-
-    // Membaca semua scoreboard dari list game
-    Map ScoreB;
-    int sbcount;
-    for (sbcount = 0; sbcount < (*game).Neff; sbcount++)
-    {
-      CreateEmptyMap(&ScoreB);
-      ADV();
-      CopyWord();
-      i = StrToInt(currentWord.TabWord); // konversi char ke int
-      ScoreB.Count = i;
-      for (j = 0; j < ScoreB.Count; j++)
-      {
-        ADV();
-        CopyWord();
-        char *namagame;
-        namagame = (char *)malloc(currentWord.Length * sizeof(char));
-        for (idx = 0; idx < currentWord.Length; idx++)
-        {
-          *(namagame + idx) = currentWord.TabWord[idx];
-        }
-        *(namagame + currentWord.Length) = '\0';
-        ScoreB.Elements[j].Key = KataPertama(namagame);
-        ScoreB.Elements[j].Value = StrToInt_input(KataKedua(namagame), str_len(KataPertama(namagame)));
-      }
-      SortMapValueDesc(&ScoreB);
-      SetElArrayMap(scoreboard, sbcount, ScoreB);
-    }
-    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
-    
-  
 }
 
 void SAVE(Array game , char * filename){

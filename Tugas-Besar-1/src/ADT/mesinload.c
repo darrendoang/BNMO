@@ -16,7 +16,6 @@ void IgnoreNewLine() {
 }
 
 void ADVWORDLOAD() {
-
     IgnoreNewLine();
     if (retval < 0) {
         EndWord = true;

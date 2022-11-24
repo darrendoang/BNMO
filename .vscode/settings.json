@@ -7,7 +7,6 @@
         "array.h": "c",
         "queue.h": "c",
         "rng.h": "c",
-        "tictactoe.h": "c",
-        "arrayofmap.h": "c"
+        "tictactoe.h": "c"
     }
 }
