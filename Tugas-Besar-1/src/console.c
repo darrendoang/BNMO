@@ -1,12 +1,27 @@
 #include "console.h"
 
-void STARTGAME(Array *game)
+void STARTGAME(Array *game )
 {
-    LOAD(game, "../data/config.txt");
+    StartLOAD("../data/config.txt");
+    int n = currentChar - '0'; //mengambil nilai line pertama dalam file yaitu jumlah game lalu diubah ke int
+    game->Neff = n; // jumlah game di assign ke game->Neff
+    ADVWORDLOAD();
+    for (int i = 0; i < n; i++) {
+        ADVWORDLOAD();
+        char *namagame;
+        namagame = (char *)malloc(currentWord.Length * sizeof(char));
+        for(int j = 0; j < currentWord.Length; j++)
+        {
+            *(namagame + j) = currentWord.TabWord[j];
+        }
+        *(namagame + currentWord.Length) = '\0'; //penanda akhir string
+        game->TI[i] = namagame;   
+    }
     printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
 }
 
-void LOAD(Array *game, char *filename) {    
+void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename) {   
+    int i , j, idx; 
     StartLOAD(filename);
     int n = currentChar - '0'; //mengambil nilai line pertama dalam file yaitu jumlah game lalu diubah ke int
     game->Neff = n; // jumlah game di assign ke game->Neff
@@ -22,6 +37,51 @@ void LOAD(Array *game, char *filename) {
         *(namagame + currentWord.Length) = '\0'; //penanda akhir string
         game->TI[i] = namagame;   
     }
+        // Membaca HISTORY GAME
+    ADVWORDLOAD();
+    i = StrToInt(currentWord.TabWord); // konversi char ke int
+    (*gamehistory).Neff = i;
+    for (j = 0; j < i; j++)
+    {
+      ADVWORDLOAD();
+      char *namagame;
+      namagame = (char *)malloc(currentWord.Length * sizeof(char));
+      for (idx = 0; idx < currentWord.Length; idx++)
+      {
+        *(namagame + idx) = currentWord.TabWord[idx];
+      }
+      *(namagame + currentWord.Length) = '\0';
+      (*gamehistory).TI[j] = namagame;
+    }
+
+    // Membaca semua scoreboard dari list game
+    Map ScoreB;
+    int banyaksb;
+    for (banyaksb = 0; banyaksb < (*game).Neff; banyaksb++)
+    {
+      CreateEmptyMap(&ScoreB);
+      ADVWORDLOAD();
+      i = StrToInt(currentWord.TabWord); // konversi char ke int
+      ScoreB.Count = i;
+      for (j = 0; j < ScoreB.Count; j++)
+      {
+        ADVWORDLOAD();
+        char *namagame;
+        namagame = (char *)malloc(currentWord.Length * sizeof(char));
+        for (idx = 0; idx < currentWord.Length; idx++)
+        {
+          *(namagame + idx) = currentWord.TabWord[idx];
+        }
+        *(namagame + currentWord.Length) = '\0';
+        ScoreB.Elements[j].Key = KataPertama(namagame);
+        ScoreB.Elements[j].Value = StrToInt_input(KataKedua(namagame), str_len(KataKedua(namagame)));
+      }
+      SortMapValueDesc(&ScoreB);
+      SetElArrayMap(scoreboard, banyaksb, ScoreB);
+    }
+    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+  
+  
 }
 
 void SAVE(Array game , char * filename){
@@ -269,19 +329,23 @@ void HELP (){
 
 // int main()
 // {
-//     Array a;
+//     Array a , gamehistory;
+//     TabMap scoreboard;
 //     MakeEmpty(&a);
+//     MakeEmpty(&gamehistory);
+//     MakeEmptyArrayMap(&scoreboard);
 //     Queue q;
 //     CreateQueue(&q);
-//     LOAD(&a, "../data/config.txt");
+//     LOAD(&a, &gamehistory , &scoreboard, "../data/savefile.txt");
+//     int i;
+//     for(i = 0; i < a.Neff; i++){
+//     printf("%d. %s\n",i+1, a.TI[i]);
+//     }
+//     printf("\n\n\n\n");
+//     for(i = 0; i < gamehistory.Neff; i++){
+//     printf("%d. %s\n",i+1, gamehistory.TI[i]);
+//     }
 
-//       int i = 0;
-//         for (i; i < length(q); i++){
-//             printf("%d. %s\n", i+1, q.buffer[i]);
-//         }
-//     CREATEGAME(&a);
-//     QUEUEGAME(&q , a);
-//     DELETEGAME(&a , &q);
-//     SAVE(a , "../data/config.txt" );
+    
 //     return 0;
 // }

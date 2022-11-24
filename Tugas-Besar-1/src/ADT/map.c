@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include "map.h"
 
-void CreateEmpty(Map *M) {
+void CreateEmptyMap(Map *M) {
     (*M).Count = 0;
 }
 
-boolean IsEmpty(Map M) {
+boolean IsEmptyMap(Map M) {
     return (M.Count == 0);
 }
 
-boolean IsFull(Map M) {
+boolean IsFullMap(Map M) {
     return (M.Count == 10);
 }
 
@@ -84,4 +84,22 @@ boolean IsMember(Map M, keytype k) {
     }
 
     return found;
+}
+
+void SortMapValueDesc(Map *M)
+{
+    int i, j;
+    i = 1;
+    infotype temp;
+    for (i; i < (*M).Count; i++)
+    {
+        temp = (*M).Elements[i];
+        j = i - 1;
+        while (j >= 0 && (*M).Elements[j].Value < temp.Value)
+        {
+            (*M).Elements[j + 1] = (*M).Elements[j];
+            j = j - 1;
+        }
+        (*M).Elements[j + 1] = temp;
+    }
 }

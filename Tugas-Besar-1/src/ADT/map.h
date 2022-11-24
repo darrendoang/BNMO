@@ -9,12 +9,12 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 
 // #define false 0
 // #define true 1
-#define Nil 0
+#define Null 0
 #define MaxEl 10
 #define Undefined -999
 
 // typedef int bool;
-typedef int keytype;
+typedef char *keytype;
 typedef int valuetype;
 typedef int address;
 
@@ -35,17 +35,17 @@ typedef struct {
 /* ********* Prototype ********* */
 
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(Map *M);
+void CreateEmptyMap(Map *M);
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
 /* Ciri Map kosong : count bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsEmpty(Map M);
+boolean IsEmptyMap(Map M);
 /* Mengirim true jika Map M kosong*/
 /* Ciri Map kosong : count bernilai Nil */
 
-boolean IsFull(Map M);
+boolean IsFullMap(Map M);
 /* Mengirim true jika Map M penuh */
 /* Ciri Map penuh : count bernilai MaxEl */
 
@@ -68,5 +68,7 @@ void Delete(Map *M, keytype k);
 
 boolean IsMember(Map M, keytype k);
 /* Mengembalikan true jika k adalah member dari M */
+
+void SortMapValueDesc(Map *M);
 
 #endif

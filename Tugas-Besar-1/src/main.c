@@ -7,9 +7,13 @@
 int main(){
     // Variabel global
     Array game;
+    Array gamehistory;
+    TabMap scoreboard;
     Queue antrian;
     MakeEmpty(&game);
+    MakeEmpty(&gamehistory);
     CreateQueue(&antrian);
+    MakeEmptyArrayMap(&scoreboard);
 
     // Initial output
     printf("Selamat datang di BNMO ^w^\n\n");
@@ -31,7 +35,7 @@ int main(){
         {
             if (str_comp(input , "START"))
             {
-                STARTGAME(&game);
+                STARTGAME(&game );
                 load = true;
             }
 
@@ -53,7 +57,7 @@ int main(){
             {
                 char * dir;
                     dir = filetodir(arg);
-                    LOAD(&game, dir);
+                    LOAD(&game, &gamehistory, &scoreboard, dir);
                     if (game.Neff < 0)
                     {
                         printf("Save file gagal dibaca. Coba lagi\n");
@@ -126,7 +130,7 @@ int main(){
                     {
                         char * dir;
                             dir = filetodir(arg);
-                            LOAD(&game, dir);
+                            LOAD(&game, &gamehistory, &scoreboard , dir);
                             if (game.Neff < 0)
                             {
                                 printf("Save file gagal dibaca. Coba lagi\n");
