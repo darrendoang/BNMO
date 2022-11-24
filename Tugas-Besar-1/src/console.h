@@ -7,14 +7,17 @@
 #include "ADT/mesinkata.h"
 #include "ADT/mesinload.h"
 #include "ADT/queue.h"
+#include "ADT/arrayOfMap.h"
 #include "GAME/rng.h"
 #include "GAME/ddash.h"
 #include "GAME/tictactoe.h"
+#include "ADT/map.h"
 
 
-void STARTGAME(Array *game);
 
-void LOAD(Array *game, char *filename);
+void STARTGAME(Array *game , Array *gamehistory , TabMap *scoreboard);
+
+void LOAD(Array *game, Array *gamehistory, TabMap *scoreboard , char *filename) ;
 
 void SAVE(Array game , char * filename);
 

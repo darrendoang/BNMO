@@ -2,6 +2,7 @@
 #define map_H
 #include <stdio.h>
 #include "boolean.h"
+#include "../console.h"
 
 /* MODUL Map
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
@@ -9,23 +10,25 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 
 // #define false 0
 // #define true 1
-#define Nil 0
-#define MaxEl 10
+#define Null 0
+#define MaxEl 50
 #define Undefined -999
 
 // typedef int bool;
-typedef int keytype;
+typedef char *keytype;
 typedef int valuetype;
 typedef int address;
 
-typedef struct {
-	keytype Key;
-	valuetype Value;
+typedef struct
+{
+    keytype Key;
+    valuetype Value;
 } infotype;
 
-typedef struct {
-	infotype Elements[MaxEl];
-	address Count;
+typedef struct
+{
+    infotype Elements[MaxEl];
+    address Count;
 } Map;
 
 /* Definisi Map M kosong : M.Count = Nil */
@@ -35,17 +38,17 @@ typedef struct {
 /* ********* Prototype ********* */
 
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(Map *M);
+void CreateEmptyMap(Map *M);
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
 /* Ciri Map kosong : count bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsEmpty(Map M);
+boolean IsMapEmpty(Map M);
 /* Mengirim true jika Map M kosong*/
 /* Ciri Map kosong : count bernilai Nil */
 
-boolean IsFull(Map M);
+boolean IsMapFull(Map M);
 /* Mengirim true jika Map M penuh */
 /* Ciri Map penuh : count bernilai MaxEl */
 
@@ -68,5 +71,8 @@ void Delete(Map *M, keytype k);
 
 boolean IsMember(Map M, keytype k);
 /* Mengembalikan true jika k adalah member dari M */
+
+void SortMapValueDesc(Map *M);
+/* Mengurutkan Value dari Map terurut mengecil */
 
 #endif
