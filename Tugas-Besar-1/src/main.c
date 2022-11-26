@@ -124,9 +124,9 @@ int main(){
                     }
                     else if (str_comp(command, "SAVE"))
                     {
-                        SAVE(game, arg);
+                        SAVE(game, gamehistory , scoreboard , arg);
                     }
-                    if (str_comp(command , "LOAD"))
+                    else if (str_comp(command , "LOAD"))
                     {
                         char * dir;
                             dir = filetodir(arg);
@@ -141,7 +141,8 @@ int main(){
                             load = true;
                             }
                     }
-                    else{
+                    else
+                    {
                         printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
                     }
                 }

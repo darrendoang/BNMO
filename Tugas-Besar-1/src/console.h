@@ -18,7 +18,7 @@ void STARTGAME(Array *game );
 
 void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename);
 
-void SAVE(Array game , char * filename);
+void SAVE(Array game, Array gamehistory, TabMap scoreboard, char *file);
 
 void CREATEGAME(Array* game);
 

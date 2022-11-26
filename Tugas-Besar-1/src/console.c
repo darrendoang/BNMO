@@ -79,31 +79,70 @@ void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename)
       SortMapValueDesc(&ScoreB);
       SetElArrayMap(scoreboard, banyaksb, ScoreB);
     }
-    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+ 
   
   
 }
 
-void SAVE(Array game , char * filename){
-    FILE* pita;
-    char data_path[100] = "../data/";
-    int i = 8;
-    while(*filename!='\0'){
-      data_path[i] = *filename;
-      i++;
-      *filename++;
-    }
-    pita=fopen(data_path,"w");
+void SAVE(Array game, Array gamehistory, TabMap scoreboard, char *file)
+{
+    FILE *pita;
+    char *filename = (char *)malloc(50 * sizeof(char));
+    filename = filetodir(file);
+    pita = fopen(filename, "w+");
+    char *game_num = (char *)malloc(5 * sizeof(char));
+    int i;
 
-    fprintf(pita,"%c\n",(char)(game.Neff+48));
-
-    for(int i=0;i<NbElmt(game)-1;i++){
-        fprintf(pita,"%s\n",game.TI[i]);
+    //save daftar game
+    sprintf(game_num, "%d", game.Neff);
+    fprintf(pita, "%s\n", game_num);
+    for (i = 0; i < NbElmt(game); i++)
+    {
+        fprintf(pita, "%s\n", game.TI[i]);
     }
-    fprintf(pita,"%s",game.TI[NbElmt(game)-1]);
+    //save gamehistory
+    sprintf(game_num, "%d", gamehistory.Neff);
+    fprintf(pita, "%s\n", game_num);
+    for (i = 0; i < NbElmt(gamehistory); i++)
+    {
+        fprintf(pita, "%s\n", gamehistory.TI[i]);
+    }
+
+    //save scoreboard
+    int j;
+    for (j = 0; j < scoreboard.NeffArrayMap - 1; j++)
+    {
+        sprintf(game_num, "%d", scoreboard.TIMap[j].Count);
+        fprintf(pita, "%s\n", game_num);
+        for (i = 0; i < scoreboard.TIMap[j].Count; i++)
+        {
+            fprintf(pita, "%s %d\n", scoreboard.TIMap[j].Elements[i].Key, scoreboard.TIMap[j].Elements[i].Value);
+        }
+    }
+    sprintf(game_num, "%d", scoreboard.TIMap[j].Count);
+    if (scoreboard.TIMap[j].Count == 0)
+    {
+        fprintf(pita, "%s", game_num);
+    }
+    else if (scoreboard.TIMap[j].Count == 1)
+    {
+        fprintf(pita, "%s\n", game_num);
+        fprintf(pita, "%s %d", scoreboard.TIMap[j].Elements[0].Key, scoreboard.TIMap[j].Elements[0].Value);
+    }
+    else
+    {
+        fprintf(pita, "%s\n", game_num);
+        for (i = 0; i < scoreboard.TIMap[j].Count - 1; i++)
+        {
+            fprintf(pita, "%s %d\n", scoreboard.TIMap[j].Elements[i].Key, scoreboard.TIMap[j].Elements[i].Value);
+        }
+        fprintf(pita, "%s %d", scoreboard.TIMap[j].Elements[i].Key, scoreboard.TIMap[j].Elements[i].Value);
+    }
 
     fclose(pita);
     printf("Save file berhasil disimpan.\n");
+    free(filename);
+    free(game_num);
 }
 
 int compare(char *str1, char *str2) {
