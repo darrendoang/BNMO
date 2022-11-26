@@ -3,7 +3,7 @@
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
-void CreateEmptyStack(Stackhanoi *S)
+void CreateEmptyStack(HanoiStack *S)
 {
     Top(*S) = Nil;
     for(int i = 0; i < MaxEl; i++)
@@ -17,19 +17,19 @@ void CreateEmptyStack(Stackhanoi *S)
 /* Ciri stack kosong : TOP bernilai Nil */
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsStackEmpty(Stackhanoi S)
+boolean IsStackEmpty(HanoiStack S)
 {
     return (Top(S) == Nil);
 }
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
-boolean IsStackFull(Stackhanoi S)
+boolean IsStackFull(HanoiStack S)
 {
     return (Top(S) == MaxEl - 1);
 }
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push(Stackhanoi *S, stackinfotype X)
+void Push(HanoiStack *S, stackinfotype X)
 {
     Top(*S) += 1;
     InfoTop(*S) = X;
@@ -39,7 +39,7 @@ void Push(Stackhanoi *S, stackinfotype X)
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stackhanoi *S, stackinfotype *X)
+void Pop(HanoiStack *S, stackinfotype *X)
 {
     *X = InfoTop(*S);
     InfoTop(*S) = 0;
@@ -49,7 +49,7 @@ void Pop(Stackhanoi *S, stackinfotype *X)
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
-boolean IsCloneStack(Stackhanoi S1, Stackhanoi S2)
+boolean IsCloneStack(HanoiStack S1, HanoiStack S2)
 {
     if (IsStackEmpty(S1) && IsStackEmpty(S2))
     {
@@ -75,7 +75,7 @@ boolean IsCloneStack(Stackhanoi S1, Stackhanoi S2)
     }
 }
 
-int top_val(Stackhanoi S) {
+int top_val(HanoiStack S) {
     if (IsStackEmpty(S)) {
         return 0;
     } else {

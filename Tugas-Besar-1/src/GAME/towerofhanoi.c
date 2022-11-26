@@ -29,7 +29,7 @@ void print_disks(int x)
     }
 }
 
-void print_tower(int x, Stackhanoi A, Stackhanoi B, Stackhanoi C)
+void print_tower(int x, HanoiStack A, HanoiStack B, HanoiStack C)
 {
     for (int i = 1; i <= x; i++)
     {
@@ -94,7 +94,7 @@ void print_tower(int x, Stackhanoi A, Stackhanoi B, Stackhanoi C)
 
 void towerofhanoi()
 {
-    Stackhanoi A, B, C, temp;
+    HanoiStack A, B, C, temp;
     int source, destination, valA, valB, valC;
     int score, n;
     int count = 0;
