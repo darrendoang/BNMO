@@ -89,7 +89,7 @@ void createFood()
 void createMeteor()
 {
     meteor.x=3;
-    meteor.y=4;
+    meteor.y=2;
     meteor.symbol='m';
 }
 
@@ -256,7 +256,7 @@ void increaseSnakeLength(char dir)
     n->symbol='C';
     n->next=NULL;
     s->next=n;
-    s->symbol=simbol;
+    s->symbol='O';
     tail=n;
 }
 
