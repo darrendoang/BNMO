@@ -30,9 +30,11 @@ void DELETEGAME(Array* game , Queue *antriangame , TabMap *scoreboard);
 
 void QUEUEGAME(Queue *antriangame, Array gamelist);
 
-void PLAYGAME(Queue *antriangame , Array gamelist);
+void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , HistoryStack *gamehistory);
 
-void SKIPGAME(Queue *queuegame, int input , Array gamelist);
+void SKIPGAME(Queue *queuegame, int input , Array gamelist, TabMap *scoreboard , HistoryStack *gamehistory);
+
+void HISTORY(HistoryStack *gamehistory , int n);
 
 void QUIT();
 

@@ -5,26 +5,26 @@
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyStack(HanoiStack *S)
 {
-    Top(*S) = Nil;
-    for(int i = 0; i < MaxEl; i++)
+    Top(*S) = Nill;
+    for(int i = 0; i < MaxElmnts; i++)
     {
         (*S).T[i] = 0;
     }
 }
 /* I.S. sembarang; */
-/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
-/* jadi indeksnya antara 0.. MaxEl */
-/* Ciri stack kosong : TOP bernilai Nil */
+/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxElmnts */
+/* jadi indeksnya antara 0.. MaxElmnts */
+/* Ciri stack kosong : TOP bernilai Nill */
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
 boolean IsStackEmpty(HanoiStack S)
 {
-    return (Top(S) == Nil);
+    return (Top(S) == Nill);
 }
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
 boolean IsStackFull(HanoiStack S)
 {
-    return (Top(S) == MaxEl - 1);
+    return (Top(S) == MaxElmnts - 1);
 }
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 

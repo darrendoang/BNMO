@@ -329,20 +329,20 @@ void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , History
     }
     char *nama;
     printf("Nama : ");
-    nama = STARTINPUT();
-    int idxgame = 0;
-    while (!compare_strings(gamelist.TI[idxgame], play))
+    nama = READINPUT();
+    int idx = 0;
+    while (!str_comp(gamelist.TI[idx], play))
     {
-        idxgame++;
+        idx++;
     };
-    while (IsMember((*scoreboard).TIMap[idxgame], nama))
+    while (IsMember((*scoreboard).TIMap[idx], nama))
     {
         printf("Nama sudah ada, silahkan memakai nama lain!\n\n");
         printf("Nama : ");
-        nama = STARTINPUT();
+        nama = READINPUT();
     }
-    Insert(&(*scoreboard).TIMap[idxgame], nama, score);
-    SortMapValueDesc(&(*scoreboard).TIMap[idxgame]);
+    Insert(&(*scoreboard).TIMap[idx], nama, score);
+    SortMapValueDesc(&(*scoreboard).TIMap[idx]);
     printf("Skor berhasil disimpan ke dalam scoreboard.\n\n");
     PushHistory(gamehistory, play);
 }
@@ -384,7 +384,18 @@ void SKIPGAME(Queue *queuegame, int input , Array gamelist, TabMap *scoreboard ,
     }
 }
 
-
+void HISTORY(HistoryStack *gamehistory , int n)
+{
+  if (IsStackHistoryEmpty(*gamehistory) || n < 1)
+    {
+        printf("\nBerikut adalah daftar game terakhir yang dimainkan: \n\n");
+    }
+    else
+    {
+        printf("\nBerikut adalah daftar game terakhir yang dimainkan: \n");
+        PrintStackHistory(gamehistory, n);
+    }
+}
 void QUIT();
 
 void HELP (){
