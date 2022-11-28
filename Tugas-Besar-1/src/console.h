@@ -13,6 +13,7 @@
 #include "GAME/rng.h"
 #include "GAME/ddash.h"
 #include "GAME/tictactoe.h"
+#include "GAME/towerofhanoi.h"
 
 
 void STARTGAME(Array *game , TabMap *scoreboard);

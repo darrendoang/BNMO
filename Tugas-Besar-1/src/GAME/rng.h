@@ -4,6 +4,6 @@
 #include "../ADT/mesinkarakter.h"
 #include "../ADT/mesinkata.h"
 
-void RNG();
+int RNG();
 
 #endif
