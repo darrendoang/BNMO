@@ -1,6 +1,6 @@
 #include "console.h"
 
-void STARTGAME(Array *game )
+void STARTGAME(Array *game , TabMap *scoreboard)
 {
     StartLOAD("../data/config.txt");
     int n = currentChar - '0'; //mengambil nilai line pertama dalam file yaitu jumlah game lalu diubah ke int
@@ -16,6 +16,13 @@ void STARTGAME(Array *game )
         }
         *(namagame + currentWord.Length) = '\0'; //penanda akhir string
         game->TI[i] = namagame;   
+    }
+    Map ScoreB;
+    int k;
+    for (k = 0; k < game->Neff; k++)
+    {
+        CreateEmptyMap(&ScoreB);
+        SetElArrayMap(scoreboard, k, ScoreB);
     }
     printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
 }
@@ -39,7 +46,7 @@ void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename)
     }
         // Membaca HISTORY GAME
     ADVWORDLOAD();
-    i = StrToInt(currentWord.TabWord); // konversi char ke int
+    i = StrToInt(currentWord.TabWord); 
     (*gamehistory).Neff = i;
     for (j = 0; j < i; j++)
     {
@@ -61,7 +68,7 @@ void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename)
     {
       CreateEmptyMap(&ScoreB);
       ADVWORDLOAD();
-      i = StrToInt(currentWord.TabWord); // konversi char ke int
+      i = StrToInt(currentWord.TabWord);
       ScoreB.Count = i;
       for (j = 0; j < ScoreB.Count; j++)
       {

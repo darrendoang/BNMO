@@ -35,7 +35,7 @@ int main(){
         {
             if (str_comp(input , "START"))
             {
-                STARTGAME(&game );
+                STARTGAME(&game , &scoreboard);
                 load = true;
             }
 

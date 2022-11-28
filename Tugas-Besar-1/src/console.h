@@ -14,7 +14,7 @@
 #include "GAME/tictactoe.h"
 
 
-void STARTGAME(Array *game );
+void STARTGAME(Array *game , TabMap *scoreboard);
 
 void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename);
 
