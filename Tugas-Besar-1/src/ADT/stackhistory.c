@@ -5,23 +5,23 @@
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyStackHistory(HistoryStack *SH)
 {
-    TopHistory(*SH) = Nil;
+    TopHistory(*SH) = Nils;
 }
 /* I.S. sembarang; */
-/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
-/* jadi indeksnya antara 0.. MaxEl */
+/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxElmt */
+/* jadi indeksnya antara 0.. MaxElmt */
 /* Ciri stack kosong : TOP bernilai Nil */
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
 boolean IsStackHistoryEmpty(HistoryStack SH)
 {
-    return (TopHistory(SH) == Nil);
+    return (TopHistory(SH) == Nils);
 }
 
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
 boolean IsStackHistoryFull(HistoryStack SH)
 {
-    return (TopHistory(SH) == MaxEl - 1);
+    return (TopHistory(SH) == MaxElmt - 1);
 }
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 

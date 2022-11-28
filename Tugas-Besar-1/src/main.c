@@ -7,11 +7,11 @@
 int main(){
     // Variabel global
     Array game;
-    Array gamehistory;
+    HistoryStack gamehistory;
     TabMap scoreboard;
     Queue antrian;
     MakeEmpty(&game);
-    MakeEmpty(&gamehistory);
+    CreateEmptyStackHistory(&gamehistory);
     CreateQueue(&antrian);
     MakeEmptyArrayMap(&scoreboard);
 

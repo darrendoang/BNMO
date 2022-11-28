@@ -7,9 +7,9 @@
 
 #include "boolean.h"
 
-#define Nil -1
-#define MaxEl 100
-/* Nil adalah stack dengan elemen kosong . */
+#define Nils -1
+#define MaxElmt 100
+/* Nils adalah stack dengan elemen kosong . */
 
 typedef char *infotypeHistory;
 typedef int address; /* indeks tabel */
@@ -18,11 +18,11 @@ typedef int address; /* indeks tabel */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct
 {
-    infotypeHistory T[MaxEl]; /* tabel penyimpan elemen */
+    infotypeHistory T[MaxElmt]; /* tabel penyimpan elemen */
     address TOPHISTORY;            /* alamat TOP: elemen puncak */
 } HistoryStack;
-/* Definisi stack S kosong : S.TOP = Nil */
-/* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxEl-1] */
+/* Definisi stack S kosong : S.TOP = Nils */
+/* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxElmt-1] */
 /* Jika S adalah Stack maka akses elemen : */
 /* S.T[(S.TOP)] untuk mengakses elemen TOP */
 /* S.TOP adalah alamat elemen TOP */
@@ -35,9 +35,9 @@ typedef struct
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyStackHistory(HistoryStack *SH);
 /* I.S. sembarang; */
-/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
-/* jadi indeksnya antara 0.. MaxEl */
-/* Ciri stack kosong : TOP bernilai Nil */
+/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxElmt */
+/* jadi indeksnya antara 0.. MaxElmt */
+/* Ciri stack kosong : TOP bernilai Nils */
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
 

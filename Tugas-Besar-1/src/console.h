@@ -9,6 +9,7 @@
 #include "ADT/queue.h"
 #include "ADT/map.h"
 #include "ADT/arrayOfMap.h"
+#include "ADT/stackhistory.h"
 #include "GAME/rng.h"
 #include "GAME/ddash.h"
 #include "GAME/tictactoe.h"
@@ -16,9 +17,9 @@
 
 void STARTGAME(Array *game , TabMap *scoreboard);
 
-void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename);
+void LOAD(Array *game, HistoryStack *gamehistory , TabMap *scoreboard,  char *filename);
 
-void SAVE(Array game, Array gamehistory, TabMap scoreboard, char *file);
+void SAVE(Array game, HistoryStack gamehistory, TabMap scoreboard, char *file);
 
 void CREATEGAME(Array* game);
 

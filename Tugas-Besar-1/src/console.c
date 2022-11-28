@@ -27,7 +27,7 @@ void STARTGAME(Array *game , TabMap *scoreboard)
     printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
 }
 
-void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename) {   
+void LOAD(Array *game, HistoryStack *gamehistory , TabMap *scoreboard,  char *filename) {   
     int i , j, idx; 
     StartLOAD(filename);
     int n = currentChar - '0'; //mengambil nilai line pertama dalam file yaitu jumlah game lalu diubah ke int
@@ -47,7 +47,7 @@ void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename)
         // Membaca HISTORY GAME
     ADVWORDLOAD();
     i = StrToInt(currentWord.TabWord); 
-    (*gamehistory).Neff = i;
+   
     for (j = 0; j < i; j++)
     {
       ADVWORDLOAD();
@@ -58,7 +58,7 @@ void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename)
         *(namagame + idx) = currentWord.TabWord[idx];
       }
       *(namagame + currentWord.Length) = '\0';
-      (*gamehistory).TI[j] = namagame;
+      PushHistory(gamehistory, namagame);
     }
 
     // Membaca semua scoreboard dari list game
@@ -91,7 +91,7 @@ void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename)
   
 }
 
-void SAVE(Array game, Array gamehistory, TabMap scoreboard, char *file)
+void SAVE(Array game, HistoryStack gamehistory, TabMap scoreboard, char *file)
 {
     FILE *pita;
     char *filename = (char *)malloc(50 * sizeof(char));
@@ -108,11 +108,11 @@ void SAVE(Array game, Array gamehistory, TabMap scoreboard, char *file)
         fprintf(pita, "%s\n", game.TI[i]);
     }
     //save gamehistory
-    sprintf(game_num, "%d", gamehistory.Neff);
+    sprintf(game_num, "%d", gamehistory.TOPHISTORY + 1);
     fprintf(pita, "%s\n", game_num);
-    for (i = 0; i < NbElmt(gamehistory); i++)
+    for (i = 0; i <= gamehistory.TOPHISTORY; i++)
     {
-        fprintf(pita, "%s\n", gamehistory.TI[i]);
+        fprintf(pita, "%s\n", gamehistory.T[i]);
     }
 
     //save scoreboard
@@ -375,10 +375,11 @@ void HELP (){
 
 // int main()
 // {
-//     Array a , gamehistory;
+//     Array a ;
+//     HistoryStack gamehistory;
 //     TabMap scoreboard;
 //     MakeEmpty(&a);
-//     MakeEmpty(&gamehistory);
+//     CreateEmptyStackHistory(&gamehistory);
 //     MakeEmptyArrayMap(&scoreboard);
 //     Queue q;
 //     CreateQueue(&q);
@@ -388,9 +389,8 @@ void HELP (){
 //     printf("%d. %s\n",i+1, a.TI[i]);
 //     }
 //     printf("\n\n\n\n");
-//     for(i = 0; i < gamehistory.Neff; i++){
-//     printf("%d. %s\n",i+1, gamehistory.TI[i]);
-//     }
+
+//     PrintStackHistory(&gamehistory , 5);
 
     
 //     return 0;
