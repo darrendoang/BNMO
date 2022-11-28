@@ -9,22 +9,23 @@
 #include "ADT/queue.h"
 #include "ADT/map.h"
 #include "ADT/arrayOfMap.h"
+#include "ADT/stackhistory.h"
 #include "GAME/rng.h"
 #include "GAME/ddash.h"
 #include "GAME/tictactoe.h"
 
 
-void STARTGAME(Array *game );
+void STARTGAME(Array *game , TabMap *scoreboard);
 
-void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename);
+void LOAD(Array *game, HistoryStack *gamehistory , TabMap *scoreboard,  char *filename);
 
-void SAVE(Array game, Array gamehistory, TabMap scoreboard, char *file);
+void SAVE(Array game, HistoryStack gamehistory, TabMap scoreboard, char *file);
 
-void CREATEGAME(Array* game);
+void CREATEGAME(Array* game , TabMap *scoreboard);
 
 void LISTGAME(Array *game);
 
-void DELETEGAME(Array* game , Queue *antriangame);
+void DELETEGAME(Array* game , Queue *antriangame , TabMap *scoreboard);
 
 void QUEUEGAME(Queue *antriangame, Array gamelist);
 

@@ -1,6 +1,6 @@
 #include "console.h"
 
-void STARTGAME(Array *game )
+void STARTGAME(Array *game , TabMap *scoreboard)
 {
     StartLOAD("../data/config.txt");
     int n = currentChar - '0'; //mengambil nilai line pertama dalam file yaitu jumlah game lalu diubah ke int
@@ -17,10 +17,17 @@ void STARTGAME(Array *game )
         *(namagame + currentWord.Length) = '\0'; //penanda akhir string
         game->TI[i] = namagame;   
     }
+    Map ScoreB;
+    int k;
+    for (k = 0; k < game->Neff; k++)
+    {
+        CreateEmptyMap(&ScoreB);
+        SetElArrayMap(scoreboard, k, ScoreB);
+    }
     printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
 }
 
-void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename) {   
+void LOAD(Array *game, HistoryStack *gamehistory , TabMap *scoreboard,  char *filename) {   
     int i , j, idx; 
     StartLOAD(filename);
     int n = currentChar - '0'; //mengambil nilai line pertama dalam file yaitu jumlah game lalu diubah ke int
@@ -39,8 +46,8 @@ void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename)
     }
         // Membaca HISTORY GAME
     ADVWORDLOAD();
-    i = StrToInt(currentWord.TabWord); // konversi char ke int
-    (*gamehistory).Neff = i;
+    i = StrToInt(currentWord.TabWord); 
+   
     for (j = 0; j < i; j++)
     {
       ADVWORDLOAD();
@@ -51,7 +58,7 @@ void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename)
         *(namagame + idx) = currentWord.TabWord[idx];
       }
       *(namagame + currentWord.Length) = '\0';
-      (*gamehistory).TI[j] = namagame;
+      PushHistory(gamehistory, namagame);
     }
 
     // Membaca semua scoreboard dari list game
@@ -61,7 +68,7 @@ void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename)
     {
       CreateEmptyMap(&ScoreB);
       ADVWORDLOAD();
-      i = StrToInt(currentWord.TabWord); // konversi char ke int
+      i = StrToInt(currentWord.TabWord);
       ScoreB.Count = i;
       for (j = 0; j < ScoreB.Count; j++)
       {
@@ -84,7 +91,7 @@ void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename)
   
 }
 
-void SAVE(Array game, Array gamehistory, TabMap scoreboard, char *file)
+void SAVE(Array game, HistoryStack gamehistory, TabMap scoreboard, char *file)
 {
     FILE *pita;
     char *filename = (char *)malloc(50 * sizeof(char));
@@ -101,11 +108,11 @@ void SAVE(Array game, Array gamehistory, TabMap scoreboard, char *file)
         fprintf(pita, "%s\n", game.TI[i]);
     }
     //save gamehistory
-    sprintf(game_num, "%d", gamehistory.Neff);
+    sprintf(game_num, "%d", gamehistory.TOPHISTORY + 1);
     fprintf(pita, "%s\n", game_num);
-    for (i = 0; i < NbElmt(gamehistory); i++)
+    for (i = 0; i <= gamehistory.TOPHISTORY; i++)
     {
-        fprintf(pita, "%s\n", gamehistory.TI[i]);
+        fprintf(pita, "%s\n", gamehistory.T[i]);
     }
 
     //save scoreboard
@@ -152,7 +159,7 @@ int compare(char *str1, char *str2) {
   }
   return *str1 - *str2;
 }
-void CREATEGAME(Array* game){
+void CREATEGAME(Array* game , TabMap *scoreboard){
     printf("Masukkan nama game yang akan ditambahkan: ");
     char *new;
     new = READINPUT();
@@ -167,6 +174,10 @@ void CREATEGAME(Array* game){
     } else{
         game->TI[num] = new;
         game->Neff ++;
+        Map scoreB;
+        CreateEmptyMap(&scoreB);
+        SetElArrayMap(scoreboard, scoreboard->NeffArrayMap, scoreB);
+        printf("Game berhasil ditambahkan.\n\n");
     }
 }
 
@@ -177,7 +188,7 @@ void LISTGAME(Array *game){
     }
 }
 
-void DELETEGAME(Array* game , Queue *antriangame){
+void DELETEGAME(Array* game , Queue *antriangame , TabMap *scoreboard){
     LISTGAME(game);
     printf("Masukkan nomor game yang akan dihapus: ");
     char *del_num_input;
@@ -209,6 +220,7 @@ void DELETEGAME(Array* game , Queue *antriangame){
             game->TI[i] = game->TI[i+1];
         }
         game->Neff --;
+        DeleteAt(scoreboard, del_num -1);
         printf("Game berhasil dihapus\n");
     }
 }
@@ -368,10 +380,11 @@ void HELP (){
 
 // int main()
 // {
-//     Array a , gamehistory;
+//     Array a ;
+//     HistoryStack gamehistory;
 //     TabMap scoreboard;
 //     MakeEmpty(&a);
-//     MakeEmpty(&gamehistory);
+//     CreateEmptyStackHistory(&gamehistory);
 //     MakeEmptyArrayMap(&scoreboard);
 //     Queue q;
 //     CreateQueue(&q);
@@ -381,9 +394,8 @@ void HELP (){
 //     printf("%d. %s\n",i+1, a.TI[i]);
 //     }
 //     printf("\n\n\n\n");
-//     for(i = 0; i < gamehistory.Neff; i++){
-//     printf("%d. %s\n",i+1, gamehistory.TI[i]);
-//     }
+
+//     PrintStackHistory(&gamehistory , 5);
 
     
 //     return 0;

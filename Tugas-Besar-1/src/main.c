@@ -7,11 +7,11 @@
 int main(){
     // Variabel global
     Array game;
-    Array gamehistory;
+    HistoryStack gamehistory;
     TabMap scoreboard;
     Queue antrian;
     MakeEmpty(&game);
-    MakeEmpty(&gamehistory);
+    CreateEmptyStackHistory(&gamehistory);
     CreateQueue(&antrian);
     MakeEmptyArrayMap(&scoreboard);
 
@@ -35,7 +35,7 @@ int main(){
         {
             if (str_comp(input , "START"))
             {
-                STARTGAME(&game );
+                STARTGAME(&game , &scoreboard);
                 load = true;
             }
 
@@ -92,13 +92,13 @@ int main(){
             {
 
                 if (str_comp(input, "CREATE GAME")){
-                    CREATEGAME(&game);
+                    CREATEGAME(&game , &scoreboard);
                 }
                 else if (str_comp(input, "LIST GAME")){
                     LISTGAME(&game);
                 }
                 else if (str_comp(input, "DELETE GAME")){
-                    DELETEGAME(&game, &antrian);
+                    DELETEGAME(&game, &antrian , &scoreboard);
                 }
                 else if (str_comp(input, "QUEUE GAME")){
                     QUEUEGAME(&antrian, game);
