@@ -21,11 +21,11 @@ void LOAD(Array *game, HistoryStack *gamehistory , TabMap *scoreboard,  char *fi
 
 void SAVE(Array game, HistoryStack gamehistory, TabMap scoreboard, char *file);
 
-void CREATEGAME(Array* game);
+void CREATEGAME(Array* game , TabMap *scoreboard);
 
 void LISTGAME(Array *game);
 
-void DELETEGAME(Array* game , Queue *antriangame);
+void DELETEGAME(Array* game , Queue *antriangame , TabMap *scoreboard);
 
 void QUEUEGAME(Queue *antriangame, Array gamelist);
 

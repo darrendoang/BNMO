@@ -159,7 +159,7 @@ int compare(char *str1, char *str2) {
   }
   return *str1 - *str2;
 }
-void CREATEGAME(Array* game){
+void CREATEGAME(Array* game , TabMap *scoreboard){
     printf("Masukkan nama game yang akan ditambahkan: ");
     char *new;
     new = READINPUT();
@@ -174,6 +174,10 @@ void CREATEGAME(Array* game){
     } else{
         game->TI[num] = new;
         game->Neff ++;
+        Map scoreB;
+        CreateEmptyMap(&scoreB);
+        SetElArrayMap(scoreboard, scoreboard->NeffArrayMap, scoreB);
+        printf("Game berhasil ditambahkan.\n\n");
     }
 }
 
@@ -184,7 +188,7 @@ void LISTGAME(Array *game){
     }
 }
 
-void DELETEGAME(Array* game , Queue *antriangame){
+void DELETEGAME(Array* game , Queue *antriangame , TabMap *scoreboard){
     LISTGAME(game);
     printf("Masukkan nomor game yang akan dihapus: ");
     char *del_num_input;
@@ -216,6 +220,7 @@ void DELETEGAME(Array* game , Queue *antriangame){
             game->TI[i] = game->TI[i+1];
         }
         game->Neff --;
+        DeleteAt(scoreboard, del_num -1);
         printf("Game berhasil dihapus\n");
     }
 }

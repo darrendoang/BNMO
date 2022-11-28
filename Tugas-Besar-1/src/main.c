@@ -92,13 +92,13 @@ int main(){
             {
 
                 if (str_comp(input, "CREATE GAME")){
-                    CREATEGAME(&game);
+                    CREATEGAME(&game , &scoreboard);
                 }
                 else if (str_comp(input, "LIST GAME")){
                     LISTGAME(&game);
                 }
                 else if (str_comp(input, "DELETE GAME")){
-                    DELETEGAME(&game, &antrian);
+                    DELETEGAME(&game, &antrian , &scoreboard);
                 }
                 else if (str_comp(input, "QUEUE GAME")){
                     QUEUEGAME(&antrian, game);
