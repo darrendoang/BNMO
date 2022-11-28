@@ -92,7 +92,7 @@ void print_tower(int x, HanoiStack A, HanoiStack B, HanoiStack C)
     printf("\n\n");
 }
 
-void towerofhanoi()
+int towerofhanoi()
 {
     HanoiStack A, B, C, temp;
     int source, destination, valA, valB, valC;
@@ -235,12 +235,13 @@ void towerofhanoi()
     printf("Kamu berhasil!\n");
     printf("\n");
     printf("Score didapatkan: %d\n", score);
+    return score;
     
 }
 
-int main()
-{
-    // printf("%d" , optimal_moves(5));
-    towerofhanoi();
-    return 0;
-}
+// int main()
+// {
+//     // printf("%d" , optimal_moves(5));
+//     towerofhanoi();
+//     return 0;
+// }

@@ -259,9 +259,10 @@ void QUEUEGAME(Queue *antriangame, Array gamelist)
 
 }
 
-void PLAYGAME(Queue *antriangame , Array gamelist)
+void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , HistoryStack *gamehistory)
 {
     ElType val;
+    int score;
     printf("Berikut adalah daftar Game-mu\n");
 
     if (isEmpty(*antriangame)){
@@ -281,47 +282,72 @@ void PLAYGAME(Queue *antriangame , Array gamelist)
     if (str_comp(play, "RNG")){
         printf("Loading RNG . . . \n");
         dequeue(antriangame,val);
-        RNG();
+        score = RNG();
     }
     else if (str_comp(play, "Diner DASH")){
         printf("Loading DINER DASH . . . \n");
         dequeue(antriangame,val);
-        diner_dash();
+        score = diner_dash();
     }
 
     else if (str_comp(play, "TIC TAC TOE")){
         printf("Loading TIC TAC TOE . . . \n");
         dequeue(antriangame,val);
-        tictactoe();
+        score = tictactoe();
     }
 
-    else if (str_comp(play, "RISEWOMAN")){
-        printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
-        printf("Silahkan pilih game lain.\n");
+    else if (str_comp(play, "TOWER OF HANOI")){
+        printf("Loading TOWER OF HANOI . . . \n");
         dequeue(antriangame,val);
+        score = towerofhanoi();
     }
 
-    else if (str_comp(play, "EIFFEL TOWER")){
-        printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
-        printf("Silahkan pilih game lain.\n");
-        dequeue(antriangame,val);
-    }
+    // else if (str_comp(play, "RISEWOMAN")){
+    //     printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
+    //     printf("Silahkan pilih game lain.\n");
+    //     dequeue(antriangame,val);
+    // }
 
-    else if (str_comp(play, "DINOSAUR IN EARTH")){
-        printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
-        printf("Silahkan pilih game lain.\n");
-        dequeue(antriangame,val);
-    }
+    // else if (str_comp(play, "EIFFEL TOWER")){
+    //     printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
+    //     printf("Silahkan pilih game lain.\n");
+    //     dequeue(antriangame,val);
+    // }
+
+    // else if (str_comp(play, "DINOSAUR IN EARTH")){
+    //     printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
+    //     printf("Silahkan pilih game lain.\n");
+    //     dequeue(antriangame,val);
+    // }
     else{
             srand(time(0));
+            score = rand()%100;
             printf("Loading %s . . . \n", play);
             printf("GAME OVER\n");
-            printf("SKOR AKHIR: %d\n", rand()%10000);
+            printf("SKOR AKHIR: %d\n", score);
             dequeue(antriangame,val);
     }
+    char *nama;
+    printf("Nama : ");
+    nama = READINPUT();
+    int idx = 0;
+    while (!str_comp(gamelist.TI[idx], play))
+    {
+        idx++;
+    };
+    while (IsMember((*scoreboard).TIMap[idx], nama))
+    {
+        printf("Nama sudah ada, silahkan memakai nama lain!\n\n");
+        printf("Nama : ");
+        nama = READINPUT();
+    }
+    Insert(&(*scoreboard).TIMap[idx], nama, score);
+    SortMapValueDesc(&(*scoreboard).TIMap[idx]);
+    printf("Skor berhasil disimpan ke dalam scoreboard.\n\n");
+    PushHistory(gamehistory, play);
 }
 
-void SKIPGAME(Queue *queuegame, int input , Array gamelist)
+void SKIPGAME(Queue *queuegame, int input , Array gamelist, TabMap *scoreboard , HistoryStack *gamehistory)
 {
     char *temp;
     printf("Berikut adalah daftar Game-mu: \n");
@@ -350,7 +376,7 @@ void SKIPGAME(Queue *queuegame, int input , Array gamelist)
 
     if (!isEmpty(*queuegame))
     {
-        PLAYGAME(queuegame, gamelist);
+        PLAYGAME(queuegame, gamelist , scoreboard ,gamehistory);
     }
     else
     {
@@ -358,7 +384,18 @@ void SKIPGAME(Queue *queuegame, int input , Array gamelist)
     }
 }
 
-
+void HISTORY(HistoryStack *gamehistory , int n)
+{
+  if (IsStackHistoryEmpty(*gamehistory) || n < 1)
+    {
+        printf("\nBerikut adalah daftar game terakhir yang dimainkan: \n\n");
+    }
+    else
+    {
+        printf("\nBerikut adalah daftar game terakhir yang dimainkan: \n");
+        PrintStackHistory(gamehistory, n);
+    }
+}
 void QUIT();
 
 void HELP (){

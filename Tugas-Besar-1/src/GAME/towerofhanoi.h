@@ -11,5 +11,5 @@ int optimal_moves();
 void print_spaces(int x);
 void print_disks(int x);
 void print_tower(int x, HanoiStack A, HanoiStack B, HanoiStack C);
-void towerofhanoi();
+int towerofhanoi();
 #endif

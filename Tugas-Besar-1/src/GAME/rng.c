@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "rng.h"
-void RNG() {
+int RNG() {
     int i , score= 100;
     printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak X\n");
     srand(time(0));
@@ -36,10 +36,12 @@ void RNG() {
     {
         printf("Ya, X adalah %i\n" , r);
         printf("Score anda adalah = %d\n" , score);
+        return score;
     }
     else if(score == 0)
     {
         printf("Kesempatan menebak Anda habis.");
+        return score;
     }
 
 }

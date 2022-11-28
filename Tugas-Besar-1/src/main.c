@@ -104,7 +104,7 @@ int main(){
                     QUEUEGAME(&antrian, game);
                 }
                 else if (str_comp(input, "PLAY GAME")){
-                    PLAYGAME(&antrian, game);
+                    PLAYGAME(&antrian, game , &scoreboard , &gamehistory);
                 }
                
                 else if (str_comp(input, "QUIT")){
@@ -120,11 +120,16 @@ int main(){
                     if(str_comp(command , "SKIPGAME"))
                     { 
                         int num = StrToInt_input(arg, str_len(arg));
-                        SKIPGAME(&antrian, num , game);
+                        SKIPGAME(&antrian, num , game , &scoreboard , &gamehistory);
                     }
                     else if (str_comp(command, "SAVE"))
                     {
                         SAVE(game, gamehistory , scoreboard , arg);
+                    }
+                    else if (str_comp(command, "HISTORY"))
+                    {
+                        int num = StrToInt_input(arg, str_len(arg));
+                        HISTORY(&gamehistory , num);
                     }
                     else if (str_comp(command , "LOAD"))
                     {
