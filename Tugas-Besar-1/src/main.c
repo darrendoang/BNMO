@@ -106,6 +106,15 @@ int main(){
                 else if (str_comp(input, "PLAY GAME")){
                     PLAYGAME(&antrian, game , &scoreboard , &gamehistory);
                 }
+                else if (str_comp(input, "SCOREBOARD")){
+                    SCOREBOARD(scoreboard , game);
+                }
+                else if (str_comp(input, "RESET SCOREBOARD")){
+                    RESETSCOREBOARD(&scoreboard , game);
+                }
+                else if (str_comp(input, "RESET HISTORY")){
+                    RESETHISTORY(&gamehistory);
+                }
                
                 else if (str_comp(input, "QUIT")){
                     over =true;

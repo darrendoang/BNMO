@@ -34,7 +34,13 @@ void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , History
 
 void SKIPGAME(Queue *queuegame, int input , Array gamelist, TabMap *scoreboard , HistoryStack *gamehistory);
 
+void SCOREBOARD(TabMap scoreboard, Array gamelist);
+
+void RESETSCOREBOARD(TabMap *scoreboard , Array gamelist);
+
 void HISTORY(HistoryStack *gamehistory , int n);
+
+void RESETHISTORY(HistoryStack *gamehistory );
 
 void QUIT();
 

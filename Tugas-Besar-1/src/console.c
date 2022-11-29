@@ -396,6 +396,159 @@ void HISTORY(HistoryStack *gamehistory , int n)
         PrintStackHistory(gamehistory, n);
     }
 }
+
+void RESETHISTORY(HistoryStack *gamehistory )
+{
+    char* j;
+    printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET HISTORY? ");
+    char* input = READINPUT();
+    printf("\n");
+    while (!(str_comp("YA" , input) || str_comp("TIDAK" , input)))
+    {
+        printf("Input salah silahkan input ulang\n");
+        printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET HISTORY? ");
+        input = READINPUT();
+        printf("\n");
+    }
+    
+    if (str_comp("YA" , input))
+    {
+            while (!IsStackHistoryEmpty(*gamehistory))
+                {
+                    PopHistory(gamehistory , &j);
+                }
+        printf("History berhasil di-reset.\n");
+    }
+    else if (str_comp("TIDAK" , input))
+    {
+        printf("History tidak jadi di-reset.");
+        HISTORY(gamehistory , 1000);
+    }
+
+}
+
+void SCOREBOARD(TabMap scoreboard, Array gamelist)
+{
+    int idx_game, idx_name, name_maxLength, nameLength, score_maxLength, scoreLength;
+    char *str_score = (char *)malloc(10 * sizeof(char));
+    for (idx_game = 0; idx_game < scoreboard.NeffArrayMap; idx_game++)
+    {
+        if (scoreboard.TIMap[idx_game].Count == 0)
+        {
+            printf("**** SCOREBOARD GAME %s ****\n", gamelist.TI[idx_game]);
+            printf("| NAMA\t\t| SKOR\t  |\n");
+            printf("---- SCOREBOARD KOSONG ----\n");
+            printf("|\n");
+        }
+        else
+        {
+            sprintf(str_score, "%d", scoreboard.TIMap[idx_game].Elements[0].Value);
+            score_maxLength = str_len(str_score);
+            name_maxLength = str_len(scoreboard.TIMap[idx_game].Elements[0].Key);
+            for (idx_name = 1; idx_name < scoreboard.TIMap[idx_game].Count; idx_name++)
+            {
+                sprintf(str_score, "%d", scoreboard.TIMap[idx_game].Elements[idx_name].Value);
+                if (str_len(str_score) > score_maxLength)
+                {
+                    score_maxLength = str_len(str_score);
+                }
+                if (str_len(scoreboard.TIMap[idx_game].Elements[idx_name].Key) > name_maxLength)
+                {
+                    name_maxLength = str_len(scoreboard.TIMap[idx_game].Elements[idx_name].Key);
+                }
+            }
+            printf("**** SCOREBOARD GAME %s ****\n", gamelist.TI[idx_game]);
+            printf("| NAMA");
+            printf("%*s", name_maxLength - 3, "");
+            printf("| SKOR");
+            if (score_maxLength < 4)
+            {
+                printf("%*s", 1, "");
+                score_maxLength = 4;
+            }
+            else
+            {
+                printf("%*s", score_maxLength - 3, "");
+            }
+            printf("|\n");
+            for (idx_name = 0; idx_name < scoreboard.TIMap[idx_game].Count; idx_name++)
+            {
+                nameLength = str_len(scoreboard.TIMap[idx_game].Elements[idx_name].Key);
+                sprintf(str_score, "%d", scoreboard.TIMap[idx_game].Elements[idx_name].Value);
+                scoreLength = str_len(str_score);
+                printf("| %s", scoreboard.TIMap[idx_game].Elements[idx_name].Key);
+                printf("%*s", name_maxLength - nameLength + 1, "");
+                printf("| %d", scoreboard.TIMap[idx_game].Elements[idx_name].Value);
+                printf("%*s", score_maxLength - scoreLength + 1, "");
+                printf("|\n");
+            }
+            printf("\n");
+        }
+        
+    }
+}
+
+
+void RESETSCOREBOARD(TabMap *scoreboard , Array gamelist )
+{
+    char *numinput;
+    char *strinput;
+    int GameNum, i;
+    printf("DAFTAR SCOREBOARD:\n");
+    printf("0. ALL\n");
+    for (i = 0; i < gamelist.Neff; i++)
+    {
+        printf("%d. %s\n", i + 1, gamelist.TI[i]);
+    }
+    printf("\n");
+    printf("SCOREBOARD YANG INGIN DIHAPUS: ");
+    numinput = READINPUT();
+    GameNum = StrToInt_input(numinput, str_len(numinput));
+    printf("\n");
+    while (GameNum > gamelist.Neff)
+    {
+        printf("Angka yang dimasukkan tidak valid!\n");
+        printf("SCOREBOARD YANG INGIN DIHAPUS: ");
+        numinput = READINPUT();
+        GameNum = StrToInt_input(numinput, str_len(numinput));
+        printf("\n");
+    }
+    if (GameNum == 0)
+    {
+        printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)? ");
+    }
+    else
+    {
+        printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD %s (YA/TIDAK)? ", gamelist.TI[GameNum - 1]);
+    }
+    strinput = READINPUT();
+    while (!str_comp(strinput, "YA") && !str_comp(strinput, "TIDAK"))
+    {
+        printf("Input tidak valid!\n\n");
+        printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)? ");
+        strinput = READINPUT();
+    }
+    if (str_comp(strinput, "YA"))
+    {
+        if (GameNum == 0)
+        {
+            for (int idx = 0; idx < (*scoreboard).NeffArrayMap; idx++)
+            {
+                CreateEmptyMap(&(*scoreboard).TIMap[idx]);
+            }
+        }
+        else
+        {
+            CreateEmptyMap(&(*scoreboard).TIMap[GameNum - 1]);
+        }
+        printf("Scoreboard berhasil di-reset.\n\n");
+    }
+    else
+    {
+        printf("Scoreboard tidak di-reset.\n\n");
+    }
+}
+
 void QUIT();
 
 void HELP (){
