@@ -14,6 +14,7 @@
 #include "GAME/ddash.h"
 #include "GAME/tictactoe.h"
 #include "GAME/towerofhanoi.h"
+#include "GAME/hman.h"
 
 
 void STARTGAME(Array *game , TabMap *scoreboard);

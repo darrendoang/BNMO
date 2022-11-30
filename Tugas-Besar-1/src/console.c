@@ -302,6 +302,14 @@ void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , History
         score = towerofhanoi();
     }
 
+     else if (str_comp(play, "HANGMAN")){
+        printf("Loading HANGMAN . . . \n");
+        dequeue(antriangame,val);
+        hman(&score) ;
+    }
+
+
+
     // else if (str_comp(play, "RISEWOMAN")){
     //     printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n",play);
     //     printf("Silahkan pilih game lain.\n");

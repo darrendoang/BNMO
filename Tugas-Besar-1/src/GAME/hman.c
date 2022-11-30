@@ -16,7 +16,8 @@ void hman(int *user_score){
     srand(time(0));
 
     while (tries != 0){
-        // Reset history dan guess
+        // Reset history dan guessD
+        
         count = 0;
         for (i = 0; i < 30; i++){
             guess[i] = false;
