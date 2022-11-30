@@ -1,6 +1,7 @@
 #include "hman.h"
 
 int main(){
-    hman();
+    int score;
+    hman(&score);
     return 0;
 }

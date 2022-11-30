@@ -9,6 +9,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-void hman();
+void hman(int *user_score);
 
 #endif

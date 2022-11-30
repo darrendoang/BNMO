@@ -1,9 +1,10 @@
 #include "hman.h"
 
-char kata[3][50] = {"GEEK", "GEEKS", "GEEKFOR"};
+char kata[10][50] = {"KUCING", "RUBAH", "ANJING", "INSTITUT", "BANDUNG", "TEKNOLOGI", "TUGAS", "ALGORITMA", "STRUKTUR", "DATA"};
 boolean guess[50];
 
-void hman(){
+void hman(int *user_score){
+    int temp_score;
     int tries = 10;
     int score = 0;
     int current, count;
@@ -11,6 +12,8 @@ void hman(){
     boolean win, found, prev;
     char * input;
     char history[30];
+
+    srand(time(0));
 
     while (tries != 0){
         // Reset history dan guess
@@ -21,7 +24,7 @@ void hman(){
         }
 
         // Memilih kata
-        current = 1;
+        current = rand() % 10;
 
         // Reset win
         win = false;
@@ -51,21 +54,14 @@ void hman(){
 
             if (input[1] != '\0'){          // Input lebih atau kurang dari 1 karakter
                 tries--;
-                printf("E >1\n");
             }
             else{
-                printf("S =1\n");
                 if (((input[0]>=65) && (input[0]<=90)) || ((input[0]>=97) && (input[0]<=122))){
-                    printf("S =ALPHA\n");
                     // Mengecek apakah input sudah pernah dimasukkan
                     prev = false; 
                     j = 0;
-                    printf("%s\n", history);
                     while ((!prev) && (history[j] != '*')){
-                        printf("LOOP\n");
-                        printf("%c %c\n", input[0], history[j]);
                         if ((input[0] == history[j]) || ((input[0] + 32) == history[j])){
-                            printf("FIND\n");
                             prev = true;
                         }
                         j++;
@@ -73,10 +69,8 @@ void hman(){
 
                     if (prev){          // Input sudah pernah dimasukkan
                         tries--;
-                        printf("E =PREV\n");
                     }
                     else{
-                        printf("S !=PREV\n");
                         if (input[0] < 97){
                             history[j] = input[0]+32;
                         }
@@ -88,17 +82,14 @@ void hman(){
                         l = 0;
                         while ((l < str_len(kata[current]))&&(!found))
                         {
-                            printf("S\n");
                             if ((input[0] == kata[current][l]) || (input[0]-32 == kata[current][l])){
                                 found = true;
-                                printf("FOUND\n");
                             } 
                             l++;
                         }
 
                         if (found)
                         {
-                            printf("S =FOUND\n");
                             for (k = 0; k < str_len(kata[current]); k++){
                                 if ((input[0] == kata[current][k]) || (input[0]-32 == kata[current][k])){
                                     count++;
@@ -112,20 +103,21 @@ void hman(){
                         }
                         else
                         {
-                            printf("S !=FOUND\n");
                             tries--;
                         }
 
                     }
                 }
                 else{           // Input bukan alfabet
-                    printf("S !=ALPHA\n");
                     tries--;
                 }
             }
+            printf("\n");
         }
         if (win){
             score += str_len(kata[current]);
         }
     }
+    printf("SKOR AKHIR: %d\n", score * 1000);
+    *user_score = score * 1000;
 }
