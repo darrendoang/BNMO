@@ -9,28 +9,38 @@
 #include "ADT/queue.h"
 #include "ADT/map.h"
 #include "ADT/arrayOfMap.h"
+#include "ADT/stackhistory.h"
 #include "GAME/rng.h"
 #include "GAME/ddash.h"
 #include "GAME/tictactoe.h"
+#include "GAME/towerofhanoi.h"
 
 
-void STARTGAME(Array *game );
+void STARTGAME(Array *game , TabMap *scoreboard);
 
-void LOAD(Array *game, Array *gamehistory , TabMap *scoreboard,  char *filename);
+void LOAD(Array *game, HistoryStack *gamehistory , TabMap *scoreboard,  char *filename);
 
-void SAVE(Array game , char * filename);
+void SAVE(Array game, HistoryStack gamehistory, TabMap scoreboard, char *file);
 
-void CREATEGAME(Array* game);
+void CREATEGAME(Array* game , TabMap *scoreboard);
 
 void LISTGAME(Array *game);
 
-void DELETEGAME(Array* game , Queue *antriangame);
+void DELETEGAME(Array* game , Queue *antriangame , TabMap *scoreboard);
 
 void QUEUEGAME(Queue *antriangame, Array gamelist);
 
-void PLAYGAME(Queue *antriangame , Array gamelist);
+void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , HistoryStack *gamehistory);
 
-void SKIPGAME(Queue *queuegame, int input , Array gamelist);
+void SKIPGAME(Queue *queuegame, int input , Array gamelist, TabMap *scoreboard , HistoryStack *gamehistory);
+
+void SCOREBOARD(TabMap scoreboard, Array gamelist);
+
+void RESETSCOREBOARD(TabMap *scoreboard , Array gamelist);
+
+void HISTORY(HistoryStack *gamehistory , int n);
+
+void RESETHISTORY(HistoryStack *gamehistory );
 
 void QUIT();
 

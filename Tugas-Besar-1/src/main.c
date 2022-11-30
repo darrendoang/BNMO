@@ -7,11 +7,11 @@
 int main(){
     // Variabel global
     Array game;
-    Array gamehistory;
+    HistoryStack gamehistory;
     TabMap scoreboard;
     Queue antrian;
     MakeEmpty(&game);
-    MakeEmpty(&gamehistory);
+    CreateEmptyStackHistory(&gamehistory);
     CreateQueue(&antrian);
     MakeEmptyArrayMap(&scoreboard);
 
@@ -35,7 +35,7 @@ int main(){
         {
             if (str_comp(input , "START"))
             {
-                STARTGAME(&game );
+                STARTGAME(&game , &scoreboard);
                 load = true;
             }
 
@@ -92,19 +92,28 @@ int main(){
             {
 
                 if (str_comp(input, "CREATE GAME")){
-                    CREATEGAME(&game);
+                    CREATEGAME(&game , &scoreboard);
                 }
                 else if (str_comp(input, "LIST GAME")){
                     LISTGAME(&game);
                 }
                 else if (str_comp(input, "DELETE GAME")){
-                    DELETEGAME(&game, &antrian);
+                    DELETEGAME(&game, &antrian , &scoreboard);
                 }
                 else if (str_comp(input, "QUEUE GAME")){
                     QUEUEGAME(&antrian, game);
                 }
                 else if (str_comp(input, "PLAY GAME")){
-                    PLAYGAME(&antrian, game);
+                    PLAYGAME(&antrian, game , &scoreboard , &gamehistory);
+                }
+                else if (str_comp(input, "SCOREBOARD")){
+                    SCOREBOARD(scoreboard , game);
+                }
+                else if (str_comp(input, "RESET SCOREBOARD")){
+                    RESETSCOREBOARD(&scoreboard , game);
+                }
+                else if (str_comp(input, "RESET HISTORY")){
+                    RESETHISTORY(&gamehistory);
                 }
                
                 else if (str_comp(input, "QUIT")){
@@ -120,13 +129,18 @@ int main(){
                     if(str_comp(command , "SKIPGAME"))
                     { 
                         int num = StrToInt_input(arg, str_len(arg));
-                        SKIPGAME(&antrian, num , game);
+                        SKIPGAME(&antrian, num , game , &scoreboard , &gamehistory);
                     }
                     else if (str_comp(command, "SAVE"))
                     {
-                        SAVE(game, arg);
+                        SAVE(game, gamehistory , scoreboard , arg);
                     }
-                    if (str_comp(command , "LOAD"))
+                    else if (str_comp(command, "HISTORY"))
+                    {
+                        int num = StrToInt_input(arg, str_len(arg));
+                        HISTORY(&gamehistory , num);
+                    }
+                    else if (str_comp(command , "LOAD"))
                     {
                         char * dir;
                             dir = filetodir(arg);
@@ -141,7 +155,8 @@ int main(){
                             load = true;
                             }
                     }
-                    else{
+                    else
+                    {
                         printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
                     }
                 }

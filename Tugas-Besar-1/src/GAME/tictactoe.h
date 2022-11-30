@@ -10,6 +10,6 @@ void playerMove();
 void computerMove();
 char checkWinner();
 void printWinner(char winner);
-void tictactoe();
+int tictactoe();
 
 #endif

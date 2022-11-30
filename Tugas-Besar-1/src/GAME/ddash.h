@@ -46,6 +46,6 @@ void enqueueD(orderQueue *q);
 
 void dequeueD(orderQueue *q, int *saldo);
 
-void diner_dash();
+int diner_dash();
 
 #endif

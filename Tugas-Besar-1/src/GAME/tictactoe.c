@@ -124,7 +124,7 @@ char checkWinner()
     return ' ';
 }
 
-void printWinner(char winner)
+void printWinner(char winner )
 {
     if (winner == PLAYER)
     {
@@ -144,7 +144,7 @@ void printWinner(char winner)
     }
 }
 
-void tictactoe()
+int tictactoe()
 {
     printf("TICTACTOE\n");
 
@@ -169,6 +169,19 @@ void tictactoe()
     }
     printBoard();
     printWinner(winner);
+    
     printf("Terima Kasih telah bermain TICTACTOE!\n");
+    if (winner == PLAYER)
+    {
+        return 100;
+    }
+    else if (winner == COMPUTER)
+    {
+        return 0;
+    }
+    else
+    {
+        return 50;
+    }
 }
 

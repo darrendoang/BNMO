@@ -48,7 +48,7 @@ void dequeueD(orderQueue *q, int *saldo){
     }
 }
 
-void diner_dash(){
+int diner_dash(){
     // Queue dan Array
     orderQueue incoming;
     arrayCook cook;
@@ -242,6 +242,7 @@ void diner_dash(){
                 printf("Kamu kalah :<\n");
             }
             printf("\nSKOR AKHIR: %d\n", saldo);
+            return saldo;
         }
     }
 }
