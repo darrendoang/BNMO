@@ -1,6 +1,6 @@
 #include "hman.h"
 
-char kata[10][50] = {"KUCING", "RUBAH", "ANJING", "INSTITUT", "BANDUNG", "TEKNOLOGI", "TUGAS", "ALGORITMA", "STRUKTUR", "DATA"};
+char kata[20][50] = {"KUCING", "RUBAH", "ANJING", "INSTITUT", "BANDUNG", "TEKNOLOGI", "TUGAS", "ALGORITMA", "STRUKTUR", "DATA"};
 boolean guess[50];
 
 void hman(int *user_score){
@@ -16,7 +16,7 @@ void hman(int *user_score){
     srand(time(0));
 
     while (tries != 0){
-        // Reset history dan guessD
+        // Reset history dan guess
         
         count = 0;
         for (i = 0; i < 30; i++){
@@ -119,6 +119,6 @@ void hman(int *user_score){
             score += str_len(kata[current]);
         }
     }
-    printf("SKOR AKHIR: %d\n", score * 1000);
+    printf("SKOR AKHIR: %d\n\n", score * 1000);
     *user_score = score * 1000;
 }

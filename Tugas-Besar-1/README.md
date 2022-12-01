@@ -39,7 +39,10 @@ PLAY GAME             Memainkan sebuah permainan;
 SKIPGAME              Melewatkan permainan sebanyak n; 
 QUIT                  Keluar dari Program; 
 HELP                  Menampilkan daftar perintah; 
-
+RESETHISORY           Me-reset history game yang telah dimainkan;
+HISTORY               Menampilkan history game yang telah dimainkan;
+RESETSCOREBOARD       Me-reset scoreboard yang berisi skor dari game yang telah dimainkan;
+SCOREBOARD            Menampilkan scoreboard yang berisi skor dari game yang telah dimainkan;
 
 KHUSUS UNTUK FUNGSI LOAD
 Input:
