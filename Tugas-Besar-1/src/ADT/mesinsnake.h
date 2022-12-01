@@ -1,11 +1,11 @@
-/* File: mesinkata.h */
+/* File: mesinsnake.h */
 /* Definisi Mesin Kata: Model Akuisisi Versi I */
 
 #ifndef __MESINSNAKE_H__
 #define __MESINSNAKE_H__
 
 #include "boolean.h"
-#include "mesinkarakter.h"
+#include "mesinkaraktersnake.h"
 
 #define NMax 100
 #define BLANK ' '
