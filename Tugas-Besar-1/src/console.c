@@ -314,6 +314,12 @@ void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , History
         hartakarun() ;
     }
 
+    else if (str_comp(play, "SNAKE ON METEOR")){
+        printf("Loading SNAKE ON METEOR . . . \n");
+        dequeue(antriangame,val);
+        snakeOnMeteor(&score) ;
+    }
+
 
 
     // else if (str_comp(play, "RISEWOMAN")){

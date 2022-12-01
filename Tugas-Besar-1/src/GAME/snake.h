@@ -1,7 +1,7 @@
-#include "listdp.h"
+#include "../ADT/listdp.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "boolean.h"
+#include "../ADT/boolean.h"
 #include "../ADT/mesinsnake.h"
 
 void printpetak(List snake, List food, List meteor, List obstacle);

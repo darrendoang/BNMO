@@ -16,6 +16,7 @@
 #include "GAME/towerofhanoi.h"
 #include "GAME/hman.h"
 #include "GAME/hartakarun.h"
+#include "GAME/snake.h"
 
 
 void STARTGAME(Array *game , TabMap *scoreboard);

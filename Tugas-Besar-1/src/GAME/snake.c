@@ -383,7 +383,7 @@ void belok(char x, List *s, List * posPanas, List * obstacle, boolean * gagal, b
     }
 }
 
-int main(){
+void snakeOnMeteor(int * score){
     List snake;
     List food;
     List meteor;
@@ -527,5 +527,4 @@ int main(){
     
     printf("Game berakhir!\n");  
     printf("Skor: %d", score);
-    return(0);
 }
