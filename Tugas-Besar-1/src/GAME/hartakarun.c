@@ -23,18 +23,6 @@ int peti(BinTree x)
     }
 }
 
-// READINPUT() buat minta input dari keyboard
-// jadi tinggal 
-// char  *x ;
-// x = READINPUT() ;
-// nanti inputnya ke simpen di x tapi masih dlm string
-// kalo mau dirubah ke INT x nya tinggal buat variabel baru
-// terus pake fungsi laen kyk gini
-// int x_int;
-// x_int = StrToInt_input(x_int , str_len(x_int));
-
-// ini x_int udh jdi int
-
 int PathChosen(BinTree x)
 {
     boolean validInput = false;
