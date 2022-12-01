@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Coding/C Programming/Tubes/Tugas-Besar-Algoritma-dan-Struktur-Data/Tugas-Besar-1/src/GAME/snake",
+      "program": "c:/Coding/C Programming/Tubes/Tugas-Besar-Algoritma-dan-Struktur-Data/Tugas-Besar-1/src/GAME/snake/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

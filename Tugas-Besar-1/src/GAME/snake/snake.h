@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
-#include "mesinkata.h"
+#include "mesinsnake.h"
 
 void printpetak(List snake, List food, List meteor, List obstacle);
 /* mengeluarkan tampilan permainan snake on meteor */
