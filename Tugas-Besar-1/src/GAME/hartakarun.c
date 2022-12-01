@@ -31,18 +31,18 @@ int PathChosen(BinTree x)
     while(!isOneElmt(x)){
         while (!validInput){
 
-            printf("Pilih jalur yang ingin diambil ('kiri'/'kanan') : ");
+            printf("Pilih jalur yang ingin diambil ('L'/'R') : ");
             char  *jalur ;
             jalur = READINPUT() ;
-            
-            if (jalur == "kiri" || jalur=="Kiri" || jalur=="KIRI"){
+
+            if (jalur == 'L' || jalur == 'l'){
                 printf("Jalur kiri telah dipilih.\n");
                 hasil += ROOT(LEFT(x));
                 x=LEFT(x);
                 validInput = true;  
             }
 
-            else if (jalur == "kanan" || jalur=="Kanan" || jalur=="KANAN"){
+            else if (jalur == 'R' || jalur == 'r'){
                 printf("Jalur kanan telah dipilih.\n");
                 hasil += ROOT(RIGHT(x));
                 x=RIGHT(x);
@@ -50,7 +50,7 @@ int PathChosen(BinTree x)
             }
 
             else{
-                printf("Masukkan invalid.\n");
+                printf("Masukan invalid.\n");
             }
 
         }
@@ -66,18 +66,17 @@ BinTree TimesTwo()
     int n;
 
     //input jumlah daun
-    printf("Banyak peti harta karun yang dapat digali : \n");
+    printf("Banyak peti harta karun yang dapat digali : ");
     char  *jumlah ;
     jumlah = READINPUT() ;
     n= StrToInt_input(jumlah , str_len(jumlah));
-
+    printf("\n");
 
     //jumlah daun harus lebih dari 0
     if(n <= 0){
         printf("Masukkan minimal 1 peti harta karun !\n");
         return 0;
     }
-
 
     int temp = n;
     while(temp%2 == 0){
@@ -92,10 +91,11 @@ BinTree TimesTwo()
     BinTree ar[batas];
     for(int i = 0; i < n;i++){
         int x;
-        printf("Masukkan jumlah koin di dalam peti  : \n");
+        printf("Masukkan jumlah koin di dalam peti %d : ",i+1);
         char  *koin ;
         koin = READINPUT() ;
         x= StrToInt_input(koin , str_len(koin));
+        printf("\n");
 
         BinTree t = NewTree(x, NULL, NULL);
         ar[i] = t;
@@ -131,8 +131,9 @@ int hartakarun(){
     printf("\n");
 
     BinTree x = TimesTwo();
-    printf("\n Jalur untuk mendapatkan peti harta karun tujuan : \n");
-    printTree(x, 2);
+    printf("\n***** Jalur untuk mendapatkan peti harta karun tujuan *****\n");
+    printf("\n");
+    printTree(x, 3);
     printf("\n");
 
     if(PathChosen(x)==peti(x)){
