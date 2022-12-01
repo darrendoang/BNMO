@@ -8,7 +8,7 @@ Dibuat oleh Kelompok 04 K02
 
 -Muhammad Rafi Haidar / 18221134
 -Priscilla Auleader Napitupulu / 18221098
--Laurensia Audrey Pramashinta / 1822114
+-Laurensia Audrey Pramashinta / 18221114
 -Darren / 18221050
 -Razan Aditya Putra / 18221132
 

@@ -8,6 +8,10 @@
         "queue.h": "c",
         "rng.h": "c",
         "tictactoe.h": "c",
+<<<<<<< HEAD
         "towerofhanoi.h": "c"
+=======
+        "bintree.h": "c"
+>>>>>>> dbb5e61e37b0e2e324dda99894479ea374321b09
     }
 }
