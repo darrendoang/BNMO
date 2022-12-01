@@ -521,10 +521,10 @@ void snakeOnMeteor(int * score){
             }
         } 
     }
-    int length, score;
+    int length;
     length = lengthsnake(snake);
-    score = length*2;
+    *score = length*2;
     
     printf("Game berakhir!\n");  
-    printf("Skor: %d", score);
+    printf("Skor: %d\n", *score);
 }

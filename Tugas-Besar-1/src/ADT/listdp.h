@@ -9,25 +9,31 @@
 #include "boolean.h"
 
 #define Nilldp NULL
-
 /* Definisi Type Data */
 typedef struct tElmtlistdp *addressldp;
 typedef char* elmntype;
-typedef POINT location;
-typedef struct tPOINT {
+typedef struct POINT {
 	int x;
 	int y;
 } POINT;
-typedef struct {
-	addressldp Firstldp;
-	addressldp Lastldp;
-} List;
+typedef POINT location;
+
 typedef struct tElmtlistdp { 
 	elmntype infoldp;
 	location posisi;
 	addressldp nextldp;
 	addressldp prevldp;
 } ElmtListdp;
+
+
+typedef struct {
+	addressldp Firstldp;
+	addressldp Lastldp;
+} List;
+
+
+
+
 
 /* Notasi Akses */
 #define Infoldp(P) (P)->infoldp

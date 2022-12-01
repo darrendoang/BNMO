@@ -136,6 +136,10 @@ int hartakarun(){
     printTree(x, 3);
     printf("\n");
 
+    printf("Keterangan: -Permainan dimulai dari root(ujung kiri atas)\n");
+    printf("            -L adalah untuk memilih cabang yang atas\n");
+    printf("            -R adalah untuk memilih cabang yang bawah\n");
+    
     if(PathChosen(x)==peti(x)){
         printf("\nJalur dengan harta karun terbanyak berhasil ditemukan.\n");
         printf("Anda menang !\n");

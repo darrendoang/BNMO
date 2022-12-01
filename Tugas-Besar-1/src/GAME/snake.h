@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "../ADT/boolean.h"
 #include "../ADT/mesinsnake.h"
+#include "../ADT/mesinkaraktersnake.h"
 
 void printpetak(List snake, List food, List meteor, List obstacle);
 /* mengeluarkan tampilan permainan snake on meteor */

@@ -4,58 +4,58 @@
 #ifndef __MESIN_KAR_SNAKE_H_
 #define __MESIN_KAR_SNAKE_H_
 
-#include "../ADT/boolean.h"
+#include "boolean.h"
 
-#define MARK '.'
+#define MARKS '.'
 #define ENTER '\n'
 
 /* State Mesin */
-extern char currentChar;
-extern boolean EOP;
+extern char currentCharSnake;
+extern boolean EOPsnake;
 extern boolean finish;
 
-void START();
-/* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
-   Karakter pertama yang ada pada pita posisinya adalah pada jendela.
-   Pita baca diambil dari stdin.
+void STARTsnake();
+/* Mesin siap dioperasikan. pitaSnake disiapkan untuk dibaca.
+   Karakter pertama yang ada pada pitaSnake posisinya adalah pada jendela.
+   pitaSnake baca diambil dari stdin.
    I.S. : sembarang
-   F.S. : currentChar adalah karakter pertama pada pita
-          Jika currentChar != MARK maka EOP akan padam (false)
-          Jika currentChar = MARK maka EOP akan menyala (true) */
+   F.S. : currentCharSnake adalah karakter pertama pada pitaSnake
+          Jika currentCharSnake != MARKS maka EOPsnake akan padam (false)
+          Jika currentCharSnake = MARKS maka EOPsnake akan menyala (true) */
 
-void ADV();
-/* Pita dimajukan satu karakter.
-   I.S. : Karakter pada jendela = currentChar, currentChar != MARK
-   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
-          currentChar mungkin = MARK
-          Jika  currentChar = MARK maka EOP akan menyala (true) */
+void ADVsnake();
+/* pitaSnake dimajukan satu karakter.
+   I.S. : Karakter pada jendela = currentCharSnake, currentCharSnake != MARKS
+   F.S. : currentCharSnake adalah karakter berikutnya dari currentCharSnake yang lama,
+          currentCharSnake mungkin = MARKS
+          Jika  currentCharSnake = MARKS maka EOPsnake akan menyala (true) */
 
-char GetCC();
-/* Mengirimkan currentChar */
+char GetCCsnake();
+/* Mengirimkan currentCharSnake */
 
-boolean IsEOP();
-/* Mengirimkan true jika currentChar = MARK */
+boolean IsEOPsnake();
+/* Mengirimkan true jika currentCharSnake = MARKS */
 
 void startFromFile(char *str);
-/* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
-   Karakter pertama yang ada pada pita posisinya adalah pada jendela.
-   Pita baca diambil dari sebuah file yang berasal dari parameter input berupa string nama file.
+/* Mesin siap dioperasikan. pitaSnake disiapkan untuk dibaca.
+   Karakter pertama yang ada pada pitaSnake posisinya adalah pada jendela.
+   pitaSnake baca diambil dari sebuah file yang berasal dari parameter input berupa string nama file.
    I.S. : sembarang
-   F.S. : currentChar adalah karakter pertama pada pita
-          Jika currentChar != MARK maka EOP akan padam (false)
-          Jika currentChar = MARK maka EOP akan menyala (true) 
+   F.S. : currentCharSnake adalah karakter pertama pada pitaSnake
+          Jika currentCharSnake != MARKS maka EOPsnake akan padam (false)
+          Jika currentCharSnake = MARKS maka EOPsnake akan menyala (true) 
           finish bernilai salah karena belum mencapai akhir dari file */
 
 void advTerminal();
-/* I.S. : Karakter pada jendela = currentChar, currentChar != ENTER
-   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
-          currentChar mungkin = ENTER
-          Jika  currentChar = ENTER maka EOP akan menyala (true) */
+/* I.S. : Karakter pada jendela = currentCharSnake, currentCharSnake != ENTER
+   F.S. : currentCharSnake adalah karakter berikutnya dari currentCharSnake yang lama,
+          currentCharSnake mungkin = ENTER
+          Jika  currentCharSnake = ENTER maka EOPsnake akan menyala (true) */
 
 void advFile();
-/* Pita dimajukan satu karakter.
-   I.S. : Karakter pada jendela = currentChar, currentChar != MARK
-   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
+/* pitaSnake dimajukan satu karakter.
+   I.S. : Karakter pada jendela = currentCharSnake, currentCharSnake != MARKS
+   F.S. : currentCharSnake adalah karakter berikutnya dari currentCharSnake yang lama,
           proses akan berenti bila sudah mencapai kondisi EOF atau End Of File yang akan
           menyala ketika sudah terjadi error atau tidak bisa melakukan pembacaan kembali
           finish bernilai TRUE yang bemakna file sudah selesai dibaca */ 

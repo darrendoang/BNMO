@@ -2,22 +2,22 @@
 #include <stdlib.h>
 #include "mesinsnake.h"
 
-boolean EndWord ;
-Word currentWord ;
-Word currentCommand;
+boolean EndWordSnake ;
+Words currentWords ;
+Words currentCommand;
 
-void IgnoreBlanks() 
+void IgnoreBlanksSnake() 
 /* Mengabaikan satu atau beberapa BLANK
-   I.S. : currentChar sembarang
-   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+   I.S. : currentCharSnake sembarang
+   F.S. : currentCharSnake ≠ BLANK atau currentCharSnake = MARKS */
 {
-    while (currentChar == BLANK || currentChar == ENTER) {
-        ADV() ;
+    while (currentCharSnake == BLANK || currentCharSnake == ENTER) {
+        ADVsnake() ;
     }
 }
 
 void IgnoreDots() {
-    while (currentChar == BLANK || currentChar == '.') {
+    while (currentCharSnake == BLANK || currentCharSnake == '.') {
         advTerminal() ;
     }
 }
@@ -34,109 +34,109 @@ void copywFile()
 /* */
 {
     int i = 0;
-    while(currentChar != ENTER && !finish) {
-        if(i < NMax) {
-            currentWord.TabWord[i] = currentChar;
+    while(currentCharSnake != ENTER && !finish) {
+        if(i < Nmaxs) {
+            currentWords.TabWord[i] = currentCharSnake;
             i++;
             advFile();
         }
     }
-    if(i > NMax) {
-        currentWord.Length = NMax;
+    if(i > Nmaxs) {
+        currentWords.Length = Nmaxs;
     } else {
-        currentWord.Length = i;
+        currentWords.Length = i;
     }
 }
 
 void igBlankFile()
 /* */
 {
-    while(currentChar == BLANK) {
+    while(currentCharSnake == BLANK) {
         advFile();
     }
 }
 
 void advNewlineFile()
 {
-    Word EMPTY = {"", 0};
-    currentWord = EMPTY;
-    if(currentChar == ENTER){
-        EndWord = false;
+    Words EMPTY = {"", 0};
+    currentWords = EMPTY;
+    if(currentCharSnake == ENTER){
+        EndWordSnake = false;
         advFile();
         copywFile();
     }
 }
 
-void STARTWORD()
-/* I.S. : currentChar sembarang
-   F.S. : EndWord = true, dan currentChar = MARK;
-          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata */
+void STARTWORDsnake()
+/* I.S. : currentCharSnake sembarang
+   F.S. : EndWordSnake = true, dan currentCharSnake = MARKS;
+          atau EndWordSnake = false, currentWords adalah kata yang sudah diakuisisi,
+          currentCharSnake karakter pertama sesudah karakter terakhir kata */
 {
-    START();
-    IgnoreBlanks() ;
-    if (currentChar == MARK) {
-            EndWord = true;
+    STARTsnake();
+    IgnoreBlanksSnake() ;
+    if (currentCharSnake == MARKS) {
+            EndWordSnake = true;
     } 
     else {
-        EndWord = false;
-        ADVWORD() ;
+        EndWordSnake = false;
+        ADVWORDsnake() ;
     }
 }
 
-void ADVWORD() 
-/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika currentChar = MARK, EndWord = true.
+void ADVWORDsnake() 
+/* I.S. : currentCharSnake adalah karakter pertama kata yang akan diakuisisi
+   F.S. : currentWords adalah kata terakhir yang sudah diakuisisi,
+          currentCharSnake adalah karakter pertama dari kata berikutnya, mungkin MARKS
+          Jika currentCharSnake = MARKS, EndWordSnake = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 
 {
-    IgnoreBlanks () ;
-    if (currentChar == MARK && !EndWord) {
-        EndWord = true ;
+    IgnoreBlanksSnake () ;
+    if (currentCharSnake == MARKS && !EndWordSnake) {
+        EndWordSnake = true ;
     }
     else {
-        CopyWord() ;
-        IgnoreBlanks();
+        CopyWordsnake() ;
+        IgnoreBlanksSnake();
     }
 }
 
-void CopyWord() 
-/* Mengakuisisi kata, menyimpan dalam currentWord
-   I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : currentWord berisi kata yang sudah diakuisisi;
-          currentChar = BLANK atau currentChar = MARK;
-          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+void CopyWordsnake() 
+/* Mengakuisisi kata, menyimpan dalam currentWords
+   I.S. : currentCharSnake adalah karakter pertama dari kata
+   F.S. : currentWords berisi kata yang sudah diakuisisi;
+          currentCharSnake = BLANK atau currentCharSnake = MARKS;
+          currentCharSnake adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi Nmaxs, maka sisa kata "dipotong" */
 {
     int i; 
     i = 0; 
-    while ((currentChar != MARK) && (currentChar != BLANK) && (currentChar != ENTER)) {
-        if (i < NMax)
+    while ((currentCharSnake != MARKS) && (currentCharSnake != BLANK) && (currentCharSnake != ENTER)) {
+        if (i < Nmaxs)
         {
-            currentWord.TabWord[i] = currentChar ;
+            currentWords.TabWord[i] = currentCharSnake ;
             i++;
         }
-        ADV();
+        ADVsnake();
     }
-    currentWord.Length = i;
+    currentWords.Length = i;
 }
 
 void advNewline()
 {
-    Word EMPTY = {"", 0};
-    currentWord = EMPTY;
-    if(currentChar == MARK){
-        EndWord = false;
-        ADV();
-        CopyWord();
+    Words EMPTY = {"", 0};
+    currentWords = EMPTY;
+    if(currentCharSnake == MARKS){
+        EndWordSnake = false;
+        ADVsnake();
+        CopyWordsnake();
     }
 }
 
-Word concatWord(Word w1, Word w2)
+Words concatWord(Words w1, Words w2)
 {
-    Word ans;
+    Words ans;
     ans.Length = w1.Length + w2.Length;
     int i;
     for(i = 0; i < w1.Length; i++){
@@ -148,7 +148,7 @@ Word concatWord(Word w1, Word w2)
     return ans;
 }
 
-boolean isWordEqual(Word a, Word b)
+boolean isWordEqual(Words a, Words b)
 {
     if(a.Length != b.Length){
         return false;
@@ -166,7 +166,7 @@ boolean isWordEqual(Word a, Word b)
     }
 }
 
-void displayWord(Word w)
+void displayWord(Words w)
 {
     int i;
     for(i = 0; i<w.Length;i++){
@@ -175,7 +175,7 @@ void displayWord(Word w)
     printf("\n");
 }
 
-void copyWordFromWord(Word w1, Word *w2)
+void copyWordFromWord(Words w1, Words *w2)
 {
     w2->Length = w1.Length;
     for(int i = 0; i < w1.Length; i++){
@@ -184,20 +184,20 @@ void copyWordFromWord(Word w1, Word *w2)
 }
 
 void STARTCOMMAND () {
-    START();
-    IgnoreBlanks();
-    if (currentChar == ENTER) {
-        EndWord = true;
+    STARTsnake();
+    IgnoreBlanksSnake();
+    if (currentCharSnake == ENTER) {
+        EndWordSnake = true;
     } else {
-        EndWord = false;
+        EndWordSnake = false;
         ADVCOMMAND();
     }
 }
 
 void ADVCOMMAND () {
     IgnoreDots();
-    if (currentChar == ENTER && !EndWord) {
-        EndWord = true;
+    if (currentCharSnake == ENTER && !EndWordSnake) {
+        EndWordSnake = true;
     } else {
         CopyCommand();
         IgnoreDots();
@@ -207,9 +207,9 @@ void ADVCOMMAND () {
 void CopyCommand () {
     int i;
     i = 0;
-    while ((currentChar != BLANK) && (currentChar != ENTER)) {
-        if (i < NMax) {
-            currentCommand.TabWord[i] = currentChar;
+    while ((currentCharSnake != BLANK) && (currentCharSnake != ENTER)) {
+        if (i < Nmaxs) {
+            currentCommand.TabWord[i] = currentCharSnake;
             i++;
         }
         advTerminal();
@@ -218,20 +218,20 @@ void CopyCommand () {
 }
 
 void STARTGAMENAME () {
-    START();
+    STARTsnake();
     IgnoreDots();
-    if (currentChar == ENTER) {
-        EndWord = true;
+    if (currentCharSnake == ENTER) {
+        EndWordSnake = true;
     } else {
-        EndWord = false;
+        EndWordSnake = false;
         ADVGAMENAME();
     }
 }
 
 void ADVGAMENAME () {
     IgnoreDots();
-    if (currentChar == ENTER && !EndWord) {
-        EndWord = true;
+    if (currentCharSnake == ENTER && !EndWordSnake) {
+        EndWordSnake = true;
     } else {
         CopyGameName();
         IgnoreDots();
@@ -241,9 +241,9 @@ void ADVGAMENAME () {
 void CopyGameName () {
     int i;
     i = 0;
-    while ((currentChar != ENTER)) {
-        if (i < NMax) {
-            currentCommand.TabWord[i] = currentChar;
+    while ((currentCharSnake != ENTER)) {
+        if (i < Nmaxs) {
+            currentCommand.TabWord[i] = currentCharSnake;
             i++;
         }
         advTerminal();
@@ -261,29 +261,29 @@ int stringLength(char *str)
     return i;
 }
 
-Word stringToWord(char *str)
+Words stringToWord(char *str)
 {
-    Word word;
+    Words Words;
     int i;
     
-    word.Length = stringLength(str);
-    for (i = 0; i < word.Length; i++)
+    Words.Length = stringLength(str);
+    for (i = 0; i < Words.Length; i++)
     {
-        word.TabWord[i] = str[i];
+        Words.TabWord[i] = str[i];
     }
 
-    word.TabWord[i] = '\0';
+    Words.TabWord[i] = '\0';
 
-    return word;
+    return Words;
 }
 
-char* wordToString(Word word)
+char* wordToString(Words Words)
 {
-    char *str = (char *)malloc(sizeof(char) * word.Length);
-    for (int i = 0; i < word.Length; i++)
+    char *str = (char *)malloc(sizeof(char) * Words.Length);
+    for (int i = 0; i < Words.Length; i++)
     {
-        str[i] = word.TabWord[i];
-        if (i == word.Length - 1)
+        str[i] = Words.TabWord[i];
+        if (i == Words.Length - 1)
         {
             str[i + 1] = '\0';
         }
@@ -291,20 +291,20 @@ char* wordToString(Word word)
     return str;
 }
 
-int wordToInt(Word word) {
+int wordToInt(Words Words) {
     int num, i;
     
     num = 0;
 
-    for (i = 0; i < word.Length; i++)
+    for (i = 0; i < Words.Length; i++)
     {
-        num = num * 10 + (word.TabWord[i] - '0');
+        num = num * 10 + (Words.TabWord[i] - '0');
     }
     return num;
 }
 
-Word intToWord(int n) {
-    Word word;
+Words intToWord(int n) {
+    Words Words;
     int i, j, temp;
     
     i = 0;
@@ -316,23 +316,23 @@ Word intToWord(int n) {
         i++;
     }
 
-    word.Length = i;
+    Words.Length = i;
 
     for (j = i - 1; j >= 0; j--)
     {
-        word.TabWord[j] = (n % 10) + '0';
+        Words.TabWord[j] = (n % 10) + '0';
         n /= 10;
     }
 
-    return word;
+    return Words;
 }
 
-int commandWord(Word w) {
+int commandWord(Words w) {
     int i;
 
     i = 0;
 
-    while (!EndWord) {
+    while (!EndWordSnake) {
         ADVCOMMAND();
         i++;
     }
@@ -340,8 +340,8 @@ int commandWord(Word w) {
     return i;
 }
 
-Word lowerWord (Word w) {
-    Word lower;
+Words lowerWord (Words w) {
+    Words lower;
     int i;
 
     lower.Length = w.Length;
@@ -357,8 +357,8 @@ Word lowerWord (Word w) {
     return lower;
 }
 
-Word upperWord (Word w) {
-    Word upper;
+Words upperWord (Words w) {
+    Words upper;
     int i;
 
     upper.Length = w.Length;
@@ -374,13 +374,13 @@ Word upperWord (Word w) {
     return upper;
 }
 
-Word charToWord(char c) {
-    Word word;
-    word.Length = 1;
-    word.TabWord[0] = c;
-    return word;
+Words charToWord(char c) {
+    Words Words;
+    Words.Length = 1;
+    Words.TabWord[0] = c;
+    return Words;
 }
 
-char wordToChar(Word w) {
+char wordToChar(Words w) {
     return w.TabWord[0];
 }

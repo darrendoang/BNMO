@@ -311,7 +311,7 @@ void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , History
      else if (str_comp(play, "HARTA KARUN")){
         printf("Loading HARTA KARUN . . . \n");
         dequeue(antriangame,val);
-        hartakarun() ;
+        score = hartakarun() ;
     }
 
     else if (str_comp(play, "SNAKE ON METEOR")){
@@ -583,6 +583,10 @@ void HELP (){
         " QUEUE GAME            Mendaftarkan permainan kedalam list \n"
         " PLAY GAME             Memainkan sebuah permainan \n"
         " SKIPGAME <n>          Melewatkan permainan sebanyak n \n"
+        " RESET HISTORY           Me-reset history game yang telah dimainkan\n"
+        " HISTORY               Menampilkan history game yang telah dimainkan\n"
+        " RESETS COREBOARD       Me-reset scoreboard yang berisi skor dari game yang telah dimainkan\n"
+        " SCOREBOARD            Menampilkan scoreboard yang berisi skor dari game yang telah dimainkan\n"
         " QUIT                  Keluar dari Program \n"
         " HELP                  Menampilkan daftar perintah \n"
     );

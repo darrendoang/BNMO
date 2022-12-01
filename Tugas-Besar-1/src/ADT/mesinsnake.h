@@ -7,160 +7,160 @@
 #include "boolean.h"
 #include "mesinkaraktersnake.h"
 
-#define NMax 100
+#define Nmaxs 100
 #define BLANK ' '
 
 typedef struct
 {
-   char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
+   char TabWord[Nmaxs]; /* container penyimpan kata, indeks yang dipakai [0..Nmaxs-1] */
    int Length;
-} Word;
+} Words;
 
 /* State Mesin Kata */
-extern boolean EndWord;
-extern Word currentWord;
-extern Word currentCommand;
+extern boolean EndWordSnake;
+extern Words currentWords;
+extern Words currentCommand;
 
-void IgnoreBlanks();
+void IgnoreBlanksSnake();
 /* Mengabaikan satu atau beberapa BLANK
-   I.S. : currentChar sembarang
-   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+   I.S. : currentCharSnake sembarang
+   F.S. : currentCharSnake ≠ BLANK atau currentCharSnake = MARKS */
 
-void STARTWORD();
-/* I.S. : currentChar sembarang
-   F.S. : EndWord = true, dan currentChar = MARK;
-          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata */
+void STARTWORDsnake();
+/* I.S. : currentCharSnake sembarang
+   F.S. : EndWordSnake = true, dan currentCharSnake = MARKS;
+          atau EndWordSnake = false, currentWords adalah kata yang sudah diakuisisi,
+          currentCharSnake karakter pertama sesudah karakter terakhir kata */
 
 void startWFile(char * file);
-/* I.S. : currentChar dalam file sembarang
+/* I.S. : currentCharSnake dalam file sembarang
    F.S. : Finish = true;
-          atau Finish = false, currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata */
+          atau Finish = false, currentWords adalah kata yang sudah diakuisisi,
+          currentCharSnake karakter pertama sesudah karakter terakhir kata */
 
 void copywFile();
-/* I.S. : currentChar sembarang
-   F.S. : currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata */
+/* I.S. : currentCharSnake sembarang
+   F.S. : currentWords adalah kata yang sudah diakuisisi,
+          currentCharSnake karakter pertama sesudah karakter terakhir kata */
 
 void igBlankFile();
 /* Mengabaikan satu atau beberapa BLANK pada file
-   I.S. : currentChar sembarang
-   F.S. : currentChar ≠ BLANK */
+   I.S. : currentCharSnake sembarang
+   F.S. : currentCharSnake ≠ BLANK */
 
 void advNewlineFile();
-/* I.S. : currentChar sembarang
-   F.S. : currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata */
+/* I.S. : currentCharSnake sembarang
+   F.S. : currentWords adalah kata yang sudah diakuisisi,
+          currentCharSnake karakter pertama sesudah karakter terakhir kata */
 
-void ADVWORD();
-/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika currentChar = MARK, EndWord = true.
+void ADVWORDsnake();
+/* I.S. : currentCharSnake adalah karakter pertama kata yang akan diakuisisi
+   F.S. : currentWords adalah kata terakhir yang sudah diakuisisi,
+          currentCharSnake adalah karakter pertama dari kata berikutnya, mungkin MARKS
+          Jika currentCharSnake = MARKS, EndWordSnake = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 
 
-void CopyWord();
-/* Mengakuisisi kata, menyimpan dalam currentWord
-   I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : currentWord berisi kata yang sudah diakuisisi;
-          currentChar = BLANK atau currentChar = MARK;
-          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+void CopyWordsnake();
+/* Mengakuisisi kata, menyimpan dalam currentWords
+   I.S. : currentCharSnake adalah karakter pertama dari kata
+   F.S. : currentWords berisi kata yang sudah diakuisisi;
+          currentCharSnake = BLANK atau currentCharSnake = MARKS;
+          currentCharSnake adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi Nmaxs, maka sisa kata "dipotong" */
 
 void advNewline();
 /* Mengabaikan satu atau beberapa ENTER
-   I.S. : currentChar sembarang
-   F.S. : currentChar ≠ ENTER atau currentChar = MARK */
+   I.S. : currentCharSnake sembarang
+   F.S. : currentCharSnake ≠ ENTER atau currentCharSnake = MARKS */
 
-Word concatWord(Word w1, Word w2);
+Words concatWord(Words w1, Words w2);
 /* Menggabungkan dua kata menjadi satu kata */
 
-boolean isWordEqual(Word a, Word b);
+boolean isWordEqual(Words a, Words b);
 /* Mengembalikan true jika kata a dan b sama */
 
-void displayWord(Word w);
+void displayWord(Words w);
 /* Menampilkan kata w */
 
-void copyWordFromWord(Word w1, Word *w2);
+void copyWordFromWord(Words w1, Words *w2);
 /* Menyalin kata w1 ke w2 */
 
 void STARTCOMMAND ();
-/* I.S. : currentChar sembarang
-   F.S. : EndWord = true, dan currentChar = MARK;
-          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata */
+/* I.S. : currentCharSnake sembarang
+   F.S. : EndWordSnake = true, dan currentCharSnake = MARKS;
+          atau EndWordSnake = false, currentWords adalah kata yang sudah diakuisisi,
+          currentCharSnake karakter pertama sesudah karakter terakhir kata */
 
 void ADVCOMMAND ();
-/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika currentChar = MARK, EndWord = true.
+/* I.S. : currentCharSnake adalah karakter pertama kata yang akan diakuisisi
+   F.S. : currentWords adalah kata terakhir yang sudah diakuisisi,
+          currentCharSnake adalah karakter pertama dari kata berikutnya, mungkin MARKS
+          Jika currentCharSnake = MARKS, EndWordSnake = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 
 void CopyCommand ();
-/* Mengakuisisi kata, menyimpan dalam currentWord
-   I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : currentWord berisi kata yang sudah diakuisisi;
-          currentChar = BLANK atau currentChar = MARK;
-          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+/* Mengakuisisi kata, menyimpan dalam currentWords
+   I.S. : currentCharSnake adalah karakter pertama dari kata
+   F.S. : currentWords berisi kata yang sudah diakuisisi;
+          currentCharSnake = BLANK atau currentCharSnake = MARKS;
+          currentCharSnake adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi Nmaxs, maka sisa kata "dipotong" */
 
 void STARTGAMENAME ();
-/* I.S. : currentChar sembarang
-   F.S. : EndWord = true, dan currentChar = MARK;
-          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata */
+/* I.S. : currentCharSnake sembarang
+   F.S. : EndWordSnake = true, dan currentCharSnake = MARKS;
+          atau EndWordSnake = false, currentWords adalah kata yang sudah diakuisisi,
+          currentCharSnake karakter pertama sesudah karakter terakhir kata */
 
 void ADVGAMENAME ();
-/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika currentChar = MARK, EndWord = true.
+/* I.S. : currentCharSnake adalah karakter pertama kata yang akan diakuisisi
+   F.S. : currentWords adalah kata terakhir yang sudah diakuisisi,
+          currentCharSnake adalah karakter pertama dari kata berikutnya, mungkin MARKS
+          Jika currentCharSnake = MARKS, EndWordSnake = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 
 void CopyGameName ();
-/* Mengakuisisi kata, menyimpan dalam currentWord
-   I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : currentWord berisi kata yang sudah diakuisisi;
-          currentChar = BLANK atau currentChar = MARK;
-          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+/* Mengakuisisi kata, menyimpan dalam currentWords
+   I.S. : currentCharSnake adalah karakter pertama dari kata
+   F.S. : currentWords berisi kata yang sudah diakuisisi;
+          currentCharSnake = BLANK atau currentCharSnake = MARKS;
+          currentCharSnake adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi Nmaxs, maka sisa kata "dipotong" */
 
 void IgnoreDots ();
 /* Mengabaikan satu atau beberapa titik
-   I.S. : currentChar sembarang
-   F.S. : currentChar ≠ BLANK atau currentChar ≠ '.' */
+   I.S. : currentCharSnake sembarang
+   F.S. : currentCharSnake ≠ BLANK atau currentCharSnake ≠ '.' */
 
 int stringLength(char *str);
 /* Mengembalikan panjang string */
 
-Word stringToWord(char *str);
+Words stringToWord(char *str);
 /* Mengubah string menjadi kata */
 
-char* wordToString(Word w);
+char* wordToString(Words w);
 /* Mengubah kata menjadi string */
 
-int wordToInt(Word w);
+int wordToInt(Words w);
 /* Mengubah kata menjadi integer */
 
-Word intToWord(int n);
+Words intToWord(int n);
 /* Mengubah integer menjadi kata */
 
-int commandWord(Word w);
+int commandWord(Words w);
 /* Mengembalikan jumlah kata pada command */
 
-Word lowerWord(Word w);
+Words lowerWord(Words w);
 /* Mengubah kata menjadi huruf kecil */
 
-Word upperWord(Word w);
+Words upperWord(Words w);
 /* Mengubah kata menjadi huruf besar */
 
-Word charToWord(char c);
+Words charToWord(char c);
 /* Mengubah karakter menjadi kata */
 
-char wordToChar(Word w);
+char wordToChar(Words w);
 /* Mengubah kata menjadi karakter */
 
 #endif
