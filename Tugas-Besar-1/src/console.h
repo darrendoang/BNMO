@@ -15,6 +15,7 @@
 #include "GAME/tictactoe.h"
 #include "GAME/towerofhanoi.h"
 #include "GAME/hman.h"
+#include "GAME/hartakarun.h"
 
 
 void STARTGAME(Array *game , TabMap *scoreboard);

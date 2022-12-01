@@ -308,6 +308,12 @@ void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , History
         hman(&score) ;
     }
 
+     else if (str_comp(play, "HARTA KARUN")){
+        printf("Loading HARTA KARUN . . . \n");
+        dequeue(antriangame,val);
+        hartakarun() ;
+    }
+
 
 
     // else if (str_comp(play, "RISEWOMAN")){

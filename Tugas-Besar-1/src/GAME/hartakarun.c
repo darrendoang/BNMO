@@ -35,14 +35,14 @@ int PathChosen(BinTree x)
             char  *jalur ;
             jalur = READINPUT() ;
 
-            if (jalur == 'L' || jalur == 'l'){
+            if (str_comp("L" , jalur) || str_comp("l" , jalur)){
                 printf("Jalur kiri telah dipilih.\n");
                 hasil += ROOT(LEFT(x));
                 x=LEFT(x);
                 validInput = true;  
             }
 
-            else if (jalur == 'R' || jalur == 'r'){
+            else if (str_comp("R" , jalur) || str_comp("r" , jalur)){
                 printf("Jalur kanan telah dipilih.\n");
                 hasil += ROOT(RIGHT(x));
                 x=RIGHT(x);
@@ -73,18 +73,18 @@ BinTree TimesTwo()
     printf("\n");
 
     //jumlah daun harus lebih dari 0
-    if(n <= 0){
-        printf("Masukkan minimal 1 peti harta karun !\n");
-        return 0;
-    }
+    // if(n <= 0){
+    //     printf("Masukkan minimal 1 peti harta karun !\n");
+    //     return 0;
+    // }
 
-    int temp = n;
-    while(temp%2 == 0){
-        temp /= 2;
-    }
-    if(temp != 1){
-        printf("Jumlah masukan tidak sesuai \n");
-        return 0;
+ 
+    while(n % 2 != 0 || n <= 0 ){
+        printf("Jumlah masukan tidak sesuai silahkan input ulang!\n");
+        printf("Banyak peti harta karun yang dapat digali : ");
+        jumlah = READINPUT() ;
+        n= StrToInt_input(jumlah , str_len(jumlah));
+        printf("\n");
     }
 
     int batas = (n*2)-1;

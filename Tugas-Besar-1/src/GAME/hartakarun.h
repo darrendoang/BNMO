@@ -2,9 +2,9 @@
 #define HARTAKARUN_H
 
 #include <stdio.h>
-#include "bintree.h"
-#include "mesinkata.h"
-#include "mesinkarakter.h"
+#include "../ADT/bintree.h"
+#include "../ADT/mesinkata.h"
+#include "../ADT/mesinkarakter.h"
 
 int peti(BinTree root);
 int PathChosen(BinTree x);

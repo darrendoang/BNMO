@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-BinTree NewTree (ElType root, BinTree left_tree, BinTree right_tree)
+BinTree NewTree (ElTypeBinTree root, BinTree left_tree, BinTree right_tree)
 /* Menghasilkan sebuah pohon biner dari root, left_tree, dan right_tree, jika alokasi berhasil 
    Menghasilkan pohon kosong (NULL) jika alokasi gagal */
 {
@@ -14,7 +14,7 @@ BinTree NewTree (ElType root, BinTree left_tree, BinTree right_tree)
     return t;
 }
 
-void CreateTree (ElType root, BinTree left_tree, BinTree right_tree, BinTree *p)
+void CreateTree (ElTypeBinTree root, BinTree left_tree, BinTree right_tree, BinTree *p)
 /* I.S. Sembarang
    F.S. Menghasilkan sebuah pohon p
    Menghasilkan sebuah pohon biner p dari akar, l, dan r, jika alokasi 
@@ -29,7 +29,7 @@ void CreateTree (ElType root, BinTree left_tree, BinTree right_tree, BinTree *p)
 }
 
 
-Address newTreeNode(ElType val)
+Address newTreeNode(ElTypeBinTree val)
 /* Alokasi sebuah address p, bernilai tidak NULL jika berhasil */
 /* Mengirimkan address hasil alokasi sebuah elemen bernilai val
    Jika alokasi berhasil, maka address tidak NULL, dan misalnya 

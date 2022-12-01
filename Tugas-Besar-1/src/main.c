@@ -167,7 +167,7 @@ int main(){
             printf("\n");   
         }
 
-    // Apabila belum keluar dari game
+   
     }
     if(over)
     {

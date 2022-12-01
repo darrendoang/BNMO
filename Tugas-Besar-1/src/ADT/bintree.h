@@ -1,7 +1,7 @@
 /* File : bintree.h */
 /* ADT pohon biner */
 /* Representasi Address dengan pointer */
-/* ElType adalah integer */
+/* ElTypeBinTree adalah integer */
 
 #ifndef POHONBINER_H
 #define POHONBINER_H
@@ -13,10 +13,10 @@
 #define LEFT(p) (p)->left
 #define RIGHT(p) (p)->right
 
-typedef int ElType;
+typedef int ElTypeBinTree;
 typedef struct treeNode* Address;
 typedef struct treeNode { 
-     ElType info;
+     ElTypeBinTree info;
      Address left;
      Address right;
 } TreeNode;
@@ -26,18 +26,18 @@ typedef struct treeNode {
 
 typedef Address BinTree;
 
-BinTree NewTree (ElType root, BinTree left_tree, BinTree right_tree); 
+BinTree NewTree (ElTypeBinTree root, BinTree left_tree, BinTree right_tree); 
 /* Menghasilkan sebuah pohon biner dari root, left_tree, dan right_tree, jika alokasi berhasil 
    Menghasilkan pohon kosong (NULL) jika alokasi gagal */
 
-void CreateTree (ElType root, BinTree left_tree, BinTree right_tree, BinTree *p);
+void CreateTree (ElTypeBinTree root, BinTree left_tree, BinTree right_tree, BinTree *p);
 /* I.S. Sembarang
    F.S. Menghasilkan sebuah pohon p
    Menghasilkan sebuah pohon biner p dari akar, l, dan r, jika alokasi 
    berhasil 
    Menghasilkan pohon p yang kosong (NULL) jika alokasi gagal */
 
-Address newTreeNode(ElType val);
+Address newTreeNode(ElTypeBinTree val);
 /* Alokasi sebuah address p, bernilai tidak NULL jika berhasil */
 /* Mengirimkan address hasil alokasi sebuah elemen bernilai val
    Jika alokasi berhasil, maka address tidak NULL, dan misalnya 
