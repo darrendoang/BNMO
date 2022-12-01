@@ -442,7 +442,7 @@ void RESETHISTORY(HistoryStack *gamehistory )
     else if (str_comp("TIDAK" , input))
     {
         printf("History tidak jadi di-reset.");
-        HISTORY(gamehistory , 1000);
+        HISTORY(gamehistory , 1000000);
     }
 
 }
@@ -583,9 +583,9 @@ void HELP (){
         " QUEUE GAME            Mendaftarkan permainan kedalam list \n"
         " PLAY GAME             Memainkan sebuah permainan \n"
         " SKIPGAME <n>          Melewatkan permainan sebanyak n \n"
-        " RESET HISTORY           Me-reset history game yang telah dimainkan\n"
-        " HISTORY               Menampilkan history game yang telah dimainkan\n"
-        " RESETS COREBOARD       Me-reset scoreboard yang berisi skor dari game yang telah dimainkan\n"
+        " RESET HISTORY         Me-reset history game yang telah dimainkan\n"
+        " HISTORY <n>           Menampilkan history game yang telah dimainkan\n"
+        " RESET SCOREBOARD      Me-reset scoreboard yang berisi skor dari game yang telah dimainkan\n"
         " SCOREBOARD            Menampilkan scoreboard yang berisi skor dari game yang telah dimainkan\n"
         " QUIT                  Keluar dari Program \n"
         " HELP                  Menampilkan daftar perintah \n"
