@@ -29,22 +29,20 @@ int PathChosen(BinTree x)
     int hasil = ROOT(x);
 
     while(!isOneElmt(x)){
-        char jalur;
-
         while (!validInput){
 
-            printf("Pilih jalur yang ingin diambil ('L'/'R') : ");
+            printf("Pilih jalur yang ingin diambil ('kiri'/'kanan') : ");
             char  *jalur ;
             jalur = READINPUT() ;
             
-            if (jalur == 'L'){
+            if (jalur == "kiri" || jalur=="Kiri" || jalur=="KIRI"){
                 printf("Jalur kiri telah dipilih.\n");
                 hasil += ROOT(LEFT(x));
                 x=LEFT(x);
                 validInput = true;  
             }
 
-            else if (jalur == 'R'){
+            else if (jalur == "kanan" || jalur=="Kanan" || jalur=="KANAN"){
                 printf("Jalur kanan telah dipilih.\n");
                 hasil += ROOT(RIGHT(x));
                 x=RIGHT(x);
@@ -95,16 +93,15 @@ BinTree TimesTwo()
     for(int i = 0; i < n;i++){
         int x;
         printf("Masukkan jumlah koin di dalam peti  : \n");
-
         char  *koin ;
         koin = READINPUT() ;
         x= StrToInt_input(koin , str_len(koin));
-        
+
         BinTree t = NewTree(x, NULL, NULL);
         ar[i] = t;
     }
     int j = 0;
-    while(jumlah < batas){
+    while(n < batas){
         BinTree left, right;
         BinTree t;
         left = ar[j];
