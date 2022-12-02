@@ -541,7 +541,7 @@ void som(TabMap *arrmapsb, int *score){
                         kena = true;
                     }
                     else{
-                        score = Info(Last(L)) * 2;
+                        *score = Info(Last(L)) * 2;
                         printf("Score : %d\n",*score);
                         kena = true;
                     }                
