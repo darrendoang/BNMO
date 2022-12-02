@@ -116,6 +116,7 @@ void hman(int *user_score){
             printf("\n");
         }
         if (win){
+            printf("Berhasil menebak kata %s! Kamu mendapatkan %d poin!\n\n", kata[current], str_len(kata[current]));
             score += str_len(kata[current]);
         }
     }
