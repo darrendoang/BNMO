@@ -1,6 +1,7 @@
 #include "hartakarun.h"
 
 int peti(BinTree x)
+//menentukan jalur berisi peti harta karun terbanyak
 {
     if (isOneElmt(x)){
         return ROOT(x);
@@ -35,6 +36,7 @@ int PathChosen(BinTree x)
             char  *jalur ;
             jalur = READINPUT() ;
 
+            //memilih jalur kiri
             if (str_comp("L" , jalur) || str_comp("l" , jalur)){
                 printf("Jalur kiri telah dipilih.\n");
                 hasil += ROOT(LEFT(x));
@@ -42,6 +44,7 @@ int PathChosen(BinTree x)
                 validInput = true;  
             }
 
+            //memilih jalur kanan
             else if (str_comp("R" , jalur) || str_comp("r" , jalur)){
                 printf("Jalur kanan telah dipilih.\n");
                 hasil += ROOT(RIGHT(x));
@@ -60,7 +63,6 @@ int PathChosen(BinTree x)
 }
 
 
-
 BinTree TimesTwo()
 {
     int n;
@@ -72,15 +74,10 @@ BinTree TimesTwo()
     n= StrToInt_input(jumlah , str_len(jumlah));
     printf("\n");
 
-    //jumlah daun harus lebih dari 0
-    // if(n <= 0){
-    //     printf("Masukkan minimal 1 peti harta karun !\n");
-    //     return 0;
-    // }
-
- 
+    //hanya menerima input berupa bilangan genap positif
     while(n % 2 != 0 || n <= 0 ){
         printf("Jumlah masukan tidak sesuai silahkan input ulang!\n");
+        printf("Clue : Jumlah peti yang tersedia 2n\n");
         printf("Banyak peti harta karun yang dapat digali : ");
         jumlah = READINPUT() ;
         n= StrToInt_input(jumlah , str_len(jumlah));
@@ -120,8 +117,8 @@ int hartakarun(){
 
     int score;
 
-    //Pembuatan tree 
-    //Parent dari tree merupakan hasil perkalian kedua anak
+    //Pembuatan peta jalur harta karun(tree)
+    //Parent-node dari tree merupakan hasil perkalian kedua child-node
 
     printf("\n --------------------------------\n");
     printf("\n|                                |\n");
@@ -131,6 +128,7 @@ int hartakarun(){
     printf("\n");
 
     BinTree x = TimesTwo();
+
     printf("\n***** Jalur untuk mendapatkan peti harta karun tujuan *****\n");
     printf("\n");
     printTree(x, 3);
@@ -139,7 +137,7 @@ int hartakarun(){
     printf("Keterangan: -Permainan dimulai dari root(ujung kiri atas)\n");
     printf("            -L adalah untuk memilih cabang yang atas\n");
     printf("            -R adalah untuk memilih cabang yang bawah\n");
-    
+
     if(PathChosen(x)==peti(x)){
         printf("\nJalur dengan harta karun terbanyak berhasil ditemukan.\n");
         printf("Anda menang !\n");
