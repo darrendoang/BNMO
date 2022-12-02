@@ -3,10 +3,10 @@
 #include <math.h>
 #include <time.h>
 
-void printpetak(List snake, List food, List meteor, List obstacle){
+void board(List snake, List food, List meteor, List obst){
     int i =0;
     int j = 0;
-    addressldp p;
+    addresss p;
 
     for(i=0; i<5; i++){
         if(i == 0){
@@ -16,7 +16,15 @@ void printpetak(List snake, List food, List meteor, List obstacle){
             if(j == 0){
                 printf("|");
             }
-            if(Searchlistdp(snake, j, i) != Nilldp){
+            if(Searchlistdp(food, j, i) != Nilldp){
+                p = Searchlistdp(food, j, i);
+                if(stringLength(Infoldp(p)) > 1){
+                    printf(" ");
+                } else {
+                    printf("  ");
+                }
+                printf("%s  |", Infoldp(p));
+            } else if(Searchlistdp(snake, j, i) != Nilldp){
                 p = Searchlistdp(snake, j, i);
                 if(stringLength(Infoldp(p)) > 1){
                     printf(" ");
@@ -25,14 +33,14 @@ void printpetak(List snake, List food, List meteor, List obstacle){
                 }
                 printf("%s  |", Infoldp(p));
                 //p = Nextldp(p);    
-            } else if(Searchlistdp(food, j, i) != Nilldp){
-                p = Searchlistdp(food, j, i);
+            } else if(Searchlistdp(obst, j, i) != Nilldp){
+                p = Searchlistdp(obst, j, i);
                 if(stringLength(Infoldp(p)) > 1){
                     printf(" ");
                 } else {
                     printf("  ");
                 }
-                printf("%s  |", Infoldp(p));
+                printf("%s |", Infoldp(p)); 
             } else if(Searchlistdp(meteor, j, i) != Nilldp){
                 p = Searchlistdp(meteor, j, i);
                 if(stringLength(Infoldp(p)) > 1){
@@ -41,14 +49,6 @@ void printpetak(List snake, List food, List meteor, List obstacle){
                     printf("  ");
                 }
                 printf("%s  |", Infoldp(p));
-            } else if(Searchlistdp(obstacle, j, i) != Nilldp){
-                p = Searchlistdp(obstacle, j, i);
-                if(stringLength(Infoldp(p)) > 1){
-                    printf(" ");
-                } else {
-                    printf("  ");
-                }
-                printf("%s |", Infoldp(p)); 
             } else {
                 printf("     |");
             }
@@ -59,96 +59,93 @@ void printpetak(List snake, List food, List meteor, List obstacle){
 
 }
 
-int randoms()
+int ran()
 {
     int a;
-    srand(time(NULL));
     a = (rand() % (5)) + 0;
+    srand(time(NULL));
     return a;
 }
 
-void initsnake(List * snake){
-    addressldp p;
-    addressldp temp;
-    int x = 0;
-    int i = 0;
-    int a;
-    int b;
+void snakes(List * snake){
+    addresss a;
+    addresss tem;
+    int i = 0, x=0, b, abs;
 
-    a = randoms();
-    b = randoms();
+    abs = ran();
+    b = ran();
     
-    InsVLastlistdp(snake, "H", a, b);
-    p = Firstldp(*snake);
+    InsVLastlistdp(snake, "H", abs, b);
+    a = Firstldp(*snake);
     while(i < 2){
-        if(Posisix(p)-1 >= 0){
-            InsVLastlistdp(snake, wordToString(intToWord(x+1)), (Posisix(p)-1) % 5, Posisiy(p));
+        if(Posisix(a)-1 >= 0){
+            InsVLastlistdp(snake, wordToString(intToWord(x+1)), (Posisix(a)-1) % 5, Posisiy(a));
         } else {
-            InsVLastlistdp(snake, wordToString(intToWord(x+1)), (Posisix(p)-1 + 5), Posisiy(p));
+            InsVLastlistdp(snake, wordToString(intToWord(x+1)), (Posisix(a)-1 + 5), Posisiy(a));
         }
-        temp = p;
-        p = Nextldp(p);
-        i++;
+        tem = a;
+        a = Nextldp(a);
         x++;
+        i++;
     }
 }
 
-void dropfood(List*snake, List* food, List * posPanas, List * obstacle){
+void dfood(List*snake, List* food, List * hmeteor, List * obst){
     int x;
     int y;
 
-    x = randoms();
-    y = randoms();
+    x = ran();
+    y = ran();
 
-    if(!IsEmptylistdp(*obstacle)){
-        if(!IsEmptylistdp(*posPanas)){
-            while(Searchlistdp((*snake), x, y) != Nilldp || Searchlistdp((*posPanas), x, y) != Nilldp || Searchlistdp((*obstacle), x, y) != Nilldp){
-                x = randoms();
-                y = randoms();
+    if(!IsEmptylistdp(*obst)){
+        if(!IsEmptylistdp(*hmeteor)){
+            while(Searchlistdp((*snake), x, y) != Nilldp || Searchlistdp((*hmeteor), x, y) != Nilldp || Searchlistdp((*obst), x, y) != Nilldp){
+                x = ran();
+                y = ran();
             }
         } else {
-            while(Searchlistdp((*snake), x, y) != Nilldp  || Searchlistdp((*obstacle), x, y) != Nilldp){
-                x = randoms();
-                y = randoms();
+            while(Searchlistdp((*snake), x, y) != Nilldp  || Searchlistdp((*obst), x, y) != Nilldp){
+                x = ran();
+                y = ran();
             }
         }
     } else {
         while(Searchlistdp((*snake), x, y) != Nilldp){
-            x = randoms();
-            y = randoms();
+            x = ran();
+            y = ran();
         }
     }
-    InsVLastlistdp(food, "O", x, y);
+    InsVLastlistdp(food, "o", x, y);
 }
 
-void dropmeteor(List* food, List* obstacle, List * meteor){
+void dmeteor(List* food, List* obst, List * meteor){
     int r;
     int s;
 
-    r = randoms();
-    s = randoms();
+    r = ran();
+    s = ran();
 
-    while(Searchlistdp((*food), r, s) != Nilldp || Searchlistdp((*obstacle), r, s) != Nilldp){
-        r = randoms();
-        s = randoms();
+    while(Searchlistdp((*obst), r, s) != Nilldp || Searchlistdp((*food), r, s) != Nilldp){
+        r = ran();
+        s = ran();
     }
-    InsVLastlistdp(meteor, "M", r, s);
+    InsVLastlistdp(meteor, "m", r, s);
 }
 
-void dropobs(List * snake, List * food, List * obstacle){
+void obs(List * snake, List * food, List * obst){
     int a;
     int b;
 
-    a = randoms();
-    b = randoms();
+    a = ran();
+    b = ran();
     while(Searchlistdp((*snake), a, b) != Nilldp || Searchlistdp((*food), a, b) != Nilldp){
-        a = randoms();
-        b = randoms();
+        a = ran();
+        b = ran();
     }
-    InsVLastlistdp(obstacle, "###", a, b);    
+    InsVLastlistdp(obst, "(|)", a, b);    
 }
 
-void makan(List * snake, List * food, List * obstacle, boolean * menang){
+void makan(List * snake, List * food, List * obst, boolean * wwin){
     elmntype tempInfoldp;
     int tempx, tempy;
 
@@ -156,42 +153,42 @@ void makan(List * snake, List * food, List * obstacle, boolean * menang){
         DelVLastlistdp(food, &tempInfoldp, &tempx, &tempy);
 
         if(Posisix(Lastldp(*snake)) != 0){
-            if(Searchlistdp((*snake), Posisix(Lastldp(*snake))-1, Posisiy(Lastldp(*snake))) == Nilldp && Searchlistdp((*obstacle), Posisix(Lastldp(*snake))-1, Posisiy(Lastldp(*snake))) == Nilldp) {
+            if(Searchlistdp((*snake), Posisix(Lastldp(*snake))-1, Posisiy(Lastldp(*snake))) == Nilldp && Searchlistdp((*obst), Posisix(Lastldp(*snake))-1, Posisiy(Lastldp(*snake))) == Nilldp) {
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), Posisix(Lastldp(*snake))-1, Posisiy(Lastldp(*snake)));
-            } else if(Posisiy(Lastldp(*snake)) != 0 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1) == Nilldp && Searchlistdp((*obstacle), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1) == Nilldp){
+            } else if(Posisiy(Lastldp(*snake)) != 0 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1) == Nilldp && Searchlistdp((*obst), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1) == Nilldp){
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1);
-            } else if(Posisiy(Lastldp(*snake)) == 0 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1 +5) == Nilldp && Searchlistdp((*obstacle), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1+5) == Nilldp){
+            } else if(Posisiy(Lastldp(*snake)) == 0 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1 +5) == Nilldp && Searchlistdp((*obst), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1+5) == Nilldp){
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1 + 5);
-            } else if(Posisiy(Lastldp(*snake)) != 4 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1) == Nilldp && Searchlistdp((*obstacle), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1) == Nilldp){
+            } else if(Posisiy(Lastldp(*snake)) != 4 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1) == Nilldp && Searchlistdp((*obst), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1) == Nilldp){
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1);
-            } else if(Posisiy(Lastldp(*snake)) == 4 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1 - 5) == Nilldp && Searchlistdp((*obstacle), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1 - 5) == Nilldp){
+            } else if(Posisiy(Lastldp(*snake)) == 4 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1 - 5) == Nilldp && Searchlistdp((*obst), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1 - 5) == Nilldp){
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1-5);
-            } else if(Searchlistdp((*snake), (Posisix(Lastldp(*snake))+1)%5, Posisiy(Lastldp(*snake))) == Nilldp && Searchlistdp((*obstacle), (Posisix(Lastldp(*snake))+1)%5, Posisiy(Lastldp(*snake))) == Nilldp){
+            } else if(Searchlistdp((*snake), (Posisix(Lastldp(*snake))+1)%5, Posisiy(Lastldp(*snake))) == Nilldp && Searchlistdp((*obst), (Posisix(Lastldp(*snake))+1)%5, Posisiy(Lastldp(*snake))) == Nilldp){
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), (Posisix(Lastldp(*snake)) + 1)%5, Posisiy(Lastldp(*snake)));
             }
         } else if(Posisix(Lastldp(*snake)) == 0){
-            if(Searchlistdp((*snake), Posisix(Lastldp(*snake))-1 + 5, Posisiy(Lastldp(*snake))) == Nilldp && Searchlistdp((*obstacle), Posisix(Lastldp(*snake)) -1 + 5, Posisiy(Lastldp(*snake))) == Nilldp){
+            if(Searchlistdp((*snake), Posisix(Lastldp(*snake))-1 + 5, Posisiy(Lastldp(*snake))) == Nilldp && Searchlistdp((*obst), Posisix(Lastldp(*snake)) -1 + 5, Posisiy(Lastldp(*snake))) == Nilldp){
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), Posisix(Lastldp(*snake))-1 + 5, Posisiy(Lastldp(*snake)));
-            } else if(Posisiy(Lastldp(*snake)) != 0 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1) == Nilldp && Searchlistdp((*obstacle), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1) == Nilldp){
+            } else if(Posisiy(Lastldp(*snake)) != 0 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1) == Nilldp && Searchlistdp((*obst), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1) == Nilldp){
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1);
-            } else if(Posisiy(Lastldp(*snake)) == 0 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1 + 5) == Nilldp && Searchlistdp((*obstacle), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1 + 5) == Nilldp){
+            } else if(Posisiy(Lastldp(*snake)) == 0 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1 + 5) == Nilldp && Searchlistdp((*obst), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1 + 5) == Nilldp){
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))-1 + 5);
-            } else if(Posisiy(Lastldp(*snake)) != 4 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1) == Nilldp && Searchlistdp((*obstacle), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1) == Nilldp) {
+            } else if(Posisiy(Lastldp(*snake)) != 4 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1) == Nilldp && Searchlistdp((*obst), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1) == Nilldp) {
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake)) + 1);
-            } else if(Posisiy(Lastldp(*snake)) == 4 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1 - 5) == Nilldp && Searchlistdp((*obstacle), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1 - 5) == Nilldp) {
+            } else if(Posisiy(Lastldp(*snake)) == 4 && Searchlistdp((*snake), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1 - 5) == Nilldp && Searchlistdp((*obst), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake))+1 - 5) == Nilldp) {
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), Posisix(Lastldp(*snake)), Posisiy(Lastldp(*snake)) + 1 - 5);
-            } else if(Posisiy(Lastldp(*snake)) == 0 && Posisiy(Prevldp(Lastldp(*snake))) == Posisiy(Lastldp(*snake)) + 1 && Searchlistdp((*obstacle), (Posisix(Lastldp(*snake))+1) % 5, Posisiy(Lastldp(*snake))) == Nilldp) {
+            } else if(Posisiy(Lastldp(*snake)) == 0 && Posisiy(Prevldp(Lastldp(*snake))) == Posisiy(Lastldp(*snake)) + 1 && Searchlistdp((*obst), (Posisix(Lastldp(*snake))+1) % 5, Posisiy(Lastldp(*snake))) == Nilldp) {
                 InsVLastlistdp(snake, wordToString(intToWord(wordToInt(stringToWord(Infoldp(Lastldp(*snake)))) + 1)), (Posisix(Lastldp(*snake)) + 1) % 5, Posisiy(Lastldp(*snake)));
             }
         } else {
-            printf("Ekor snake tidak dapat di-spawn ke arah manapun :<\n");
-            *menang = true;
+            printf("Ekor snake tidak dapat di-spawn ke arah manapun\n");
+            *wwin = true;
         }
     }
 }
 
 void hit(List * snake, List * meteor, location * temp){
-    addressldp p;
+    addresss p;
     int tempx, tempy;
 
     if(Searchlistdp(*snake, Posisix(Firstldp(*meteor)), Posisiy(Firstldp(*meteor))) == Nilldp){
@@ -206,7 +203,7 @@ void hit(List * snake, List * meteor, location * temp){
     }
 }
 
-int lengthsnake(List snake){
+int lengths(List snake){
     int count = 0;
     while (Firstldp(snake) != Nilldp) {
         count++;
@@ -215,9 +212,9 @@ int lengthsnake(List snake){
     return count;
 }
 
-void belok(char x, List *s, List * posPanas, List * obstacle, boolean * gagal, boolean * menang){
-    addressldp p;
-    addressldp temp;
+void belok(char x, List *s, List * hmeteor, List * obst, boolean * gagal, boolean * wwin){
+    addresss p;
+    addresss temp;
     int i = 0;
     int tempx, tempy;
 
@@ -225,20 +222,20 @@ void belok(char x, List *s, List * posPanas, List * obstacle, boolean * gagal, b
     printf("\n");
 
     if((x) == 'w'){
-        if(Posisiy(Firstldp(*s)) != 0 && Searchlistdp((*posPanas), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))-1) != Nilldp){
+        if(Posisiy(Firstldp(*s)) != 0 && Searchlistdp((*hmeteor), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))-1) != Nilldp){
             printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
             *gagal = true;
-        } else if(Posisiy(Firstldp(*s)) == 0 && Searchlistdp((*posPanas), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))-1 + 5) != Nilldp){
+        } else if(Posisiy(Firstldp(*s)) == 0 && Searchlistdp((*hmeteor), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))-1 + 5) != Nilldp){
             printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
             *gagal = true;
-        } else if (Posisiy(Firstldp(*s)) != 0 && Searchlistdp((*obstacle), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))-1) != Nilldp) {
-            printf("Anda menabrak obstacle :<\n");
+        } else if (Posisiy(Firstldp(*s)) != 0 && Searchlistdp((*obst), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))-1) != Nilldp) {
+            printf("Anda menabrak obst :<\n");
             *gagal = true;
-            *menang = true;
-        } else if (Posisiy(Firstldp(*s)) == 0 && Searchlistdp((*obstacle), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))-1 + 5) != Nilldp) {
-            printf("Anda menabrak obstacle :<\n");
+            *wwin = true;
+        } else if (Posisiy(Firstldp(*s)) == 0 && Searchlistdp((*obst), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))-1 + 5) != Nilldp) {
+            printf("Anda menabrak obst :<\n");
             *gagal = true;
-            *menang = true;
+            *wwin = true;
         } else if (Posisiy(Firstldp(*s)) != 0 && Searchlistdp((*s), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))-1) != Nilldp) {
             printf("Anda tidak dapat bergerak ke tubuh anda sendiri\n");
             *gagal = true;
@@ -262,21 +259,21 @@ void belok(char x, List *s, List * posPanas, List * obstacle, boolean * gagal, b
         }
     }
     else if ((x) == 's') {
-        if (Posisiy(Firstldp(*s)) != 4 && Searchlistdp((*posPanas), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))+1) != Nilldp){
+        if (Posisiy(Firstldp(*s)) != 4 && Searchlistdp((*hmeteor), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))+1) != Nilldp){
             printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
             *gagal = true;
-        } else if (Posisiy(Firstldp(*s)) == 4 && Searchlistdp((*posPanas), Posisix(Firstldp(*s)), (Posisiy(Firstldp(*s))+1)%5) != Nilldp){
+        } else if (Posisiy(Firstldp(*s)) == 4 && Searchlistdp((*hmeteor), Posisix(Firstldp(*s)), (Posisiy(Firstldp(*s))+1)%5) != Nilldp){
             printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
             *gagal = true;
         }
-        else if (Posisiy(Firstldp(*s)) != 4 && Searchlistdp((*obstacle), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))+1) != Nilldp) {
-            printf("Anda menabrak obstacle :<\n");
+        else if (Posisiy(Firstldp(*s)) != 4 && Searchlistdp((*obst), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))+1) != Nilldp) {
+            printf("Anda menabrak obst :<\n");
             *gagal = true;
-            *menang = true;
-        } else if (Posisiy(Firstldp(*s)) == 4 && Searchlistdp((*obstacle), Posisix(Firstldp(*s)), (Posisiy(Firstldp(*s))+1)%5) != Nilldp) {
-            printf("Anda menabrak obstacle :<\n");
+            *wwin = true;
+        } else if (Posisiy(Firstldp(*s)) == 4 && Searchlistdp((*obst), Posisix(Firstldp(*s)), (Posisiy(Firstldp(*s))+1)%5) != Nilldp) {
+            printf("Anda menabrak obst :<\n");
             *gagal = true;
-            *menang = true;
+            *wwin = true;
         } else if(Posisiy(Firstldp(*s)) != 4 && Searchlistdp((*s), Posisix(Firstldp(*s)), Posisiy(Firstldp(*s))+1) != Nilldp){
             printf("Anda tidak dapat bergerak ke tubuh anda sendiri\n");
             *gagal = true;
@@ -301,21 +298,21 @@ void belok(char x, List *s, List * posPanas, List * obstacle, boolean * gagal, b
         }
     }
     else if ((x) == 'a') {
-        if (Posisix(Firstldp(*s)) != 0 && Searchlistdp((*posPanas), Posisix(Firstldp(*s)) -1 , Posisiy(Firstldp(*s))) != Nilldp){
+        if (Posisix(Firstldp(*s)) != 0 && Searchlistdp((*hmeteor), Posisix(Firstldp(*s)) -1 , Posisiy(Firstldp(*s))) != Nilldp){
             printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
             *gagal = true;
-        } else if (Posisix(Firstldp(*s)) == 0 && Searchlistdp((*posPanas), (Posisix(Firstldp(*s)) -1) + 5 , Posisiy(Firstldp(*s))) != Nilldp){
+        } else if (Posisix(Firstldp(*s)) == 0 && Searchlistdp((*hmeteor), (Posisix(Firstldp(*s)) -1) + 5 , Posisiy(Firstldp(*s))) != Nilldp){
             printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
             *gagal = true;
         }
-        else if (Posisix(Firstldp(*s)) != 0 && Searchlistdp((*obstacle), Posisix(Firstldp(*s)) -1 , Posisiy(Firstldp(*s))) != Nilldp) {
-            printf("Anda menabrak obstacle :<\n");
+        else if (Posisix(Firstldp(*s)) != 0 && Searchlistdp((*obst), Posisix(Firstldp(*s)) -1 , Posisiy(Firstldp(*s))) != Nilldp) {
+            printf("Anda menabrak obst :<\n");
             *gagal = true;
-            *menang = true;
-        } else if (Posisix(Firstldp(*s)) == 0 && Searchlistdp((*obstacle), Posisix(Firstldp(*s)) -1 + 5, Posisiy(Firstldp(*s))) != Nilldp) {
-            printf("Anda menabrak obstacle :<\n");
+            *wwin = true;
+        } else if (Posisix(Firstldp(*s)) == 0 && Searchlistdp((*obst), Posisix(Firstldp(*s)) -1 + 5, Posisiy(Firstldp(*s))) != Nilldp) {
+            printf("Anda menabrak obst :<\n");
             *gagal = true;
-            *menang = true;
+            *wwin = true;
         } else if(Posisix(Firstldp(*s)) != 0 && Searchlistdp((*s), Posisix(Firstldp(*s))-1, Posisiy(Firstldp(*s))) != Nilldp){
             printf("Anda tidak dapat bergerak ke tubuh anda sendiri\n");
             *gagal = true;
@@ -340,21 +337,21 @@ void belok(char x, List *s, List * posPanas, List * obstacle, boolean * gagal, b
         }
     }
     else if ((x) == 'd') {
-        if (Posisix(Firstldp(*s)) != 4 && Searchlistdp((*posPanas), Posisix(Firstldp(*s)) + 1, Posisiy(Firstldp(*s))) != Nilldp){
+        if (Posisix(Firstldp(*s)) != 4 && Searchlistdp((*hmeteor), Posisix(Firstldp(*s)) + 1, Posisiy(Firstldp(*s))) != Nilldp){
             printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
             *gagal = true;
-        } else if (Posisix(Firstldp(*s)) == 4 && Searchlistdp((*posPanas), (Posisix(Firstldp(*s)) + 1) % 5, Posisiy(Firstldp(*s))) != Nilldp){
+        } else if (Posisix(Firstldp(*s)) == 4 && Searchlistdp((*hmeteor), (Posisix(Firstldp(*s)) + 1) % 5, Posisiy(Firstldp(*s))) != Nilldp){
             printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
             *gagal = true;
         }
-        else if (Posisix(Firstldp(*s)) != 4 && Searchlistdp((*obstacle), Posisix(Firstldp(*s)) + 1, Posisiy(Firstldp(*s))) != Nilldp) {
-            printf("Anda menabrak obstacle :<\n");
+        else if (Posisix(Firstldp(*s)) != 4 && Searchlistdp((*obst), Posisix(Firstldp(*s)) + 1, Posisiy(Firstldp(*s))) != Nilldp) {
+            printf("Anda menabrak obst :<\n");
             *gagal = true;
-            *menang = true;
-        }else if (Posisix(Firstldp(*s)) == 4 && Searchlistdp((*obstacle), (Posisix(Firstldp(*s)) + 1) %5, Posisiy(Firstldp(*s))) != Nilldp) {
-            printf("Anda menabrak obstacle :<\n");
+            *wwin = true;
+        }else if (Posisix(Firstldp(*s)) == 4 && Searchlistdp((*obst), (Posisix(Firstldp(*s)) + 1) %5, Posisiy(Firstldp(*s))) != Nilldp) {
+            printf("Anda menabrak obst :<\n");
             *gagal = true;
-            *menang = true;
+            *wwin = true;
         } else if(Posisix(Firstldp(*s)) != 4 && Searchlistdp((*s), Posisix(Firstldp(*s))+1, Posisiy(Firstldp(*s))) != Nilldp){
             printf("Anda tidak dapat bergerak ke tubuh anda sendiri\n");
             *gagal = true;
@@ -387,45 +384,45 @@ void snakeOnMeteor(int * score){
     List snake;
     List food;
     List meteor;
-    List posPanas;
-    List obstacle;
+    List hmeteor;
+    List obst;
     
     char command;
     boolean validasicommand = false;
-    boolean menang = false;
+    boolean wwin = false;
     boolean donef = false;
     boolean gagal = false;
     boolean kenakepala = false;
     int test = 0;
     int turn = 1;
-    //location posPanas;
+    //location hmeteor;
 
     CreateEmptylistdp(&food);
     CreateEmptylistdp(&snake);
     CreateEmptylistdp(&meteor);
-    CreateEmptylistdp(&posPanas);
-    CreateEmptylistdp(&obstacle);
-    initsnake(&snake);
+    CreateEmptylistdp(&hmeteor);
+    CreateEmptylistdp(&obst);
+    snakes(&snake);
 
     printf("\n                 Selamat datang di snake on meteor!\n");
     printf(" .+:*+.+:*+.+:*+. P A N D U A N  S I N G K A T  G A M E .+*:+.+*:+.+*:+. \n");
     printf("o   : makanan yang harus dicapai agar snake bertambah panjang\n");
     printf("H   : Head dari snake yang akan diikuti oleh badannya (1, 2, dst.)\n");
     printf("M   : meteor yang akan muncul secara acak dan menyerang snake\n");
-    printf("### : obstacle yang harus dihindari, apabila menabraknya snake akan mati\n\n");
+    printf("### : obst yang harus dihindari, apabila menabraknya snake akan mati\n\n");
 
     printf("\nMengenerate peta, snake dan makanan\n");
     printf("\nBerhasil digenerate!\n");
 
     printf("\n----------------------------------\n\n");
 
-    dropfood(&snake, &food, &posPanas, &obstacle);
+    dfood(&snake, &food, &hmeteor, &obst);
     donef = true;
-    dropobs(&snake, &food, &obstacle);
-    printpetak(snake, food, meteor, obstacle);
-    while (!menang) {
-        if(!donef){ // dropfoodnya kalo belum di drop dan makanan sebelumnya belum di makan
-            dropfood(&snake, &food, &posPanas, &obstacle);
+    obs(&snake, &food, &obst);
+    board(snake, food, meteor, obst);
+    while (!wwin) {
+        if(!donef){ // dfoodnya kalo belum di drop dan makanan sebelumnya belum di makan
+            dfood(&snake, &food, &hmeteor, &obst);
             
             donef = true;
         }
@@ -444,9 +441,9 @@ void snakeOnMeteor(int * score){
             }
             else {
                 validasicommand = true;
-                belok(command, &snake, &posPanas, &obstacle, &gagal, &menang);
+                belok(command, &snake, &hmeteor, &obst, &gagal, &wwin);
                 
-                if (!menang) {
+                if (!wwin) {
                     if(gagal == true ){
                         printf("Silahkan masukkan command lainnya\n");
                     } else {
@@ -457,17 +454,17 @@ void snakeOnMeteor(int * score){
                             DelVLastlistdp(&meteor, &tempInfoldp, &tempx, &tempy);
                         }
                         if((Posisix(Firstldp(food)) == Posisix(Firstldp(snake))) && (Posisiy(Firstldp(food)) == Posisiy(Firstldp(snake))) && !gagal) {
-                            makan(&snake, &food, &obstacle, &menang);
+                            makan(&snake, &food, &obst, &wwin);
                             donef = false;
                            
                         }
-                        if(!donef){ // dropfoodnya kalo belum di drop dan makanan sebelumnya belum di makan
-                            dropfood(&snake, &food, &posPanas, &obstacle);
+                        if(!donef){ // dfoodnya kalo belum di drop dan makanan sebelumnya belum di makan
+                            dfood(&snake, &food, &hmeteor, &obst);
                             
                             donef = true;
                         }
                         
-                        dropmeteor(&food, &obstacle, &meteor);
+                        dmeteor(&food, &obst, &meteor);
                         
                         if(Searchlistdp(snake, Posisix(Firstldp(meteor)), Posisiy(Firstldp(meteor))) != Nilldp){
                             //kondisional search posisinya meteor sama kaya posisinya snakenya apa engga
@@ -476,14 +473,14 @@ void snakeOnMeteor(int * score){
                                 int headx;
                                 int heady;
                                 DelVFirstlistdp(&snake, &temphead, &headx, &heady);
-                                menang = true;
+                                wwin = true;
                                 kenakepala = true;
-                                printpetak(snake, food, meteor, obstacle);
+                                board(snake, food, meteor, obst);
                                 printf("Kepala snake terkena meteor :<\n");
                             } else {
                                 elmntype tempbadan;
                                 location postemp;
-                                addressldp p;
+                                addresss p;
 
                                 postemp.x = -1;
                                 postemp.y = -1;
@@ -492,28 +489,28 @@ void snakeOnMeteor(int * score){
                                     postemp = Posisi(Nextldp(p));
                                 }
                                 DelPlistdp(&snake, tempbadan, Posisix(Firstldp(meteor)), Posisiy(Firstldp(meteor)));
-                                printpetak(snake, food, meteor, obstacle);
+                                board(snake, food, meteor, obst);
                                 hit(&snake, &meteor, &postemp);
                                 printf("Anda terkena meteor\n");
                                 printf("Berikut merupakan peta permainan sekarang:\n");
-                                printpetak(snake, food, meteor, obstacle);
+                                board(snake, food, meteor, obst);
                                 printf("Silahkan lanjutkan permainan\n");
                                 
-                                InsVLastlistdp(&posPanas, wordToString(intToWord(turn)), Posisix(Firstldp(meteor)), Posisiy(Firstldp(meteor)));
+                                InsVLastlistdp(&hmeteor, wordToString(intToWord(turn)), Posisix(Firstldp(meteor)), Posisiy(Firstldp(meteor)));
                             }
                         } else {
                 
-                            printpetak(snake, food, meteor, obstacle);
+                            board(snake, food, meteor, obst);
                             printf("Anda beruntung tidak terkena meteor! ");
                             printf("Silahkan lanjutkan permainan\n");
                         }    
                         
                         turn++;
-                        if(!IsEmptylistdp(posPanas)){
-                            if(wordToInt(stringToWord(Infoldp(Firstldp(posPanas)))) + 2 == turn ){
+                        if(!IsEmptylistdp(hmeteor)){
+                            if(wordToInt(stringToWord(Infoldp(Firstldp(hmeteor)))) + 2 == turn ){
                                 elmntype temppanas;
                                 int px, py;
-                                DelVFirstlistdp(&posPanas, &temppanas, &px, &py);
+                                DelVFirstlistdp(&hmeteor, &temppanas, &px, &py);
                             }
                         }
                     }
@@ -522,7 +519,7 @@ void snakeOnMeteor(int * score){
         } 
     }
     int length;
-    length = lengthsnake(snake);
+    length = lengths(snake);
     *score = length*2;
     
     printf("Game berakhir!\n");  
