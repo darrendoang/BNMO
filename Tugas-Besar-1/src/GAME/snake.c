@@ -8,7 +8,7 @@
 #include "boolean.h"
 #include "snake.h"
 
-int GetInfo(addressLDP P){
+int  GetInf(addressLDP P){
     if(P == NULL){
         return UndefLDP;
     }
@@ -120,39 +120,39 @@ void move (List *L, char* input){
     addressLDP P=Last(*L);
     POINT temp;
     if (IsStrEq(input,atas)){
-        temp=(*Prev(P)).coor;
+        temp=(*Prev(P)).posisi;
         while (Prev(P)!=NilLDP){
-            (*P).coor=temp;
+            (*P).posisi=temp;
             P=(P)->prev;
             if (Prev(P)!=NilLDP){
-                temp=(*Prev(P)).coor;
+                temp=(*Prev(P)).posisi;
             }
         }
     }else if(IsStrEq(input,bawah)){
-        temp=(*Prev(P)).coor;
+        temp=(*Prev(P)).posisi;
         while (Prev(P)!=NilLDP){
-            (*P).coor=temp;
+            (*P).posisi=temp;
             P = (P)->prev;
             if (Prev(P)!=NilLDP){
-                temp=(*Prev(P)).coor;
+                temp=(*Prev(P)).posisi;
             }
         }
     }else if(IsStrEq(input,kanan)){
-        temp=(*Prev(P)).coor;
+        temp=(*Prev(P)).posisi;
         while (Prev(P)!=NilLDP){
-            (*P).coor=temp;
+            (*P).posisi=temp;
             P = (P)->prev;
             if (Prev(P)!=NilLDP){
-                temp=(*Prev(P)).coor;
+                temp=(*Prev(P)).posisi;
             }
         }
     }else if(IsStrEq(input,kiri)){
-        temp=(*Prev(P)).coor;
+        temp=(*Prev(P)).posisi;
         while (Prev(P)!=NilLDP){
-            (*P).coor=temp;
+            (*P).posisi=temp;
             P = (P)->prev;
             if (Prev(P)!=NilLDP){
-                temp=(*Prev(P)).coor;
+                temp=(*Prev(P)).posisi;
             }
         }
     }
@@ -188,7 +188,7 @@ void move (List *L, char* input){
     }
 }  
 
-void makeMeteor(POINT *meteor,POINT food){
+void createMeteor(POINT *meteor,POINT food){
     srand(time(NULL));
 
     int a = rand() % 5;
@@ -226,7 +226,7 @@ void makeMeteor(POINT *meteor,POINT food){
 }
 
 
-void makeObstacle(List L, POINT* obstacle){
+void createObstacle(List L, POINT* obstacle){
     srand(time(NULL));
 
     int a = rand() % 5;
@@ -266,7 +266,7 @@ void makeObstacle(List L, POINT* obstacle){
     }
 }
 
-void makeFood(POINT *food,List L, POINT obstacle){
+void createFood(POINT *food,List L, POINT obstacle){
     srand(time(NULL));
 
     int a = rand() % 5;
@@ -306,35 +306,35 @@ void makeFood(POINT *food,List L, POINT obstacle){
     }
 }
 
-boolean foodEaten(List *L, POINT food){
-    return((*First(*L))).coor.x == food.x && ((*First(*L)).coor.y== food.y);
+boolean checkFoodEaten(List *L, POINT food){
+    return((*First(*L))).posisi.x == food.x && ((*First(*L)).posisi.y== food.y);
 }
-boolean stillHotAF(List L, char* input, POINT meteor){
+boolean areaMeteor(List L, char* input, POINT meteor){
     addressLDP P = First(L);
-    char* wilujeng="w";
-    char* anting="a";
-    char* sayo="s";
-    char* dori="d";
+    char* up="w";
+    char* left="a";
+    char* down="s";
+    char* right="d";
     int a = Absis(P);
     int b = Ordinat(P);
-    boolean why = (a == meteor.x && meteor.y == (b - 1) % 5);
-    boolean are = (b == meteor.y && meteor.x == (a - 1) % 5);
-    boolean demn = (b == meteor.y && meteor.x == (a + 1) % 5);
-    boolean sus = (a == meteor.x && meteor.y == (b + 1) % 5);
-    if(IsStrEq(input,wilujeng)){
-        return why;
+    boolean met = (a == meteor.x && meteor.y == (b - 1) % 5);
+    boolean e = (b == meteor.y && meteor.x == (a - 1) % 5);
+    boolean o = (b == meteor.y && meteor.x == (a + 1) % 5);
+    boolean r = (a == meteor.x && meteor.y == (b + 1) % 5);
+    if(IsStrEq(input,up)){
+        return met;
     }
-    else if(IsStrEq(input,anting)){
-        return are;
+    else if(IsStrEq(input,left)){
+        return e;
     }
-    else if(IsStrEq(input,dori)){
-        return demn;
+    else if(IsStrEq(input,right)){
+        return o;
     }
-    else if(IsStrEq(input,sayo)){
-        return sus;
+    else if(IsStrEq(input,down)){
+        return r;
     }
 }
-void kenaMeteor(List *L,POINT food,POINT meteor){
+void hit(List *L,POINT food,POINT meteor){
     addressLDP a;
     a = First(*L);
     addressLDP b;
@@ -371,7 +371,7 @@ void kenaMeteor(List *L,POINT food,POINT meteor){
     }
 }
 
-boolean endGame(List L,POINT meteor, POINT obstacle){
+boolean endCond(List L,POINT meteor, POINT obstacle){
     addressLDP a;
     a = First(L);
     boolean found=false;
@@ -394,7 +394,7 @@ boolean endGame(List L,POINT meteor, POINT obstacle){
             printf("HAHAHA Kepala snake menabrak obstacle\n");
             return true;
         }
-        else if(GetInfo(SearchAP(L,Absis(First(L))+1,Ordinat(First(L)))) < 25 && GetInfo(SearchAP(L,Absis(First(L))-1,Ordinat(First(L)))) < 25 && GetInfo(SearchAP(L,Absis(First(L)),Ordinat(First(L))-1)) < 25 && GetInfo(SearchAP(L,Absis(First(L)),Ordinat(First(L))+1)) < 25){
+        else if( GetInf(SearchAP(L,Absis(First(L))+1,Ordinat(First(L)))) < 25 &&  GetInf(SearchAP(L,Absis(First(L))-1,Ordinat(First(L)))) < 25 &&  GetInf(SearchAP(L,Absis(First(L)),Ordinat(First(L))-1)) < 25 &&  GetInf(SearchAP(L,Absis(First(L)),Ordinat(First(L))+1)) < 25){
             printf("Anda sudah tidak bisa kemana-mana lagi wkwkwk\n");
             return true;
         }
@@ -468,10 +468,10 @@ void som(TabMap *arrmapsb, int *score){
     meteor.x = UndefLDP;
     meteor.y = UndefLDP;
 
-    char* we = "w";
-    char* ah = "a";
-    char* es = "s";
-    char* de = "d";
+    char* mv = "w";
+    char* rg = "a";
+    char* dw = "s";
+    char* lf = "d";
     char* satu = "1";
     char* dua = "2";
         srand(time(NULL));
@@ -487,33 +487,33 @@ void som(TabMap *arrmapsb, int *score){
         printf("Berikut merupakan peta permainan!\n");
         
         
-        makeObstacle(L,&obstacle);
-        makeFood(&food,L,obstacle);
+        createObstacle(L,&obstacle);
+        createFood(&food,L,obstacle);
         printMap(L,food,meteor,obstacle);
 
         while(!kena){
             printf("Turn %d:\n",turn);
             printf("Silahkan masukkan command anda: ");
             input = scaninput();
-            if (IsStrEq(input,we) || IsStrEq(input,ah) || IsStrEq(input,es) || IsStrEq(input,de)){
+            if (IsStrEq(input,mv) || IsStrEq(input,rg) || IsStrEq(input,dw) || IsStrEq(input,lf)){
                 addressLDP cek = First(L);
-                if(IsStrEq(input,de) && GetInfo(SearchAP(L,Absis(cek)+1,Ordinat(cek))) < 25){
+                if(IsStrEq(input,lf) &&  GetInf(SearchAP(L,Absis(cek)+1,Ordinat(cek))) < 25){
                     printf("Anda tidak dapat bergerak ke tubuh anda sendiri\n");
                 }            
-                else if(IsStrEq(input,ah) && GetInfo(SearchAP(L,Absis(cek)-1,Ordinat(cek))) < 25){
+                else if(IsStrEq(input,rg) &&  GetInf(SearchAP(L,Absis(cek)-1,Ordinat(cek))) < 25){
                     printf("Anda tidak dapat bergerak ke tubuh anda sendiri\n");
                 }
-                else if(IsStrEq(input,we) && GetInfo(SearchAP(L,Absis(cek),Ordinat(cek)-1)) < 25){
+                else if(IsStrEq(input,mv) &&  GetInf(SearchAP(L,Absis(cek),Ordinat(cek)-1)) < 25){
                     printf("Anda tidak dapat bergerak ke tubuh anda sendiri\n");
                 }
-                else if(IsStrEq(input,es) && GetInfo(SearchAP(L,Absis(cek),Ordinat(cek)+1)) < 25){
+                else if(IsStrEq(input,dw) &&  GetInf(SearchAP(L,Absis(cek),Ordinat(cek)+1)) < 25){
                     printf("Anda tidak dapat bergerak ke tubuh anda sendiri\n");
                 }                        
-                else if(!stillHotAF(L,input,meteor)){
+                else if(!areaMeteor(L,input,meteor)){
                     move(&L,input);
-                    if (foodEaten(&L,food)){
+                    if (checkFoodEaten(&L,food)){
                         addressLDP ekortemp = Last(L);
-                        if(GetInfo(SearchAP(L,Absis(ekortemp)+1,Ordinat(ekortemp))) < 25 && GetInfo(SearchAP(L,Absis(ekortemp)-1,Ordinat(ekortemp))) < 25 && GetInfo(SearchAP(L,Absis(ekortemp),Ordinat(ekortemp)-1)) < 25 && GetInfo(SearchAP(L,Absis(ekortemp),Ordinat(ekortemp)+1)) < 25){
+                        if( GetInf(SearchAP(L,Absis(ekortemp)+1,Ordinat(ekortemp))) < 25 &&  GetInf(SearchAP(L,Absis(ekortemp)-1,Ordinat(ekortemp))) < 25 &&  GetInf(SearchAP(L,Absis(ekortemp),Ordinat(ekortemp)-1)) < 25 &&  GetInf(SearchAP(L,Absis(ekortemp),Ordinat(ekortemp)+1)) < 25){
                             printf("Ekor tidak bisa spawn\n");
                             score = Info(Last(L)) * 2;
                             printf("Score : %d\n",score);
@@ -523,17 +523,17 @@ void som(TabMap *arrmapsb, int *score){
                             ekorbaru=*(Last(L));
                             addressLDP alamatekor= AlokasiLDPEkor(((int)Info(Last(L))) + 1);
                             
-                            Absis(alamatekor)= ekorbaru.coor.x;
-                            Ordinat(alamatekor)= ekorbaru.coor.y;
+                            Absis(alamatekor)= ekorbaru.posisi.x;
+                            Ordinat(alamatekor)= ekorbaru.posisi.y;
                             InsertLastLDP(&L,alamatekor);
-                            makeFood(&food,L,obstacle);
+                            createFood(&food,L,obstacle);
                         }     
                     }
-                    makeMeteor(&meteor,food);
+                    createMeteor(&meteor,food);
                     printMap(L,food,meteor,obstacle);
-                    kenaMeteor(&L,food,meteor);
+                    hit(&L,food,meteor);
 
-                    if(!endGame(L,meteor,obstacle)){
+                    if(!endCond(L,meteor,obstacle)){
                         turn++;
                     }
                     else if(Info(Last(L)) == 23){
@@ -547,7 +547,7 @@ void som(TabMap *arrmapsb, int *score){
                         kena = true;
                     }                
                 }
-                else if(stillHotAF(L,input,meteor)){
+                else if(areaMeteor(L,input,meteor)){
                     printf("Meteor masih panas! Anda belum dapat ke titik tersebut.\n");
                 }
             } 

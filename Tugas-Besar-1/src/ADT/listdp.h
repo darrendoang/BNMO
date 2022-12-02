@@ -23,7 +23,7 @@ typedef struct tElmtlist {
 	int info;
 	addressLDP next;
 	addressLDP prev;
-	POINT coor;
+	POINT posisi;
 } ElmtList;
 
 
@@ -44,8 +44,8 @@ typedef struct {
 #define Prev(P) (P)->prev
 #define First(L) ((L).First)
 #define Last(L) ((L).Last)
-#define Absis(P) (P)->coor.x
-#define Ordinat(P) (P)->coor.y
+#define Absis(P) (P)->posisi.x
+#define Ordinat(P) (P)->posisi.y
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/

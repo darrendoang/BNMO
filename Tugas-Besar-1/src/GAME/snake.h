@@ -11,7 +11,7 @@
 # ifndef SOM_H
 # define SOM_H
 
-int GetInfo(addressLDP P);
+int  GetInf(addressLDP P);
 
 boolean SearchPoint(List L,int X,int Y);
 
@@ -21,17 +21,17 @@ void createSnake(List *L);
 
 void move (List *L, char* input);
 
-void makeMeteor(POINT *meteor,POINT food);
+void createMeteor(POINT *meteor,POINT food);
 
-void makeObstacle(List L, POINT* obstacle);
+void createObstacle(List L, POINT* obstacle);
 
-void makeFood(POINT *food,List L, POINT obstacle);
+void createFood(POINT *food,List L, POINT obstacle);
 
-boolean foodEaten(List *L, POINT food);
+boolean checkFoodEaten(List *L, POINT food);
 
-void kenaMeteor(List *L,POINT food,POINT meteor);
+void hit(List *L,POINT food,POINT meteor);
 
-boolean endGame(List L,POINT meteor, POINT obstacle);
+boolean endCond(List L,POINT meteor, POINT obstacle);
 
 void printMap(List L,POINT food, POINT meteor,POINT obstacle);
 

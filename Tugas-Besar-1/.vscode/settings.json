@@ -8,6 +8,10 @@
         "rng.h": "c",
         "math.h": "c",
         "DRIVER_DDASH.C": "cpp",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "stackhistory.h": "c",
+        "charmachine.h": "c",
+        "wordmachine.h": "c",
+        "listdp.h": "c"
     }
 }

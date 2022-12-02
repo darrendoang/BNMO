@@ -252,8 +252,8 @@ void DelPLDP (List *L, char X)
         DelLastLDP(L,&P);
     }else{
         while (Q!=P){
-            Q->coor.x=Prev(Q)->coor.x;
-            Q->coor.y=Prev(Q)->coor.y;
+            Q->posisi.x=Prev(Q)->posisi.x;
+            Q->posisi.y=Prev(Q)->posisi.y;
         }
         Next(Prev(P))=Next(P);
         Prev(Next(P))=Prev(P);
