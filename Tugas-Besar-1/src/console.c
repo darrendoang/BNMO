@@ -318,7 +318,7 @@ void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , History
     else if (str_comp(play, "SNAKE ON METEOR")){
         printf("Loading SNAKE ON METEOR . . . \n");
         dequeue(antriangame,val);
-        som(&arrmapsb, score) ;
+        som(&arrmapsb, &score) ;
     }
 
 

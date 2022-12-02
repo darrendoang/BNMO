@@ -35,6 +35,6 @@ boolean endCond(List L,POINT meteor, POINT obstacle);
 
 void printMap(List L,POINT food, POINT meteor,POINT obstacle);
 
-void som(TabMap *arrmapsb, int score);
+void som(TabMap *arrmapsb, int *score);
 
 #endif
