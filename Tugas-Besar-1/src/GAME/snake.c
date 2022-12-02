@@ -453,7 +453,7 @@ void printMap(List L,POINT food, POINT meteor,POINT obstacle){
 }
 
 // void som(TabMap *arrmapsb){
-void som(TabMap *arrmapsb, int score){
+void som(TabMap *arrmapsb, int *score){
     List L;
     ElmtList ekorbaru;
     char* input;
@@ -514,8 +514,8 @@ void som(TabMap *arrmapsb, int score){
                         addressLDP ekortemp = Last(L);
                         if( GetInf(SearchAP(L,Absis(ekortemp)+1,Ordinat(ekortemp))) < 25 &&  GetInf(SearchAP(L,Absis(ekortemp)-1,Ordinat(ekortemp))) < 25 &&  GetInf(SearchAP(L,Absis(ekortemp),Ordinat(ekortemp)-1)) < 25 &&  GetInf(SearchAP(L,Absis(ekortemp),Ordinat(ekortemp)+1)) < 25){
                             printf("Ekor tidak bisa spawn\n");
-                            score = Info(Last(L)) * 2;
-                            printf("Score : %d\n",score);
+                            *score = Info(Last(L)) * 2;
+                            printf("Score : %d\n",*score);
                             kena = true;
                         }
                         else{
@@ -537,12 +537,12 @@ void som(TabMap *arrmapsb, int score){
                     }
                     else if(Info(Last(L)) == 23){
                         int sekor = 46;
-                        printf("Score : %d\n",score);
+                        printf("Score : %d\n",*score);
                         kena = true;
                     }
                     else{
-                        score = Info(Last(L)) * 2;
-                        printf("Score : %d\n",score);
+                        *score = Info(Last(L)) * 2;
+                        printf("Score : %d\n",*score);
                         kena = true;
                     }                
                 }
