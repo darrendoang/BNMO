@@ -386,16 +386,16 @@ boolean endCond(List L,POINT meteor, POINT obstacle){
     if (!found){
         addressLDP check = First(L);
         if((check->info != 'H')){
-            printf("DUAARRRRRR Kepala snake terkena meteor !\n");
+            printf("Kepala snake terkena meteor !\n");
             Info(First(L))+= 2;
             return true;
         }
         else if(Absis(First(L)) == obstacle.x && Ordinat(First(L)) == obstacle.y){
-            printf("HAHAHA Kepala snake menabrak obstacle\n");
+            printf("Kepala snake menabrak obstacle\n");
             return true;
         }
         else if( GetInf(SearchAP(L,Absis(First(L))+1,Ordinat(First(L)))) < 25 &&  GetInf(SearchAP(L,Absis(First(L))-1,Ordinat(First(L)))) < 25 &&  GetInf(SearchAP(L,Absis(First(L)),Ordinat(First(L))-1)) < 25 &&  GetInf(SearchAP(L,Absis(First(L)),Ordinat(First(L))+1)) < 25){
-            printf("Anda sudah tidak bisa kemana-mana lagi wkwkwk\n");
+            printf("Anda tidak bisa bergerak kemanapun\n");
             return true;
         }
         else{
@@ -414,13 +414,13 @@ void printMap(List L,POINT food, POINT meteor,POINT obstacle){
     for (i = 0 ; i < 11 ; i++){
         for (j = 0 ; j < 11 ;j++){
             if (i % 2 == 0 && j % 2 == 0){
-                printf("%c",254);
+                printf("%c",46);
             }
             else if (i % 2 == 0){
-                printf("%c%c%c",205,205,205);
+                printf("%c%c%c",196,196,196);
             }
             else if(j % 2 == 0){
-                printf("%c",186);
+                printf("%c",179);
             }
             else if(food.x==((j+1)/2)-1 && food.y==((i+1)/2)-1){
                 printf(" o ");
