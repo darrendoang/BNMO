@@ -4,8 +4,8 @@
 
 int main(){
     List test;
-    addresss add1, add2;
-    elmntype temp;
+    addressLDP add1, add2;
+    char * temp;
     int a,b;
 
     CreateEmptylistdp(&test);
