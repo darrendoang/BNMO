@@ -2,11 +2,11 @@
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
-#include "charmachine.h"
-#include "wordmachine.h"
-#include "listdp.h"
-#include "arrayMap.h"
-#include "boolean.h"
+#include "ADT/charmachine.h"
+#include "ADT/wordmachine.h"
+#include "ADT/listdp.h"
+#include "ADT/arrayMap.h"
+#include "ADT/boolean.h"
 
 # ifndef SOM_H
 # define SOM_H
@@ -35,6 +35,6 @@ boolean endCond(List L,POINT meteor, POINT obstacle);
 
 void printMap(List L,POINT food, POINT meteor,POINT obstacle);
 
-void som(TabMap *arrmapsb, int *score);
+void som(TabMap *arrmapsb, int score);
 
 #endif

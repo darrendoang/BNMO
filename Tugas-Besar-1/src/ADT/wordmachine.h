@@ -10,11 +10,11 @@
 typedef struct {
    char contents[CAPACITY]; /* container penyimpan kata, indeks yang dipakai [0..CAPACITY-1] */
    int length;
-} Word;
+} Worde;
 
 /* Word Engine State */
 extern boolean endWord;
-extern Word currentWord;
+extern Worde currentWord;
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
@@ -87,12 +87,12 @@ char* secondword(char* input);
 
 boolean IsStrEq(char string1[], char string2[]);
 
-char *scanword(Word Word);
+char *scanword(Worde Word);
 
-int ScanNum(Word word);
+int ScanNum(Worde word);
 // Menghasilkan integer dari sebuah kata
 
-boolean IsWordStr(Word word, char string[]);
+boolean IsWordStr(Worde word, char string[]);
 // Menghasilkan true jika string pada kata sama dengan string yang dibandingkan
 
 int LengthStr(char string[]);

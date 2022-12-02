@@ -12,6 +12,7 @@
         "stackhistory.h": "c",
         "charmachine.h": "c",
         "wordmachine.h": "c",
-        "listdp.h": "c"
+        "listdp.h": "c",
+        "arraymap.h": "c"
     }
 }

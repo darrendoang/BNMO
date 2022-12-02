@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 boolean endWord;
-Word currentWord;
+Worde currentWord;
 static FILE * pita;
 static int retval;
 
@@ -239,7 +239,7 @@ boolean IsStrEq(char string1[], char string2[]){
    return false;
 }
 
-char *scanword(Word Word)
+char *scanword(Worde Word)
 {
     char *str;
     str = malloc(Word.length * sizeof(char));
@@ -253,7 +253,7 @@ char *scanword(Word Word)
     return str;
 }
 
-int ScanNum(Word word){
+int ScanNum(Worde word){
    // Menghasilkan integer dari sebuah kata
    int result = 0;
    int i = 0;
@@ -265,7 +265,7 @@ int ScanNum(Word word){
    return result;
 }
 
-boolean IsWordStr(Word word, char string[]){
+boolean IsWordStr(Worde word, char string[]){
    // Menghasilkan true jika string pada kata sama dengan string yang dibandingkan
    int i = 0;
    if(word.length == LengthStr(string)){
