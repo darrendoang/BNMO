@@ -453,14 +453,13 @@ void printMap(List L,POINT food, POINT meteor,POINT obstacle){
 }
 
 // void som(TabMap *arrmapsb){
-void som(TabMap *arrmapsb, int *score){
+void som(TabMap *arrmapsb, int score){
     List L;
     ElmtList ekorbaru;
     char* input;
     POINT obstacle,food,meteor;
     boolean kena = false;
     int turn = 1;
-    int score;
     char*jwbn;
 
     food.x = UndefLDP;
