@@ -3,48 +3,48 @@
 #include <stdlib.h>
 
 boolean endWord;
-Worde currentWord;
+Worde currentWordee;
 static FILE * pita;
 static int retval;
 
-void IgnoreBlanks(){
-	while (currentChar == BLANK || currentChar == NEWLINE)
+void IgnoreBlankss(){
+	while (currentCharS == BLANK || currentCharS == NEWLINE)
    {
-		ADV();
+		ADVS();
 	}
 }
 /* Mengabaikan satu atau beberapa BLANK
-   I.S. : currentChar sembarang 
-   F.S. : currentChar ? BLANK atau currentChar = MARK */
+   I.S. : currentCharS sembarang 
+   F.S. : currentCharS ? BLANK atau currentCharS = MARK */
 
 /* PITA STDIN */
 
-void STARTWORD(){
-	START();
-	IgnoreBlanks();
-	CopyWord();
+void STARTWORDS(){
+	STARTS();
+	IgnoreBlankss();
+	CopyWordS();
 }
-/* I.S. : currentChar sembarang 
-   F.S. : endWord = true, dan currentChar = MARK; 
-          atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata */
+/* I.S. : currentCharS sembarang 
+   F.S. : endWord = true, dan currentCharS = MARK; 
+          atau endWord = false, currentWordee adalah kata yang sudah diakuisisi,
+          currentCharS karakter pertama sesudah karakter terakhir kata */
 
-void ADVWORD(){
-   CopyWord();
+void ADVWORDS(){
+   CopyWordS();
 }
-/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi 
-   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi, 
-          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika currentChar = MARK, endWord = true.		  
-   Proses : Akuisisi kata menggunakan procedure copyWord */
+/* I.S. : currentCharS adalah karakter pertama kata yang akan diakuisisi 
+   F.S. : currentWordee adalah kata terakhir yang sudah diakuisisi, 
+          currentCharS adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika currentCharS = MARK, endWord = true.		  
+   Proses : Akuisisi kata menggunakan procedure CopyWordS */
 
-void CopyWord(){
-	IgnoreBlanks();
-	currentWord.length = 0;
-	while((currentChar != BLANK) && (currentChar != NEWLINE)){
-      if (currentWord.length < CAPACITY){
-		currentWord.contents[currentWord.length++] = currentChar;
-		ADV();
+void CopyWordS(){
+	IgnoreBlankss();
+	currentWordee.length = 0;
+	while((currentCharS != BLANK) && (currentCharS != NEWLINE)){
+      if (currentWordee.length < CAPACITY){
+		currentWordee.contents[currentWordee.length++] = currentCharS;
+		ADVS();
       }
       else{
          break;
@@ -52,78 +52,78 @@ void CopyWord(){
 		
 	}
 }
-/* Mengakuisisi kata, menyimpan dalam currentWord
-   I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : currentWord berisi kata yang sudah diakuisisi; 
-          currentChar = BLANK atau currentChar = MARK; 
-          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+/* Mengakuisisi kata, menyimpan dalam currentWordee
+   I.S. : currentCharS adalah karakter pertama dari kata
+   F.S. : currentWordee berisi kata yang sudah diakuisisi; 
+          currentCharS = BLANK atau currentCharS = MARK; 
+          currentCharS adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
 
-void IgnoreBlanksDin()
+void IgnoreBlankssDin()
 {
     /* Mengabaikan satu atau beberapa BLANK
-       I.S. : currentChar sembarang
-       F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-    while (currentChar == BLANK)
+       I.S. : currentCharS sembarang
+       F.S. : currentCharS ≠ BLANK atau currentCharS = MARK */
+    while (currentCharS == BLANK)
     {
-        ADV();
+        ADVS();
     }
 }
 
-void STARTWORDDin()
+void STARTWORDSDin()
 {
-    /* I.S. : currentChar sembarang
-       F.S. : endWord = true, dan currentChar = MARK;
-              atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
-              currentChar karakter pertama sesudah karakter terakhir kata */
-    START();
-    IgnoreBlanksDin();
-    if (currentChar == NEWLINE)
+    /* I.S. : currentCharS sembarang
+       F.S. : endWord = true, dan currentCharS = MARK;
+              atau endWord = false, currentWordee adalah kata yang sudah diakuisisi,
+              currentCharS karakter pertama sesudah karakter terakhir kata */
+    STARTS();
+    IgnoreBlankssDin();
+    if (currentCharS == NEWLINE)
     {
         endWord = true;
     }
     else
     {
         endWord = false;
-        CopyWordDin();
+        CopyWordSDin();
     }
 }
 
-void ADVWORDDin()
+void ADVWORDSDin()
 {
-    /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-       F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-              currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-              Jika currentChar = MARK, endWord = true.
-       Proses : Akuisisi kata menggunakan procedure CopyWord */
-    IgnoreBlanksDin();
-    if (currentChar == NEWLINE)
+    /* I.S. : currentCharS adalah karakter pertama kata yang akan diakuisisi
+       F.S. : currentWordee adalah kata terakhir yang sudah diakuisisi,
+              currentCharS adalah karakter pertama dari kata berikutnya, mungkin MARK
+              Jika currentCharS = MARK, endWord = true.
+       Proses : Akuisisi kata menggunakan procedure CopyWordS */
+    IgnoreBlankssDin();
+    if (currentCharS == NEWLINE)
     {
         endWord = true;
     }
     else
     {
         endWord = false;
-        CopyWordDin();
-        IgnoreBlanksDin();
+        CopyWordSDin();
+        IgnoreBlankssDin();
     }
 }
 
-void CopyWordDin()
+void CopyWordSDin()
 {
-    /* Mengakuisisi kata, menyimpan dalam currentWord
-       I.S. : currentChar adalah karakter pertama dari kata
-       F.S. : currentWord berisi kata yang sudah diakuisisi;
-              currentChar = BLANK atau currentChar = MARK;
-              currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+    /* Mengakuisisi kata, menyimpan dalam currentWordee
+       I.S. : currentCharS adalah karakter pertama dari kata
+       F.S. : currentWordee berisi kata yang sudah diakuisisi;
+              currentCharS = BLANK atau currentCharS = MARK;
+              currentCharS adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
-    currentWord.length = 0;
-    while (currentChar != BLANK && currentChar != NEWLINE)
+    currentWordee.length = 0;
+    while (currentCharS != BLANK && currentCharS != NEWLINE)
     {
-        if (currentWord.length < CAPACITY)
+        if (currentWordee.length < CAPACITY)
         {
-            currentWord.contents[currentWord.length++] = currentChar;
-            ADV();
+            currentWordee.contents[currentWordee.length++] = currentCharS;
+            ADVS();
         }
         else
             break;
@@ -131,40 +131,40 @@ void CopyWordDin()
 }
 void STARTLOAD(char *filename){
    pita = fopen(filename,"r");
-   ADVLOAD();
+   ADVLOADS();
 }
 
-void ADVLOAD(){
-   retval = fscanf(pita,"%c",&currentChar);
-   EOP = (retval<0);
-   if (EOP){
+void ADVLOADS(){
+   retval = fscanf(pita,"%c",&currentCharS);
+   EOPS = (retval<0);
+   if (EOPS){
       fclose(pita);
    }
 }
 
-void ADVWORDLOAD(){
-   IgnoreNewLine();
+void ADVWORDSLOAD(){
+   IgnoreNewLineS();
    if (retval < 0){
       endWord = true;
    }
    else{
-      CopyWordLoad();
+      CopyWordSLoad();
    }
 }
 
-void CopyWordLoad(){
+void CopyWordSLoad(){
    int i = 0;
-   while ((currentChar != NEWLINE) && i < CAPACITY && !EOP){
-      currentWord.contents[i] = currentChar;
-      ADVLOAD();
+   while ((currentCharS != NEWLINE) && i < CAPACITY && !EOPS){
+      currentWordee.contents[i] = currentCharS;
+      ADVLOADS();
       i++;
    }
-   currentWord.length = i;
+   currentWordee.length = i;
 }
 
-void IgnoreNewLine(){
-   while (currentChar == NEWLINE){
-      ADVLOAD();
+void IgnoreNewLineS(){
+   while (currentCharS == NEWLINE){
+      ADVLOADS();
    }
 }
 

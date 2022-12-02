@@ -14,70 +14,70 @@ typedef struct {
 
 /* Word Engine State */
 extern boolean endWord;
-extern Worde currentWord;
+extern Worde currentWorde;
 
-void IgnoreBlanks();
+void IgnoreBlankss();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang 
    F.S. : currentChar ? BLANK atau currentChar = NEWLINE */
 
-void STARTWORD();
+void STARTWORDS();
 /* I.S. : currentChar sembarang 
    F.S. : endWord = true, dan currentChar = NEWLINE; 
-          atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
+          atau endWord = false, currentWorde adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void ADVWORD();
+void ADVWORDS();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi 
-   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi, 
+   F.S. : currentWorde adalah kata terakhir yang sudah diakuisisi, 
           currentChar adalah karakter pertama dari kata berikutnya, mungkin NEWLINE
           Jika currentChar = NEWLINE, endWord = true.		  
-   Proses : Akuisisi kata menggunakan procedure copyWord */
+   Proses : Akuisisi kata menggunakan procedure CopyWordS */
 
-void CopyWord();
-/* Mengakuisisi kata, menyimpan dalam currentWord
+void CopyWordS();
+/* Mengakuisisi kata, menyimpan dalam currentWorde
    I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : currentWord berisi kata yang sudah diakuisisi; 
+   F.S. : currentWorde berisi kata yang sudah diakuisisi; 
           currentChar = BLANK atau currentChar = NEWLINE; 
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
 
 
-void IgnoreBlanksDin();
+void IgnoreBlankssDin();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang 
    F.S. : currentChar ? BLANK atau currentChar = NEWLINE */
 
-void STARTWORDDin();
+void STARTWORDSDin();
 /* I.S. : currentChar sembarang 
    F.S. : endWord = true, dan currentChar = NEWLINE; 
-          atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
+          atau endWord = false, currentWorde adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void ADVWORDDin();
+void ADVWORDSDin();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi 
-   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi, 
+   F.S. : currentWorde adalah kata terakhir yang sudah diakuisisi, 
           currentChar adalah karakter pertama dari kata berikutnya, mungkin NEWLINE
           Jika currentChar = NEWLINE, endWord = true.		  
-   Proses : Akuisisi kata menggunakan procedure copyWord */
+   Proses : Akuisisi kata menggunakan procedure CopyWordS */
 
-void CopyWordDin();
-/* Mengakuisisi kata, menyimpan dalam currentWord
+void CopyWordSDin();
+/* Mengakuisisi kata, menyimpan dalam currentWorde
    I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : currentWord berisi kata yang sudah diakuisisi; 
+   F.S. : currentWorde berisi kata yang sudah diakuisisi; 
           currentChar = BLANK atau currentChar = NEWLINE; 
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
 
 void STARTLOAD(char *filename);
 
-void ADVLOAD();
+void ADVLOADS();
 
-void ADVWORDLOAD();
+void ADVWORDSLOAD();
 
-void CopyWordLoad();
+void CopyWordSLoad();
 
-void IgnoreNewLine();
+void IgnoreNewLineS();
 
 char* scaninput();
 

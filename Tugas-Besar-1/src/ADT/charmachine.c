@@ -1,43 +1,43 @@
 #include "charmachine.h"
 #include <stdio.h>
 
-char currentChar;
-boolean EOP;
+char currentCharS;
+boolean EOPS;
 
 static FILE * pita;
 static int retval;
 
-void START() {
+void STARTS() {
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
-   F.S. : currentChar adalah karakter pertama pada pita
-          Jika currentChar != MARK maka EOP akan padam (false)
-          Jika currentChar = MARK maka EOP akan menyala (true) */
+   F.S. : currentCharS adalah karakter pertama pada pita
+          Jika currentCharS != MARK maka EOPS akan padam (false)
+          Jika currentCharS = MARK maka EOPS akan menyala (true) */
 
 	/* Algoritma */
 	pita = stdin;
-	ADV();
+	ADVS();
 }
 
-void ADV() {
+void ADVS() {
 /* Pita dimajukan satu karakter. 
-   I.S. : Karakter pada jendela = currentChar, currentChar != MARK
-   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, 
-          currentChar mungkin = MARK
-		      Jika  currentChar = MARK maka EOP akan menyala (true) */
+   I.S. : Karakter pada jendela = currentCharS, currentCharS != MARK
+   F.S. : currentCharS adalah karakter berikutnya dari currentCharS yang lama, 
+          currentCharS mungkin = MARK
+		      Jika  currentCharS = MARK maka EOPS akan menyala (true) */
 
 	/* Algoritma */
-	retval = fscanf(pita,"%c",&currentChar);
-   EOP = (currentChar == NEWLINE);
+	retval = fscanf(pita,"%c",&currentCharS);
+   EOPS = (currentCharS == NEWLINE);
 }
 
-char GetCC(){
-    return currentChar;
+char GetCCS(){
+    return currentCharS;
 }
-/* Mengirimkan currentChar */
+/* Mengirimkan currentCharS */
 
-boolean IsEOP(){
-   return EOP;
+boolean IsEOPSS(){
+   return EOPS;
 }
-/* Mengirimkan true jika currentChar = MARK */
+/* Mengirimkan true jika currentCharS = MARK */

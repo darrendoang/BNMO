@@ -2,11 +2,11 @@
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
-#include "ADT/charmachine.h"
-#include "ADT/wordmachine.h"
-#include "ADT/listdp.h"
-#include "ADT/arrayMap.h"
-#include "ADT/boolean.h"
+#include "../ADT/charmachine.h"
+#include "../ADT/wordmachine.h"
+#include "../ADT/listdp.h"
+#include "../ADT/arrayMap.h"
+#include "../ADT/boolean.h"
 
 int  GetInf(addressLDP P){
     if(P == NULL){
