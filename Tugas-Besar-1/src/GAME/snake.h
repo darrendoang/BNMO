@@ -1,36 +1,40 @@
-#include "../ADT/listdp.h"
 #include <stdio.h>
+#include <time.h>
 #include <stdlib.h>
-#include "../ADT/boolean.h"
-#include "../ADT/mesinsnake.h"
-#include "../ADT/mesinkaraktersnake.h"
+#include <math.h>
+#include "charmachine.h"
+#include "wordmachine.h"
+#include "listdp.h"
+#include "arrayMap.h"
+#include "boolean.h"
 
-void board(List snake, List food, List meteor, List obst);
-/* menampilkan permainan snake on meteor */
+# ifndef SOM_H
+# define SOM_H
 
-void snakes(List * snake);
-/* inisiasi awal snake yaitu terdiri dari H, 1, dan 2, dengan randomize letak awal */
+int GetInfo(addressLDP P);
 
-void dfood(List * snake, List * food, List * hmeteor, List * obst);
-/* meletakkan makanan pada game secara acak */
+boolean SearchPoint(List L,int X,int Y);
 
-void dmeteor(List * food, List * obst, List * meteor);
-/* meletakkan meteor pada game secara acak */
+addressLDP SearchAP(List L,int i,int j);
 
-void makan(List * snake, List * food, List * obst, boolean * wwin);
-/* bertambah panjangnya ekor snake setelah memakan sebuah food */
+void createSnake(List *L);
 
-void belok(char x, List *s, List * hmeteor, List * obst, boolean * gagal, boolean * wwin);
-/* pembelokan head yang diikuti badan - badan snake */
+void move (List *L, char* input);
 
-void hit(List * snake, List * meteor, location * temp);
-/* snake terkena meteor dan badan akan terputus */
+void makeMeteor(POINT *meteor,POINT food);
 
-void obs(List * snake, List * food, List * obst);
-/* meletakkan obst secara acak pada game */
+void makeObstacle(List L, POINT* obstacle);
 
-int lengths(List snake);
-/* panjang snake */
+void makeFood(POINT *food,List L, POINT obstacle);
 
-void snakeOnMeteor(int * score);
-/* permainan Snake On Meteor */
+boolean foodEaten(List *L, POINT food);
+
+void kenaMeteor(List *L,POINT food,POINT meteor);
+
+boolean endGame(List L,POINT meteor, POINT obstacle);
+
+void printMap(List L,POINT food, POINT meteor,POINT obstacle);
+
+void som(TabMap *arrmapsb, int *score);
+
+#endif

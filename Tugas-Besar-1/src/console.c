@@ -262,6 +262,7 @@ void QUEUEGAME(Queue *antriangame, Array gamelist)
 void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , HistoryStack *gamehistory)
 {
     ElType val;
+    TabMap arrmapsb;
     int score;
     printf("Berikut adalah daftar Game-mu\n");
 
@@ -317,7 +318,7 @@ void PLAYGAME(Queue *antriangame , Array gamelist , TabMap *scoreboard , History
     else if (str_comp(play, "SNAKE ON METEOR")){
         printf("Loading SNAKE ON METEOR . . . \n");
         dequeue(antriangame,val);
-        snakeOnMeteor(&score) ;
+        som(&arrmapsb, &score) ;
     }
 
 
