@@ -429,7 +429,7 @@ void printMap(List L,POINT food, POINT meteor,POINT obstacle){
                 printf(" M ");
             }
             else if(obstacle.x==((j+1)/2)-1 && obstacle.y==((i+1)/2)-1){
-                printf(" ! ");
+                printf(" # ");
             }
             else if(SearchAP(L,((j+1)/2)-1,((i+1)/2)-1)){
                 if (Info(SearchAP(L,((j+1)/2)-1,((i+1)/2)-1)) == 72){
