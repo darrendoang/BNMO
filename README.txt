@@ -1,19 +1,4 @@
-# Tugas Besar 1 ── BNMO
-## IF2111 Algoritma dan Struktur Data STI
-
-> Program membantu Indra dan Doni untuk memprogram 
-> robot video game console kesayangan mereka
-
-Dibuat oleh Kelompok 04 K02
-
--Muhammad Rafi Haidar / 18221134
--Priscilla Auleader Napitupulu / 18221098
--Laurensia Audrey Pramashinta / 18221114
--Darren / 18221050
--Razan Aditya Putra / 18221132
-
-
-## Deskripsi Singkat Laporan
+## Deskripsi Singkat 
 BNMO (dibaca: Binomo) adalah sebuah robot video game console yang dimiliki oleh Indra dan Doni. Dua bulan yang lalu, ia mengalami kerusakan dan telah berhasil diperbaiki. Sayangnya, setelah diperbaiki ia justru mendapatkan lebih banyak bug dalam sistemnya. Oleh karena itu, Indra dan Doni mencari programmer lain yang lebih handal untuk ulang memprogram robot video game console kesayangannya. Buatlah sebuah permainan berbasis CLI (command-line interface). Sistem ini dibuat dalam bahasa C dengan menggunakan struktur data yang sudah kalian pelajari di mata kuliah ini. 
 
 ## Cara Kompilasi Program
